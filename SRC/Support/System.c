@@ -70,7 +70,7 @@ u8 TestBuf[5];
 
 void main_init(void)
 {
-  NoUseNum=ApiAtCmd_WritCommand(ATCOMM_RESET,(void*)0, 0);
+  
   disableInterrupts();
   SystemClock_Init(HSE_Clock);
   ITC_SetSoftwarePriority(ITC_IRQ_UART1_RX,ITC_PRIORITYLEVEL_3);
@@ -121,7 +121,7 @@ void main_init(void)
   api_disp_icoid_output( eICO_IDBATT5, TRUE, TRUE);//显示电池满电图标
   api_disp_icoid_output( eICO_IDTemper, TRUE, TRUE);//免提模式图标
   api_lcd_pwr_on_hint(5,2,"Abell");
-  VOICE_SetOutput(ATVOICE_FreePlay,"4100620065006C006C00",20);//播报Abell
+  NoUseNum=ApiAtCmd_WritCommand(ATCOMM_RESET,(void*)0, 0);
   
   BEEP_Time(1);
   TaskDrvObj.NewId=Task_Start;//Task_Start

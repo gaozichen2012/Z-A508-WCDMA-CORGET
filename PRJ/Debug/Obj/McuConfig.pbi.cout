@@ -1,22 +1,22 @@
-"E:\1-source\A508\SRC\Support\McuConfig.c"
+"E:\1-source\2-A508_WCDMA_CORGET\SRC\Support\McuConfig.c"
 -std=c99
 -ferror-limit=100
 -I
-E:\1-source\A508\PRJ\..\INCLUDE
+E:\1-source\2-A508_WCDMA_CORGET\PRJ\..\INCLUDE
 -I
-E:\1-source\A508\PRJ\..\MAIN
+E:\1-source\2-A508_WCDMA_CORGET\PRJ\..\MAIN
 -I
-E:\1-source\A508\PRJ\..\SRC\MCU\inc
+E:\1-source\2-A508_WCDMA_CORGET\PRJ\..\SRC\MCU\inc
 -I
 C:\Program Files\IAR Systems\Embedded Workbench 7.3\stm8\inc
 -I
 C:\Program Files\IAR Systems\Embedded Workbench 7.3\stm8\inc\c
 -I
-E:\1-source\A508\INCLUDE
+E:\1-source\2-A508_WCDMA_CORGET\INCLUDE
 -I
-E:\1-source\A508\MAIN
+E:\1-source\2-A508_WCDMA_CORGET\MAIN
 -I
-E:\1-source\A508\SRC\MCU\inc
+E:\1-source\2-A508_WCDMA_CORGET\SRC\MCU\inc
 -DSTM8S007=1
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff

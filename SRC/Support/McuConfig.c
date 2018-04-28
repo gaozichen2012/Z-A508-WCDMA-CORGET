@@ -105,6 +105,11 @@ void Uart1_Init(void)
     	UART1_PARITY_NO , UART1_SYNCMODE_CLOCK_DISABLE , UART1_MODE_TXRX_ENABLE);
     UART1_ITConfig(UART1_IT_RXNE_OR, ENABLE);
     UART1_Cmd(ENABLE);
+    
+#if 1 //WCDMA ×¿ÖÇ´ï
+    GPIO_Init(GPIOA,GPIO_PIN_4,GPIO_MODE_IN_PU_NO_IT );//½ÓÊÕ
+#endif
+    
 }
 
 /*******************************************************************************

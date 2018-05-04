@@ -47,6 +47,8 @@ extern void ApiPocCmd_ReceivedVoicePlayStatesIntermediateSet(bool a);//中间变量
 extern bool ApiPocCmd_ToneStateIntermediate(void);
 extern void ApiPocCmd_ToneStateIntermediateSet(bool a);
 
+extern bool ApiPocCmd_ReceivedVoicePlayStatesForLED(void);
+
 extern bool ApiPocCmd_ToneState(void);
 extern void ApiPocCmd_ToneStateSet(bool a);
 

@@ -18,11 +18,7 @@ void LED_IntOutputRenew(void)
   }
   else
   {
-#if 0//WCDMA
-    if(POC_ReceivedVoice_Flag==TRUE)
-#else
-      if(1)
-#endif
+    if(ApiPocCmd_ReceivedVoicePlayStatesForLED()==TRUE)
     {
       Set_GreenLed(LED_ON);
     }
@@ -31,23 +27,17 @@ void LED_IntOutputRenew(void)
       LED_Conut++;
       if(LED_Conut>=49)
       {
-#ifdef BEIDOU//使用外置北斗
         if(BDValid==1)
-#else//使用内置GPS
-        if(PositionInfoSendToATPORT_RedLed_Flag==TRUE)
-#endif
         {
           Set_RedLed(LED_ON);
         }
         else
         {
           Set_GreenLed(LED_ON);
-        }
-        
+        } 
       }
       if(LED_Conut>=51)
       {
-        PositionInfoSendToATPORT_RedLed_Flag=FALSE;
         Set_GreenLed(LED_OFF);
         Set_RedLed(LED_OFF);
         LED_Conut=0;
@@ -62,8 +52,6 @@ void LED_IntOutputRenew(void)
         else
         {
         }
-        
-        //Set_RedLed(LED_OFF);
       }
     }
   }

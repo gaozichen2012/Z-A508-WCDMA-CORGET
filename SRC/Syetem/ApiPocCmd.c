@@ -43,7 +43,8 @@ typedef struct{
     GroupStatsType GroupStats;
     u8 KeyPttState;
     bool ReceivedVoicePlayStates;
-    bool ReceivedVoicePlayStates_Intermediate;
+    bool ReceivedVoicePlayStates_Intermediate;//喇叭
+    bool ReceivedVoicePlayStatesForLED;
     bool ToneState;
     bool ToneState_Intermediate;
   }States;
@@ -522,12 +523,14 @@ void ApiPocCmd_10msRenew(void)
       ucId = COML_AscToHex(pBuf+4, 0x02);
       if(ucId==0x01)
       {
-        PocCmdDrvobj.States.ReceivedVoicePlayStates=TRUE;
+        PocCmdDrvobj.States.ReceivedVoicePlayStates=TRUE;//喇叭控制使用
+        PocCmdDrvobj.States.ReceivedVoicePlayStatesForLED=TRUE;//指示灯使用
       }
       else
       {
         
-        PocCmdDrvobj.States.ReceivedVoicePlayStates_Intermediate=TRUE;
+        PocCmdDrvobj.States.ReceivedVoicePlayStates_Intermediate=TRUE;//喇叭控制使用
+        PocCmdDrvobj.States.ReceivedVoicePlayStatesForLED=FALSE;//指示灯使用
       }
       break;
     case 0x8C://通知接收其他终端发来的消息
@@ -989,6 +992,12 @@ void ApiPocCmd_ReceivedVoicePlayStatesIntermediateSet(bool a)//中间变量
 {
   PocCmdDrvobj.States.ReceivedVoicePlayStates_Intermediate=a;
 }
+
+bool ApiPocCmd_ReceivedVoicePlayStatesForLED(void)
+{
+  return PocCmdDrvobj.States.ReceivedVoicePlayStatesForLED;
+}
+
 
 bool ApiPocCmd_ToneStateIntermediate(void)//中间变量
 {

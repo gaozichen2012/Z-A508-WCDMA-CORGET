@@ -84,6 +84,8 @@ typedef struct {
     u8 CIMICount;
     u8 NoCardCount;
     u8 PPPStatusOpenCount;
+    u8 ToneStateCount;
+    u8 ReceivedVoicePlayStatesCount;
   }Count;
   u8 BacklightTimeBuf[1];//背光灯时间(需要设置进入eeprom)
   u8 KeylockTimeBuf[1];//键盘锁时间(需要设置进入eeprom)
@@ -337,7 +339,28 @@ static void DEL_500msProcess(void)			//delay 500ms process server
         DelDrvObj.Count.PPPStatusOpenCount=0;
       }
     }
-
+/******按下PTT BB提示音过0.5秒关闭,解决提示音未播报完就关闭喇叭的问题***********************/
+    if(ApiPocCmd_ToneStateIntermediate()==TRUE)
+    {
+      DelDrvObj.Count.ToneStateCount++;
+      if(DelDrvObj.Count.ToneStateCount>1)
+      {
+        ApiPocCmd_ToneStateSet(FALSE);
+        ApiPocCmd_ToneStateIntermediateSet(FALSE);
+        DelDrvObj.Count.ToneStateCount=0;
+      }
+    }
+/******接收完语音过0.5s关闭喇叭，解决接收结束BB提示音听不到的问题************************/
+    if(ApiPocCmd_ReceivedVoicePlayStatesIntermediate()==TRUE)
+    {
+      DelDrvObj.Count.ReceivedVoicePlayStatesCount++;
+      if(DelDrvObj.Count.ReceivedVoicePlayStatesCount>1)
+      {
+        ApiPocCmd_ReceivedVoicePlayStatesIntermediateSet(FALSE);
+        ApiPocCmd_ReceivedVoicePlayStatesSet(FALSE);
+        DelDrvObj.Count.ReceivedVoicePlayStatesCount=0;
+      }
+    }
 /*****低于设定值播报网络信号弱*************************************************************************/
     
 /******登录状态下的低电报警**********************************************/

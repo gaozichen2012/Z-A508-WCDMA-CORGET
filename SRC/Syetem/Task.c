@@ -424,20 +424,20 @@ else
 }
 #endif
 /********øÿ÷∆π¶∑≈¿Æ∞»*************************************/
-#if 0
-if(ApiPocCmd_PlayReceivedVoice_Flag==TRUE)
+#if 1
+if(ApiPocCmd_ReceivedVoicePlayStates()==TRUE)
 {
   AUDIO_IOAFPOW(ON);
 }
 else
 {
-  if(ApiAtCmd_ZTTS_Flag==TRUE)
+  if(ApiAtCmd_bZTTSStates()==1)
   {
     AUDIO_IOAFPOW(ON);
   }
   else
   {
-    if(ApiPocCmd_Tone_Flag==TRUE)
+    if(ApiPocCmd_ToneState()==TRUE)
     {
       AUDIO_IOAFPOW(ON);
     }

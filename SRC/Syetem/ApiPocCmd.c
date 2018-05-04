@@ -42,6 +42,10 @@ typedef struct{
     PocStatesType PocStatus;
     GroupStatsType GroupStats;
     u8 KeyPttState;
+    bool ReceivedVoicePlayStates;
+    bool ReceivedVoicePlayStates_Intermediate;
+    bool ToneState;
+    bool ToneState_Intermediate;
   }States;
   struct{
 /*****组名**************/
@@ -262,9 +266,11 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
     break;
   case PocComm_StartPTT://3
     DrvGD83_UART_TxCommand(ucStartPTT,strlen((char const *)ucStartPTT));
+    ApiPocCmd_ToneStateSet(TRUE);
     break;
   case PocComm_EndPTT://4
     DrvGD83_UART_TxCommand(ucEndPTT,strlen((char const *)ucEndPTT));
+    ApiPocCmd_ToneStateSet(TRUE);
     break;
   case PocComm_GroupListInfo://5
     DrvGD83_UART_TxCommand(buf, len);
@@ -436,6 +442,7 @@ void ApiPocCmd_10msRenew(void)
       if(ucId==0x00)
       {
         PocCmdDrvobj.States.KeyPttState=1;//KeyPttState 0：未按PTT 1:按下ptt瞬间  2：按住PTT状态 3：松开PTT瞬间
+        PocCmdDrvobj.States.ToneState_Intermediate=TRUE;//-----------------------延迟0.5s关闭喇叭
       }
       break;
     case 0x0C://判断松开PTT
@@ -443,6 +450,7 @@ void ApiPocCmd_10msRenew(void)
       if(ucId==0x00)
       {
         PocCmdDrvobj.States.KeyPttState=3;//KeyPttState 0：未按PTT 1:按下ptt瞬间  2：按住PTT状态 3：松开PTT瞬间
+        PocCmdDrvobj.States.ToneState_Intermediate=TRUE;
       }
       break;
     case 0x0D://获取群组信息
@@ -511,6 +519,16 @@ void ApiPocCmd_10msRenew(void)
     case 0x8A://通知接收到信息
       break;
     case 0x8B://通知音频播放状态
+      ucId = COML_AscToHex(pBuf+4, 0x02);
+      if(ucId==0x01)
+      {
+        PocCmdDrvobj.States.ReceivedVoicePlayStates=TRUE;
+      }
+      else
+      {
+        
+        PocCmdDrvobj.States.ReceivedVoicePlayStates_Intermediate=TRUE;
+      }
       break;
     case 0x8C://通知接收其他终端发来的消息
       break;
@@ -953,4 +971,38 @@ u8 ApiPocCmd_KeyPttState(void)
 void ApiPocCmd_SetKeyPttState(u8 i)
 {
   PocCmdDrvobj.States.KeyPttState=i;
+}
+
+bool ApiPocCmd_ReceivedVoicePlayStates(void)
+{
+  return PocCmdDrvobj.States.ReceivedVoicePlayStates;
+}
+void ApiPocCmd_ReceivedVoicePlayStatesSet(bool a)
+{
+  PocCmdDrvobj.States.ReceivedVoicePlayStates=a;
+}
+bool ApiPocCmd_ReceivedVoicePlayStatesIntermediate(void)//中间变量
+{
+  return PocCmdDrvobj.States.ReceivedVoicePlayStates_Intermediate;
+}
+void ApiPocCmd_ReceivedVoicePlayStatesIntermediateSet(bool a)//中间变量
+{
+  PocCmdDrvobj.States.ReceivedVoicePlayStates_Intermediate=a;
+}
+
+bool ApiPocCmd_ToneStateIntermediate(void)//中间变量
+{
+  return PocCmdDrvobj.States.ToneState_Intermediate;
+}
+void ApiPocCmd_ToneStateIntermediateSet(bool a)//中间变量
+{
+  PocCmdDrvobj.States.ToneState_Intermediate=a;
+}
+bool ApiPocCmd_ToneState(void)
+{
+  return PocCmdDrvobj.States.ToneState;
+}
+void ApiPocCmd_ToneStateSet(bool a)
+{
+  PocCmdDrvobj.States.ToneState=a;
 }

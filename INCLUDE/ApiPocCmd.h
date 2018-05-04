@@ -34,8 +34,21 @@ typedef enum{
 }GroupStatsType;
 
 extern GroupStatsType ApiPocCmd_GroupStats(void);
+
 extern u8 ApiPocCmd_KeyPttState(void);
 extern void ApiPocCmd_SetKeyPttState(u8 i);
+
+extern bool ApiPocCmd_ReceivedVoicePlayStates(void);
+extern void ApiPocCmd_ReceivedVoicePlayStatesSet(bool a);
+
+extern bool ApiPocCmd_ReceivedVoicePlayStatesIntermediate(void);//中间变量
+extern void ApiPocCmd_ReceivedVoicePlayStatesIntermediateSet(bool a);//中间变量
+
+extern bool ApiPocCmd_ToneStateIntermediate(void);
+extern void ApiPocCmd_ToneStateIntermediateSet(bool a);
+
+extern bool ApiPocCmd_ToneState(void);
+extern void ApiPocCmd_ToneStateSet(bool a);
 
 extern void ApiPocCmd_PowerOnInitial(void);
 extern void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len);

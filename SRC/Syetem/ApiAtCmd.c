@@ -13,6 +13,8 @@ const u8 *ucRxCIMI      ="CIMI:";
 const u8 *ucRxCMEERROR  ="CME ERROR: 10";
 const u8 *ucRxZPPPSTATUS="ZPPPSTATUS: OPENED";
 const u8 *ucRxCSQ = "CSQ:";
+const u8 *ucRxPASTATE1 = "PASTATE:1";
+const u8 *ucRxZTTS0 = "ZTTS:0";
 
 u8 KeyDownUpChoose_GroupOrUser_Flag=0;
 u8 HDRCSQValue=0;//HDRCSQ的值
@@ -30,9 +32,9 @@ u8 CSQ99Count_Flag=0;
 
 
 const u8 *ucGD83Reset  = "at^reset";
-const u8 *ucRxPASTATE1 = "PASTATE:1";
+
 const u8 *ucRxPASTATE0 = "PASTATE:0";
-const u8 *ucRxZTTS0 = "ZTTS:0";
+
 const u8 *ucCheckRssi = "AT+CSQ?";
 const u8 *ucHDRCSQ = "AT^HDRCSQ";
 const u8 *ucRxCSQ = "CSQ:";
@@ -67,7 +69,8 @@ typedef struct{
       u16  bCardIn         :1;
       u16  bNoCard         :1;
       u16  bPPPStatusOpen  :1;
-      u16                  :13;
+      u16  bZTTSStates     :1;
+      u16                  :11;
     }Bits;
     u8 Byte;
   }Msg;
@@ -316,6 +319,18 @@ void ApiAtCmd_10msRenew(void)
       AtCmdDrvobj.CSQParam.Len = i;
       AtCmdDrvobj.CSQParam.Value=CHAR_TO_Digital(AtCmdDrvobj.CSQParam.Buf,2);
     } 
+/*******语音播放喇叭控制标志位*******************/
+    ucRet = memcmp(pBuf, ucRxPASTATE1, 9);
+    if(ucRet == 0x00)
+    {
+      AtCmdDrvobj.Msg.Bits.bZTTSStates=1;
+    }
+    ucRet = memcmp(pBuf, ucRxZTTS0, 6);
+    if(ucRet == 0x00)
+    {
+      AtCmdDrvobj.Msg.Bits.bZTTSStates=0;
+    }
+/************************/
   }
 }
 
@@ -407,4 +422,8 @@ u16 ApiAtCmd_bPPPStatusOpen(void)
 u8 ApiAtCmd_CSQValue(void)
 {
   return AtCmdDrvobj.CSQParam.Value;
+}
+u16 ApiAtCmd_bZTTSStates(void)
+{
+  return AtCmdDrvobj.Msg.Bits.bZTTSStates;
 }

@@ -37,6 +37,7 @@ extern u16 ApiAtCmd_bCardIn(void);
 extern u16 ApiAtCmd_bNoCard(void);
 extern u16 ApiAtCmd_bPPPStatusOpen(void);
 extern u8 ApiAtCmd_CSQValue(void);
+extern u16 ApiAtCmd_bZTTSStates(void);
 #endif
 
 

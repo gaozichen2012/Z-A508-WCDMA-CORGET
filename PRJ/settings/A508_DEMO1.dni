@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=-660993118
+Checksum=-133242485
 [CodeCoverage]
 Enabled=_ 0
 [CallStack]
@@ -57,6 +57,7 @@ ShowSource=1
 Freq=16000000
 [struct_types]
 Fmt0=ADRLEN_INF-Adr	4	0
+Fmt1=struct <Unnamed 88>-NameLen	3	0
 [array_types]
 Fmt0=u8[14]	4	0
 Fmt1=u8[15]	4	0

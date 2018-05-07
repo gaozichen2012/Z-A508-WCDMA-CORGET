@@ -2,14 +2,14 @@
 #if 1//WCDMA 卓智达
 
 #define DrvMC8332_UseId_Len	        100//define UART Tx buffer length value
-#define APIPOC_GroupName_Len            32
-#define APIPOC_UserName_Len             32
+#define APIPOC_GroupName_Len            32//unicode只存前2位，00不存，32/2=16,屏幕最多显示16个字符
+#define APIPOC_UserName_Len             48
 #define APIPOC_Group_Num                40
-#define APIPOC_User_Num                 40
+#define APIPOC_User_Num                 25
 
 const u8 *ucAtPocHead           = "AT+POC=";
 const u8 *ucSetIPAndID          = "010000";
-const u8 *ucPocOpenConfig       ="000000010101";
+const u8 *ucPocOpenConfig       ="00000001010101";
 u8 *ucStartPTT                  = "0B0000";
 u8 *ucEndPTT                    = "0C0000";
 typedef struct{
@@ -425,7 +425,7 @@ bool ApiPocCmd_user_info_set(u8 *pBuf, u8 len)//cTxBuf为存放ip账号密码的信息
 #if 1 //WCDMA 卓智达
 void ApiPocCmd_10msRenew(void)
 {
-  u8 ucId, Len;
+  u8 ucId, Len,i;
   u8 * pBuf;
   while((Len = DrvMC8332_PocNotify_Queue_front(&pBuf)) != 0x00)
   {
@@ -501,17 +501,31 @@ void ApiPocCmd_10msRenew(void)
       break;
     case 0x86://通知用户进入群组信息
       ucId = COML_AscToHex(pBuf+4, 0x02);
-      if(ucId==0x00)
-      {
-        PocCmdDrvobj.States.GroupStats=EnterGroup;
-      }
-      else if(ucId==0xff)
+      if(ucId==0xff)
       {
         PocCmdDrvobj.States.GroupStats=LeaveGroup;
       }
       else
-      {}
-        
+      {
+        PocCmdDrvobj.States.GroupStats=EnterGroup;
+        if(Len >= 12)//如果群组id后面还有群组名
+        {
+          PocCmdDrvobj.NameInfo.NowWorkingGroupName.NameLen= (Len-12)/2;//英文字符只存一半
+          if(PocCmdDrvobj.NameInfo.NowWorkingGroupName.NameLen > APIPOC_GroupName_Len)
+          {
+            PocCmdDrvobj.NameInfo.NowWorkingGroupName.NameLen = APIPOC_GroupName_Len;
+          }
+        }
+        else//无群组名
+        {
+          PocCmdDrvobj.NameInfo.NowWorkingGroupName.NameLen = 0x00;
+        }
+        for(i = 0x00; 2*i<PocCmdDrvobj.NameInfo.NowWorkingGroupName.NameLen; i++)
+        {
+          PocCmdDrvobj.NameInfo.NowWorkingGroupName.Name[2*i] = pBuf[4*i+12];//存入获取的群组名
+          PocCmdDrvobj.NameInfo.NowWorkingGroupName.Name[2*i+1] = pBuf[4*i+1+12];
+        }
+      }
       break;
     case 0x87://通知用户名字信息
       break;

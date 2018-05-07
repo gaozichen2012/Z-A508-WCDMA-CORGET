@@ -15,6 +15,7 @@ static const MCU_VERSION Mcu_Version = {	//mcu vwersion information
 	{"res"},				//4//4byte eeprom version
 	{"res"}
 };
+
 //修改版本时必须也修改此处版本
 void MCU_VERSIONForMenu(void)
 {

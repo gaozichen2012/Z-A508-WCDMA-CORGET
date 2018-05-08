@@ -182,7 +182,6 @@ void api_disp_char_output2(DISP_CHAR CharInfo, u8 *CharData)//UNICODEÏÔÊ¾£¬Èº×éÐ
 	DISP_MulTypePro2(CharInfo, CharData);
 	return;
 }
-#if 1//WCDMA ×¿ÖÇ´ï
 void api_lcd_pwr_on_hint(u8 x,u8 y,u8 *CharData)
 {
 	DISP_CHAR stCharInfo;
@@ -197,95 +196,6 @@ void api_lcd_pwr_on_hint(u8 x,u8 y,u8 *CharData)
 	//MCU_LCD_BACKLIGTH(OFF);
 	api_disp_all_screen_refresh();// È«ÆÁÍ³Ò»Ë¢ÐÂ
 }
-
-#else
-void api_lcd_pwr_on_hint(u8 *CharData)
-{
-	DISP_CHAR stCharInfo;
-	stCharInfo.DispType  = DISP_IDCNASC816;
-	//stCharInfo.DispAddX  = 0;
-	stCharInfo.DispAddY  = 0x02;
-	stCharInfo.DispAddX  = 0;//Ò»ÐÐ16¸öÓ¢ÎÄ×Ö·û
-        stCharInfo.DispLenth = LCD_DISP_LEN_MAX;
-        
-	api_disp_char_output(stCharInfo,CharData);
-
-	//MCU_LCD_BACKLIGTH(OFF);
-	api_disp_all_screen_refresh();// È«ÆÁÍ³Ò»Ë¢ÐÂ
-}
-void api_lcd_pwr_on_hint2(u8 *CharData)
-{
-	DISP_CHAR stCharInfo;
-	stCharInfo.DispType  = DISP_IDCNASC816B;
-	//stCharInfo.DispAddX  = 0;
-	stCharInfo.DispAddY  = 0x02;
-	stCharInfo.DispAddX  = 5;//Ò»ÐÐ16¸öÓ¢ÎÄ×Ö·û
-        stCharInfo.DispLenth = LCD_DISP_LEN_MAX;
-        
-	api_disp_char_output(stCharInfo,CharData);
-
-	//MCU_LCD_BACKLIGTH(OFF);
-	api_disp_all_screen_refresh();// È«ÆÁÍ³Ò»Ë¢ÐÂ
-}
-void api_lcd_pwr_on_hint3(u8 *CharData)
-{
-	DISP_CHAR stCharInfo;
-	stCharInfo.DispType  = DISP_IDCNASC816;
-	//stCharInfo.DispAddX  = 0;
-	stCharInfo.DispAddY  = 0x00;//×óÉÏ½ÇÏÔÊ¾ºº×Ö
-	stCharInfo.DispAddX  = 0;//Ò»ÐÐ16¸öÓ¢ÎÄ×Ö·û
-        stCharInfo.DispLenth = LCD_DISP_LEN_MAX;
-        
-	api_disp_char_output(stCharInfo,CharData);
-
-	//MCU_LCD_BACKLIGTH(OFF);
-	api_disp_all_screen_refresh();// È«ÆÁÍ³Ò»Ë¢ÐÂ
-}
-
-void api_lcd_pwr_on_hint5(u8 *CharData)//²Ëµ¥Ò³ÓÒÉÏ½ÇÐòºÅ
-{
-	DISP_CHAR stCharInfo;
-	stCharInfo.DispType  = DISP_IDCNASC816;
-	//stCharInfo.DispAddX  = 0;
-	stCharInfo.DispAddY  = 0;//×óÉÏ½ÇÏÔÊ¾ºº×Ö
-	stCharInfo.DispAddX  = 13;//Ò»ÐÐ16¸öÓ¢ÎÄ×Ö·û
-        stCharInfo.DispLenth = LCD_DISP_LEN_MAX;
-        
-	api_disp_char_output(stCharInfo,CharData);
-
-	//MCU_LCD_BACKLIGTH(OFF);
-	api_disp_all_screen_refresh();// È«ÆÁÍ³Ò»Ë¢ÐÂ
-}
-
-void api_lcd_pwr_on_hint6(u8 *CharData)
-{
-	DISP_CHAR stCharInfo;
-	stCharInfo.DispType  = DISP_IDCNASC816;
-	//stCharInfo.DispAddX  = 0;
-	stCharInfo.DispAddY  = 0x02;
-	stCharInfo.DispAddX  = 12;//Ò»ÐÐ16¸öÓ¢ÎÄ×Ö·û
-        stCharInfo.DispLenth = LCD_DISP_LEN_MAX;
-        
-	api_disp_char_output(stCharInfo,CharData);
-
-	//MCU_LCD_BACKLIGTH(OFF);
-	api_disp_all_screen_refresh();// È«ÆÁÍ³Ò»Ë¢ÐÂ
-}
-void api_lcd_pwr_on_hint7(u8 *CharData)
-{
-	DISP_CHAR stCharInfo;
-	stCharInfo.DispType  = DISP_IDCNASC816;
-	//stCharInfo.DispAddX  = 0;
-	stCharInfo.DispAddY  = 0x00;
-	stCharInfo.DispAddX  = 4;//Ò»ÐÐ16¸öÓ¢ÎÄ×Ö·û
-        stCharInfo.DispLenth = LCD_DISP_LEN_MAX;
-        
-	api_disp_char_output(stCharInfo,CharData);
-
-	//MCU_LCD_BACKLIGTH(OFF);
-	api_disp_all_screen_refresh();// È«ÆÁÍ³Ò»Ë¢ÐÂ
-}
-#endif
 void api_lcd_pwr_on_hint4(u8 *CharData)//UNICODEÏÔÊ¾
 {
 	DISP_CHAR stCharInfo;

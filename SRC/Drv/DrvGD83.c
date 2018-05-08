@@ -10,7 +10,7 @@
 #define DrvMC8332_UART_NoLEN    50	//define UART Rx buffer length value
 #define DrvMC8332Caret_UART_NoLEN  40	//define UART Rx buffer length value
 #define DrvMC8332At_UART_NoLEN  40	//define UART Rx buffer length value
-#define DrvMC8332Poc_UART_NoLEN 70	//define UART Rx buffer length value
+#define DrvMC8332Poc_UART_NoLEN 100	//define UART Rx buffer length value
 #define DrvMC8332_UART_IDLE     0x00	//define UART constant value flag
 
 #define DrvMC8332_UART_RUN      0x01

@@ -206,7 +206,7 @@ void SubmenuMenuDisplay(SubmenuMenuDisplayType id)
   case GpsInfoMenu:
      api_lcd_pwr_on_hint(0,2,"                ");//清屏
     api_lcd_pwr_on_hint(0,0,"                ");//清屏
-    if(PositionInfoSendToATPORT_InfoDisplay_Flag==FALSE)//未定位显示000
+  if(1)//未定位显示000
     {
       api_lcd_pwr_on_hint(0,0,"经度:000.000000 ");//清屏
        api_lcd_pwr_on_hint(0,2,"纬度:00.000000  ");//清屏
@@ -219,10 +219,10 @@ void SubmenuMenuDisplay(SubmenuMenuDisplayType id)
     Buf1[2]=0xb6;
     Buf1[3]=0xc8;
     Buf1[4]=0x3a;
-    COML_DecToAsc(Data_Latitude_Minute(), Buf1+5);
+    //COML_DecToAsc(Data_Latitude_Minute(), Buf1+5);
     COML_StringReverse(3,Buf1+5);
     Buf1[8]=0x2e;
-    COML_DecToAsc(Data_Latitude_Second(), Buf1+9);
+    //COML_DecToAsc(Data_Latitude_Second(), Buf1+9);
     COML_StringReverse(6,Buf1+9);
     Buf1[15]='\0';
     api_lcd_pwr_on_hint(0,0,Buf1);
@@ -232,10 +232,10 @@ void SubmenuMenuDisplay(SubmenuMenuDisplayType id)
     Buf2[2]=0xb6;
     Buf2[3]=0xc8;
     Buf2[4]=0x3a;
-    COML_DecToAsc(Data_Longitude_Minute(), Buf2+5);
+    //COML_DecToAsc(Data_Longitude_Minute(), Buf2+5);
     COML_StringReverse(2,Buf2+5);
     Buf2[7]=0x2e;
-    COML_DecToAsc(Data_Longitude_Second(), Buf2+8);
+    //COML_DecToAsc(Data_Longitude_Second(), Buf2+8);
     COML_StringReverse(6,Buf2+8);
     Buf2[14]='\0';
     api_lcd_pwr_on_hint(0,2,Buf2);

@@ -33,7 +33,8 @@ typedef enum{
   InGroup       =0x02
 }GroupStatsType;
 
-extern GroupStatsType ApiPocCmd_GroupStats(void);
+extern GroupStatsType ApiPocCmd_GroupStates(void);
+extern void ApiPocCmd_GroupStatesSet(GroupStatsType a);
 
 extern u8 ApiPocCmd_KeyPttState(void);
 extern void ApiPocCmd_SetKeyPttState(u8 i);
@@ -52,6 +53,14 @@ extern bool ApiPocCmd_ReceivedVoicePlayStatesForLED(void);
 extern bool ApiPocCmd_ToneState(void);
 extern void ApiPocCmd_ToneStateSet(bool a);
 
+/*****群组用户名相关调用函数****************/
+extern u8 *GetNowWorkingGroupNameForDisplay(void);
+extern u8 GetNowWorkingGroupNameLenForDisplay(void);
+extern u8 *GetAllGroupNameForDisplay(u8 a);
+extern u16 GetNowWorkingGroupXuhao(void);
+extern u16 GetAllGroupNum(void);
+extern u8 *GetAllGroupNameForVoice(u8 a);
+/*************/
 extern void ApiPocCmd_PowerOnInitial(void);
 extern void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len);
 extern bool ApiPocCmd_user_info_set(u8 *pBuf, u8 len);//cTxBuf为存放ip账号密码的信息

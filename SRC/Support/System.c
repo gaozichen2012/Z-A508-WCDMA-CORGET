@@ -59,7 +59,6 @@ typedef struct {
 static TASK_DRV	TaskDrvObj;
 
 u8 *ucSwitch            = "10000002";
-u8 *ucGroupListInfo     = "0D0000";
 
 
 
@@ -137,9 +136,10 @@ void main_app(void)
     {
     case Task_Start:
       Task_RunStart();
-      if(ApiPocCmd_GroupStats()==EnterGroup)
+      if(ApiPocCmd_GroupStates()==EnterGroup)
       {
         TaskDrvObj.NewId=Task_NormalOperation;
+        ApiPocCmd_WritCommand(PocComm_GroupListInfo,0,0);
       }
       break;
     case Task_NormalOperation:

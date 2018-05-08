@@ -108,6 +108,7 @@ void Task_RunStart(void)
 #if 1//WCDMA 卓智达
 void Task_RunNormalOperation(void)
 {
+  Keyboard_Test();
   UART3_ToMcuMain();
 //解决写频时，影响其他机器使用（其他机器处于接收状态）
   if(WriteFreq_Flag==TRUE)//解决写频时，群组内其他机器一直有滴滴滴的声音
@@ -285,6 +286,22 @@ if(ReadInput_KEY_3==0)//组呼键
   {
   }
 /***********判断正常进组；正常退出组;被单呼模式；退出单呼模式；主动开始单呼；单呼；主动退出单呼*************/
+  if(ApiPocCmd_GroupStates()==EnterGroup)
+  {
+    //刷新图标
+    //显示当前群组
+    api_lcd_pwr_on_hint(0,2,"                ");
+    api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());
+    ApiPocCmd_GroupStatesSet(InGroup);
+  }
+  else if(ApiPocCmd_GroupStates()==InGroup)
+  {
+    
+  }
+  else//LeaveGroup
+  {
+    
+  }
 #if 0
   if(POC_EnterPersonalCalling_Flag==2)//1刚被呼
   {

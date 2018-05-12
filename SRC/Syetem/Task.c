@@ -6,6 +6,7 @@ typedef struct{
   struct{
     bool AccountConfig;
     bool BootPrompt;
+    bool PersonalKeyMode;
   }status;
 }TaskDrv;
 static TaskDrv TaskDrvobj;
@@ -58,13 +59,13 @@ void Task_RunStart(void)
   {
     if(TaskDrvobj.status.BootPrompt==FALSE)
     {
-      VOICE_SetOutput(ATVOICE_FreePlay,"4100620065006C006C00",20);//播报Abell
+      VOICE_Play(ABELL);
       TaskDrvobj.status.BootPrompt=TRUE;
     }
     
     if(ApiAtCmd_bCardIn()==1)//检测到卡
     {
-      if(ApiAtCmd_CSQValue()==31)
+      if(ApiAtCmd_CSQValue()>=25)
       {
         if(ApiAtCmd_bPPPStatusOpen()==1)
         {
@@ -211,7 +212,7 @@ void Task_RunNormalOperation(void)
     case 0://默认PTT状态
       break;
     case 1://=1，进入某群组
-      VOICE_SetOutput(ATVOICE_FreePlay,"f25d09902d4e",12);//播报已选中
+      VOICE_Play(GroupSelected);
       DEL_SetTimer(0,40);
       while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
       //ApiPocCmd_WritCommand(PocComm_EnterGroup,ucPocOpenConfig,strlen((char const *)ucPocOpenConfig));
@@ -220,17 +221,6 @@ void Task_RunNormalOperation(void)
       KeyUpDownCount=0;
       break;
     case 2://=2,呼叫某用户
-     // if(GettheOnlineMembersDone==TRUE)
-      {
-        //GettheOnlineMembersDone=FALSE;
-        VOICE_SetOutput(ATVOICE_FreePlay,"f25d09902d4e",12);//播报已选中
-        DEL_SetTimer(0,60);
-        while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
-        //ApiPocCmd_WritCommand(PocComm_Invite,ucPocOpenConfig,strlen((char const *)ucPocOpenConfig));
-        KeyDownUpChoose_GroupOrUser_Flag=3;
-        TASK_Ptt_StartPersonCalling_Flag=TRUE;//判断主动单呼状态（0a）
-        EnterKeyTimeCount=0;
-      }
       break;
     case 3:
       break;
@@ -280,6 +270,9 @@ if(ReadInput_KEY_3==0)//组呼键
 /*******个呼键状态检测***************************************************************************************************************************************/
   if(ReadInput_KEY_2==0)//个呼键
   {
+    TaskDrvobj.status.PersonalKeyMode=TRUE;
+    api_lcd_pwr_on_hint(0,2,"Personal Mode");
+    VOICE_Play(PersonalMode);
   }
 /*******报警键状态检测********************************************************************************************************************************************/
   if(ReadInput_KEY_4==0)//报警键
@@ -990,7 +983,7 @@ void TASK_RunLoBattery(void)
 {
 #if 1
   api_lcd_pwr_on_hint(0,2," 电量低  请充电  ");
-  VOICE_SetOutput(ATVOICE_FreePlay,"3575606c3575cf914e4f0cfff78b73513a6745513575",44);//电量低请充电
+  VOICE_Play(PowerLowPleaseCharge);
   DEL_SetTimer(0,1000);
   while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
   BEEP_Time(10);
@@ -1084,3 +1077,11 @@ void Key3_PlayVoice(void)
   }
 }
 
+bool TASK_PersonalKeyMode(void)
+{
+  return TaskDrvobj.status.PersonalKeyMode;
+}
+void TASK_PersonalKeyModeSet(bool a)
+{
+  TaskDrvobj.status.PersonalKeyMode=a;
+}

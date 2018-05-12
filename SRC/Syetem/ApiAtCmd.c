@@ -374,23 +374,23 @@ void HDRCSQSignalIcons(void)
 {
   if(MenuMode_Flag==0)
   {
-    if(HDRCSQValue>=31)//5格
+    if(ApiAtCmd_CSQValue()>=31)//5格
     {
       api_disp_icoid_output( eICO_IDSPEAKER, TRUE, TRUE);//5格信号
     }
-    else if(HDRCSQValue>=25&&HDRCSQValue<31)
+    else if(ApiAtCmd_CSQValue()>=25&&ApiAtCmd_CSQValue()<31)
     {
       api_disp_icoid_output( eICO_IDSCANPA, TRUE, TRUE);//4格信号
     }
-    else if(HDRCSQValue>=20&&HDRCSQValue<25)
+    else if(ApiAtCmd_CSQValue()>=20&&ApiAtCmd_CSQValue()<25)
     {
       api_disp_icoid_output( eICO_IDSCAN, TRUE, TRUE);//3格信号
     }
-    else if(HDRCSQValue>=15&&HDRCSQValue<20)
+    else if(ApiAtCmd_CSQValue()>=15&&ApiAtCmd_CSQValue()<20)
     {
       api_disp_icoid_output( eICO_IDRXNULL, TRUE, TRUE);//2格信号
     }
-    else if(HDRCSQValue>=10&&HDRCSQValue<15)
+    else if(ApiAtCmd_CSQValue()>=10&&ApiAtCmd_CSQValue()<15)
     {
       api_disp_icoid_output( eICO_IDRXFULL, TRUE, TRUE);//1格信号
     }

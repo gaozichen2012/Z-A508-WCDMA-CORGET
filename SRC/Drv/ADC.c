@@ -157,28 +157,27 @@ void LowVoltageDetection(void)
     }
   }
 }
-
 void KeyBatteryReport(void)
 {
   switch(BatteryLevel)
   {
   case 0:
-    VOICE_SetOutput(ATVOICE_FreePlay,"3575cf917e7606524b4e3500",24);//百分之五
+    VOICE_Play(FivePercentPower);//百分之五
     break;
   case 1:
-    VOICE_SetOutput(ATVOICE_FreePlay,"3575cf917e7606524b4e32004153",28);//百分之20
+    VOICE_Play(TwentyPercentPower);//百分之20
     break;
   case 2:
-    VOICE_SetOutput(ATVOICE_FreePlay,"3575cf917e7606524b4e34004153",28);//百分之40
+    VOICE_Play(FortyPercentPower);//百分之40
     break;
   case 3:
-    VOICE_SetOutput(ATVOICE_FreePlay,"3575cf917e7606524b4e36004153",28);//百分之60
+    VOICE_Play(SixtyPercentPower);//百分之60
     break;
   case 4:
-    VOICE_SetOutput(ATVOICE_FreePlay,"3575cf917e7606524b4e38004153",28);//百分80
+    VOICE_Play(EightyPercentPower);//百分80
     break;
   case 5:
-    VOICE_SetOutput(ATVOICE_FreePlay,"3575cf917e7606527e76",20);//百分百
+    VOICE_Play(OneHundredPercentPower);//百分百
     break;
   default:
     break;

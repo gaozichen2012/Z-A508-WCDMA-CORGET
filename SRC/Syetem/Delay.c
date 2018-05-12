@@ -301,23 +301,24 @@ static void DEL_500msProcess(void)			//delay 500ms process server
       if(ApiAtCmd_bNoCard()==1)
       {
         DelDrvObj.Count.NoCardCount++;
-        if(DelDrvObj.Count.NoCardCount>2*6)
+        if(DelDrvObj.Count.NoCardCount>2*8)
         {
           DelDrvObj.Count.NoCardCount=0;
-          VOICE_SetOutput(ATVOICE_FreePlay,"c0680d4e30526153",16);//播报检不到卡
+          VOICE_Play(NoSimCard);
+          api_lcd_pwr_on_hint(0,2,"No SIM Card     ");
         }
       } 
     }
 /*********定时5s发一次[AT+CSQ?]*************************************************/
-    if(DelDrvObj.Count.CSQTimeCount>=2*4)
+    if(DelDrvObj.Count.CSQTimeCount>=2*5)
     {
       DelDrvObj.Count.CSQTimeCount=0;
       ApiAtCmd_WritCommand(ATCOMM_CSQ, (void*)0, 0);
       
-      if(GetTaskId()==Task_Start&&ApiAtCmd_CSQValue()!=31)
+      if(GetTaskId()==Task_Start&&ApiAtCmd_CSQValue()<25)
       {
-        VOICE_SetOutput(ATVOICE_FreePlay,"1c64227d517fdc7e",16);//播报搜索网络
-        api_lcd_pwr_on_hint(0,2,"   搜索网络...  ");
+        VOICE_Play(NetworkSearching);
+        api_lcd_pwr_on_hint(0,2,"NET searching   ");
       }
 
       HDRCSQSignalIcons();
@@ -325,7 +326,7 @@ static void DEL_500msProcess(void)			//delay 500ms process server
 /*******检测PPP链接**********/
     if(ApiAtCmd_bStartingUp()==1&&ApiAtCmd_bCardIn()==1)
     {
-      if(ApiAtCmd_bPPPStatusOpen()==0&&ApiAtCmd_CSQValue()==31)
+      if(ApiAtCmd_bPPPStatusOpen()==0&&ApiAtCmd_CSQValue()>=25)
       {
         DelDrvObj.Count.PPPStatusOpenCount++;
         if(DelDrvObj.Count.PPPStatusOpenCount>2*2)
@@ -353,7 +354,7 @@ static void DEL_500msProcess(void)			//delay 500ms process server
 /******接收完语音过0.5s关闭喇叭，解决接收结束BB提示音听不到的问题************************/
     if(ApiPocCmd_ReceivedVoicePlayStatesIntermediate()==TRUE)
     {
-      DelDrvObj.Count.ReceivedVoicePlayStatesCount++;
+      DelDrvObj.Count.ReceivedVoicePlayStatesCount++;  
       if(DelDrvObj.Count.ReceivedVoicePlayStatesCount>1)
       {
         ApiPocCmd_ReceivedVoicePlayStatesIntermediateSet(FALSE);
@@ -369,7 +370,7 @@ static void DEL_500msProcess(void)			//delay 500ms process server
       DelDrvObj.Count.LobatteryTask_StartCount++;
       if(DelDrvObj.Count.LobatteryTask_StartCount==1)
       {
-        VOICE_SetOutput(ATVOICE_FreePlay,"f78b45513575",12);//电量低请充电
+        VOICE_Play(PowerLowPleaseCharge);
       }
       if(DelDrvObj.Count.LobatteryTask_StartCount>2*5)
       {
@@ -405,7 +406,7 @@ static void DEL_500msProcess(void)			//delay 500ms process server
       if(DelDrvObj.Count.PrimaryLowPowerCount>=2*30)
       {
         DelDrvObj.Count.PrimaryLowPowerCount=0;
-        VOICE_SetOutput(ATVOICE_FreePlay,"3575606c3575cf914e4f0cfff78b45513575",36);//播报电池电量低请充电
+        VOICE_Play(PowerLowPleaseCharge);
         PrimaryLowPower_Flag=FALSE;
       }
     }

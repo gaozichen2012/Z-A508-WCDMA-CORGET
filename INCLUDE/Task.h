@@ -34,6 +34,10 @@ typedef enum{
   Key3_OptionFive       =       0x05
 }Key3_OptionType;
 
+#if 1 //WCDMA
+extern bool TASK_PersonalKeyMode(void);
+extern void TASK_PersonalKeyModeSet(bool a);
+#endif
 TASKAPI bool KEY_4_Flag;
 TASKAPI Key3_OptionType Key3Option;
 TASKAPI bool EnterPttMoment_Flag;

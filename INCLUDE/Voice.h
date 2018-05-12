@@ -9,6 +9,25 @@
 	#define VOICEAPI	extern
 #endif
 
+
+typedef enum{
+  PersonalMode          = 0x00,
+  ABELL                 = 0x01,
+  AllGroupName          = 0x02,
+  GroupSelected         = 0x03,
+  NoSimCard             = 0x04,
+  NetworkSearching      = 0x05,
+  PowerLowPleaseCharge  = 0x06,
+  FivePercentPower      = 0x07,
+  TwentyPercentPower    = 0x08,
+  FortyPercentPower     = 0x09,
+  SixtyPercentPower     = 0x0a,
+  EightyPercentPower    = 0x0b,
+  OneHundredPercentPower= 0x0c,
+  GroupMode             = 0x0d,
+  HandsetMode           = 0x0e,
+  HandfreeMode          = 0x0f
+}VOICEPLAY_TYPE;
 typedef enum
 {	
 	VOICE_IDKEY		= 0x00,
@@ -39,6 +58,8 @@ typedef enum
 	VOICE_IDPOW	= 0x02,
 	VOICE_IDBATT= 0x03
 }TPCONT_SEL;
+
+extern void VOICE_Play(VOICEPLAY_TYPE id);
 
 VOICEAPI void VOICE_PowerOnInitial(void);
 VOICEAPI void VOICE_SetOutput(AtVoiceType Id, u8 *buf, u8 Len);

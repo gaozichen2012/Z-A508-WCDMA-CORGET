@@ -13,6 +13,7 @@ const u8 *ucPocOpenConfig      ="00000001010101";
 u8 *ucStartPTT                  = "0B0000";
 u8 *ucEndPTT                    = "0C0000";
 u8 *ucGroupListInfo             = "0d0000";
+u8 *ucUserListInfo              = "0e00000000";
 typedef struct{
   struct{
     union{
@@ -63,7 +64,8 @@ typedef struct{
     }NowWorkingGroupName;//当前工作群组成员名
 /******人名**************/
     struct{
-      u8 Name[APIPOC_UserName_Len];
+      u32 ID;
+      u8  Name[APIPOC_UserName_Len];
       u8 NameLen;
     }AllGroupUserName[APIPOC_User_Num];//群组成员名
     struct{
@@ -81,6 +83,7 @@ typedef struct{
   u8 AllGroupNameBuf[APIPOC_GroupName_Len];
   u8 AllGroupNameForVoiceBuf[APIPOC_GroupName_Len*2+10];
   u16 GroupXuhao;
+  u16 UserXuhao;
   u8 GroupIdBuf[5];
 }PocCmdDrv;
 
@@ -246,6 +249,9 @@ void ApiPocCmd_PowerOnInitial(void)
 #if 1//WCDMA 卓智达
 void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
 {
+  u8 cBuf[4]={0,0,0,0};
+  u8 primary_buf_len;
+  u16 i;
   DrvMC8332_TxPort_SetValidable(ON);
   DrvGD83_UART_TxCommand((u8 *)ucAtPocHead,strlen((char const *)ucAtPocHead));
   switch(id)
@@ -256,6 +262,9 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
   case PocComm_SetParam://设置账号密码
     memset(PocCmdDrvobj.ReadBuffer,0,sizeof(PocCmdDrvobj.ReadBuffer));
     FILE_Read(0,80,PocCmdDrvobj.ReadBuffer);//80位
+    primary_buf_len=strlen((char const*)PocCmdDrvobj.ReadBuffer);
+    PocCmdDrvobj.ReadBuffer[primary_buf_len]='0';
+    PocCmdDrvobj.ReadBuffer[primary_buf_len+1]='0';
     DrvGD83_UART_TxCommand((u8 *)ucSetIPAndID,strlen((char const *)ucSetIPAndID));
     DrvGD83_UART_TxCommand(PocCmdDrvobj.ReadBuffer, strlen((char const *)PocCmdDrvobj.ReadBuffer));
     break;
@@ -289,7 +298,30 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
      DrvGD83_UART_TxCommand(ucGroupListInfo, strlen((char const *)ucGroupListInfo));
     break;
   case PocComm_UserListInfo://6
-    DrvGD83_UART_TxCommand(buf, len);
+#if 1//Test OK
+    DrvGD83_UART_TxCommand(ucUserListInfo, strlen((char const *)ucUserListInfo));
+    i=GetNowWorkingGroupXuhao()+1;//
+    COML_HexToAsc(i,cBuf);
+    switch(strlen((char const *)cBuf))
+    {
+    case 1:
+      cBuf[1]='0';
+      cBuf[2]='0';
+      cBuf[3]='0';
+      break;
+    case 2:
+      cBuf[2]='0';
+      cBuf[3]='0';
+      break;
+    case 3:
+      cBuf[3]='0';
+      break;
+    default:
+      break;
+    }
+    COML_StringReverse(4,cBuf);
+    DrvGD83_UART_TxCommand(cBuf,4);
+#endif
     break;
   case PocComm_Key://7
     DrvGD83_UART_TxCommand(buf, len);
@@ -434,6 +466,7 @@ void ApiPocCmd_10msRenew(void)
   u8 ucId, Len,i;
   u8 * pBuf;
   u16 ucNameId;
+  u32 ucUserId;
   while((Len = DrvMC8332_PocNotify_Queue_front(&pBuf)) != 0x00)
   {
     ucId = COML_AscToHex(pBuf, 0x02);
@@ -503,6 +536,32 @@ void ApiPocCmd_10msRenew(void)
       }
       break;
     case 0x81://组成员列表
+      ucId=COML_AscToHex(pBuf+2, 0x02);
+      if(ucId==0x01)//如果成员不在线则不获取群组名
+      {}
+      else
+      {
+        ucUserId=COML_AscToHex(pBuf+12,0x08);
+        PocCmdDrvobj.UserXuhao=COML_AscToHex(pBuf+8,0x04);
+        PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].ID=ucUserId;//保存群组ID，从[0]开始存
+        if(Len >= 24)//如果群组id后面还有群组名
+        {
+          PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].NameLen= (Len-24)/2;//英文字符只存一半
+          if(PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].NameLen > APIPOC_UserName_Len)
+          {
+            PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].NameLen = APIPOC_UserName_Len;
+          }
+        }
+        else//无群组名
+        {
+          PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].NameLen = 0x00;
+        }
+        for(i = 0x00; 2*i<PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].NameLen; i++)
+        {
+          PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].Name[2*i] = pBuf[4*i+24];//存入获取的群组名
+          PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].Name[2*i+1] = pBuf[4*i+1+24];
+        }
+      }
       break;
     case 0x82://登录状态及本机用户名
       ucId = COML_AscToHex(pBuf+2, 0x02);
@@ -530,6 +589,15 @@ void ApiPocCmd_10msRenew(void)
     case 0x84://返回提示信息
       break;
     case 0x85://通知更新组或成员信息
+      ucId = COML_AscToHex(pBuf+2, 0x02);
+      if(ucId==0x00)
+      {
+        ApiPocCmd_WritCommand(PocComm_GroupListInfo,0,0);
+      }
+      if(ucId==0x01)
+      {
+        ApiPocCmd_WritCommand(PocComm_UserListInfo,0,0);
+      }
       break;
     case 0x86://通知用户进入群组信息
       ucId = COML_AscToHex(pBuf+4, 0x02);

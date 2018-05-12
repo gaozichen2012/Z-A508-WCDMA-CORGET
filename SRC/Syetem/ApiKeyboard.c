@@ -146,22 +146,27 @@ void Keyboard_Test(void)
     }
     else
     {
-
-      KeyUpDownCount--;
-      GroupCallingNum=GetNowWorkingGroupXuhao()+KeyUpDownCount;
-      if(GroupCallingNum<0)
+      if(TASK_PersonalKeyMode()==TRUE)//单呼模式
       {
-        GroupCallingNum=GetAllGroupNum()-1;
-        KeyUpDownCount=GetAllGroupNum()-1-GetNowWorkingGroupXuhao();//
+        
       }
-      api_lcd_pwr_on_hint(0,2,"                ");//清屏
-      api_lcd_pwr_on_hint(0,2,GetAllGroupNameForDisplay(GroupCallingNum));//显示当前选中的群组名
-      VOICE_SetOutput(ATVOICE_FreePlay,GetAllGroupNameForVoice(GroupCallingNum),strlen((char const*)GetAllGroupNameForVoice(GroupCallingNum)));
-      UpDownSwitching_Flag=TRUE;
-      UpDownSwitchingCount=0;
-      //api_lcd_pwr_on_hint("群组:   选择群组");//显示汉字
-      //api_lcd_pwr_on_hint2(HexToChar_GroupCallingNum());//显示数据
-      KeyDownUpChoose_GroupOrUser_Flag=1;
+      else
+      {
+        KeyUpDownCount--;
+        GroupCallingNum=GetNowWorkingGroupXuhao()+KeyUpDownCount;
+        if(GroupCallingNum<0)
+        {
+          GroupCallingNum=GetAllGroupNum()-1;
+          KeyUpDownCount=GetAllGroupNum()-1-GetNowWorkingGroupXuhao();//
+        }
+        api_lcd_pwr_on_hint(0,2,"                ");//清屏
+        api_lcd_pwr_on_hint(0,2,GetAllGroupNameForDisplay(GroupCallingNum));//显示当前选中的群组名
+        VOICE_Play(AllGroupName);
+        UpDownSwitching_Flag=TRUE;
+        UpDownSwitchingCount=0;
+        KeyDownUpChoose_GroupOrUser_Flag=1;
+      }
+
 
     }
     Key_Flag_1=1;
@@ -183,7 +188,7 @@ void Keyboard_Test(void)
         case 0://默认PTT状态
           break;
         case 1://=1，进入某群组
-          VOICE_SetOutput(ATVOICE_FreePlay,"f25d09902d4e",12);//播报已选中
+          VOICE_Play(GroupSelected);
           UpDownSwitchingCount=0;//解决选中单呼后切换群组，语音中断的问题
           DEL_SetTimer(0,40);
           while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
@@ -193,19 +198,6 @@ void Keyboard_Test(void)
           KeyUpDownCount=0;
           break;
         case 2://=2,呼叫某用户
-          //if(GettheOnlineMembersDone==TRUE)
-          {
-            //GettheOnlineMembersDone=FALSE;
-            VOICE_SetOutput(ATVOICE_FreePlay,"f25d09902d4e",12);//播报已选中
-            UpDownSwitchingCount=0;//解决选中单呼后切换群组，语音中断的问题
-            DEL_SetTimer(0,60);
-            while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
-            ApiPocCmd_WritCommand(PocComm_Invite,"0000000101",strlen((char const *)"0000000101"));
-            KeyDownUpChoose_GroupOrUser_Flag=3;
-            TASK_Ptt_StartPersonCalling_Flag=TRUE;//判断主动单呼状态（0a）
-            EnterKeyTimeCount=0;
-            
-          }
           break;
         case 3:
           break;
@@ -229,7 +221,7 @@ void Keyboard_Test(void)
             break;
           case 1://一级菜单再按ok键默认模式
             SubmenuMenuDisplay(GroupSwitch);
-            VOICE_SetOutput(ATVOICE_FreePlay,"07526263A47FC47E",16);//切换群组
+            VOICE_Play(GroupMode);
             ApiMenu_SwitchGroup_Flag=0;
             TheMenuLayer_Flag=0;//处于0级菜单，进入换组为菜单外功能
             MenuMode_Flag=0;
@@ -385,7 +377,7 @@ void Keyboard_Test(void)
     if(AkeyvolumeCount==7)
     {
       
-      VOICE_SetOutput(ATVOICE_FreePlay,"2c54527b216a0f5f",16);//听筒模式
+      VOICE_Play(HandsetMode);//听筒模式
       api_disp_icoid_output( eICO_IDMONITER, TRUE, TRUE);//听筒模式图标
       VoiceType_FreehandOrHandset_Flag=1;
       api_disp_all_screen_refresh();// 全屏统一刷新
@@ -398,7 +390,7 @@ void Keyboard_Test(void)
     {
       if(AkeyvolumeCount==1)
       {
-        VOICE_SetOutput(ATVOICE_FreePlay,"4d51d063216a0f5f",16);//免提模式
+        VOICE_Play(HandfreeMode);//免提模式
         api_disp_icoid_output( eICO_IDTemper, TRUE, TRUE);//免提模式图标
         VoiceType_FreehandOrHandset_Flag=0;
         api_disp_all_screen_refresh();// 全屏统一刷新
@@ -517,6 +509,11 @@ void Keyboard_Test(void)
       }
       else
       {
+        if(TASK_PersonalKeyMode()==TRUE)//单呼模式
+        {
+        }
+        else
+        {
           KeyUpDownCount++;
           GroupCallingNum=GetNowWorkingGroupXuhao()+KeyUpDownCount;
           if(GroupCallingNum>GetAllGroupNum()-1)
@@ -526,12 +523,13 @@ void Keyboard_Test(void)
           }
           api_lcd_pwr_on_hint(0,2,"                ");//清屏
           api_lcd_pwr_on_hint(0,2,GetAllGroupNameForDisplay(GroupCallingNum));//显示当前选中的群组名
-           VOICE_SetOutput(ATVOICE_FreePlay,GetAllGroupNameForVoice(GroupCallingNum),strlen((char const*)GetAllGroupNameForVoice(GroupCallingNum)));
+          VOICE_Play(AllGroupName);
           UpDownSwitching_Flag=TRUE;
           UpDownSwitchingCount=0;
           //api_lcd_pwr_on_hint("群组:   群组选择");//显示汉字
           //api_lcd_pwr_on_hint2(HexToChar_GroupCallingNum());//显示数据
           KeyDownUpChoose_GroupOrUser_Flag=1;
+        }
       }
       Key_Flag_1=1;
     }

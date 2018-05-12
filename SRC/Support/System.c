@@ -119,7 +119,7 @@ void main_init(void)
   MCU_LCD_BACKLIGTH(ON);//打开背光灯
   api_disp_icoid_output( eICO_IDBATT5, TRUE, TRUE);//显示电池满电图标
   api_disp_icoid_output( eICO_IDTemper, TRUE, TRUE);//免提模式图标
-  api_lcd_pwr_on_hint(5,2,"Abell");
+  api_lcd_pwr_on_hint(5,2,"ABELL");
   NoUseNum=ApiAtCmd_WritCommand(ATCOMM_RESET,(void*)0, 0);
   
   BEEP_Time(1);
@@ -139,7 +139,7 @@ void main_app(void)
       if(ApiPocCmd_GroupStates()==EnterGroup)
       {
         TaskDrvObj.NewId=Task_NormalOperation;
-        ApiPocCmd_WritCommand(PocComm_GroupListInfo,0,0);
+        //ApiPocCmd_WritCommand(PocComm_GroupListInfo,0,0);
       }
       break;
     case Task_NormalOperation:

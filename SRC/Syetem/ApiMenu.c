@@ -153,34 +153,37 @@ void MenuDisplay(MenuDisplayType id)
     {
       api_disp_icoid_output( eICO_IDMESSAGE, TRUE, TRUE);//0格信号
     }
+    
     if(NetworkType_2Gor3G_Flag==3)
       api_disp_icoid_output( eICO_IDEmergency, TRUE, TRUE);//3G图标
     else
-      api_disp_icoid_output( eICO_IDPOWERL, TRUE, TRUE);//图标：2G
+      //api_disp_icoid_output( eICO_IDPOWERL, TRUE, TRUE);//图标：2G
+      api_disp_icoid_output( eICO_IDEmergency, TRUE, TRUE);//3G图标
+    
     if(LockingState_Flag==FALSE)
       api_disp_icoid_output( eICO_IDBANDWIDTHN, TRUE, TRUE);//无锁屏空图标
     else
-    {
       api_disp_icoid_output( eICO_IDBANDWIDTHW, TRUE, TRUE);//锁屏图标
-    }
-    
+
     api_disp_icoid_output( BatteryLevel, TRUE, TRUE);//电池电量图标
     api_disp_icoid_output( eICO_IDTALKAR, TRUE, TRUE);//默认无发射无接收信号图标
-    if(ShowTime_Flag==FALSE)
+//if(ShowTime_Flag==FALSE)
     {
       if(VoiceType_FreehandOrHandset_Flag==0)
         api_disp_icoid_output( eICO_IDTemper, TRUE, TRUE);//免提模式
       else
         api_disp_icoid_output( eICO_IDMONITER, TRUE, TRUE);//听筒模式图标
-      if(PersonCallIco_Flag==0)
+      
+      if(TASK_PersonalKeyMode()==0)
         api_disp_icoid_output( eICO_IDPOWERM, TRUE, TRUE);//显示组呼图标
       else
         api_disp_icoid_output( eICO_IDPOWERH, TRUE, TRUE);//显示个呼图标
-
+#if 0
       if(KeyDownUpChoose_GroupOrUser_Flag==0)
         api_disp_icoid_output( eICO_IDMESSAGEOff, TRUE, TRUE);//空图标-与选对应
       else
         api_disp_icoid_output( eICO_IDLOCKED, TRUE, TRUE);//选
+#endif
     }
       break;
   case Menu_UnlockStep1_Ok:

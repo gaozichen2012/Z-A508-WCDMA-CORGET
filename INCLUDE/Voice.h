@@ -26,7 +26,9 @@ typedef enum{
   OneHundredPercentPower= 0x0c,
   GroupMode             = 0x0d,
   HandsetMode           = 0x0e,
-  HandfreeMode          = 0x0f
+  HandfreeMode          = 0x0f,
+  AllUserName           = 0x10,
+  NoOnlineUser          = 0x11
 }VOICEPLAY_TYPE;
 typedef enum
 {	

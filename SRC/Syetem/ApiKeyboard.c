@@ -95,7 +95,7 @@ void Keyboard_Test(void)
     if(TestNum6>=KeyCountNum)
     {
       TestNum6=0;
-    NumberKeyboardPressDown_flag=TRUE;
+      NumberKeyboardPressDown_flag=TRUE;
     }
     break;
   case 0x00010000://dn
@@ -132,8 +132,7 @@ void Keyboard_Test(void)
 #endif
         api_lcd_pwr_on_hint4("                ");//清屏
         api_lcd_pwr_on_hint(0,2,GetAllGroupNameForDisplay(PersonalCallingNum));//显示当前选中的群组名
-        UpDownSwitching_Flag=TRUE;
-        UpDownSwitchingCount=0;
+
       }
       else if(ApiMenu_GpsInfo_Flag==1||ApiMenu_NativeInfo_Flag==1||ApiMenu_BeiDouOrWritingFrequency_Flag==1)//如果是GPS信息、本机信息、北斗写频切换二级菜单
       {}
@@ -148,7 +147,16 @@ void Keyboard_Test(void)
     {
       if(TASK_PersonalKeyMode()==TRUE)//单呼模式
       {
-        
+        KeyPersonalCallingCount--;
+        PersonalCallingNum=KeyPersonalCallingCount;
+        if(PersonalCallingNum<0)
+        {
+          PersonalCallingNum=GetAllUserNum()-1;
+          KeyPersonalCallingCount=GetAllUserNum()-1;
+        }
+        api_lcd_pwr_on_hint(0,2,"                ");//清屏
+        api_lcd_pwr_on_hint(0,2,GetAllUserNameForDisplay(PersonalCallingNum));//显示当前选中的群组名
+        VOICE_Play(AllUserName);//播报按上键之后对应的用户名
       }
       else
       {
@@ -162,8 +170,6 @@ void Keyboard_Test(void)
         api_lcd_pwr_on_hint(0,2,"                ");//清屏
         api_lcd_pwr_on_hint(0,2,GetAllGroupNameForDisplay(GroupCallingNum));//显示当前选中的群组名
         VOICE_Play(AllGroupName);
-        UpDownSwitching_Flag=TRUE;
-        UpDownSwitchingCount=0;
         KeyDownUpChoose_GroupOrUser_Flag=1;
       }
 
@@ -198,6 +204,7 @@ void Keyboard_Test(void)
           KeyUpDownCount=0;
           break;
         case 2://=2,呼叫某用户
+          ApiPocCmd_WritCommand(PocComm_Invite,"0000000101",strlen((char const *)"0000000101"));
           break;
         case 3:
           break;
@@ -495,8 +502,7 @@ void Keyboard_Test(void)
          // VOICE_SetOutput(ATVOICE_FreePlay,ApiAtCmd_GetUserName(PersonalCallingNum),ApiAtCmd_GetUserNameLen(PersonalCallingNum));//播报按上键之后对应的用户名
           api_lcd_pwr_on_hint4("                ");//清屏
          // api_lcd_pwr_on_hint4(UnicodeForGbk_AllUserName(PersonalCallingNum));//显示当前选中的群组名
-          UpDownSwitching_Flag=TRUE;
-          UpDownSwitchingCount=0;
+
         }
         else if(ApiMenu_GpsInfo_Flag==1||ApiMenu_NativeInfo_Flag==1||ApiMenu_BeiDouOrWritingFrequency_Flag==1)//如果是GPS信息、本机信息、北斗写频切换二级菜单
         {}
@@ -511,6 +517,17 @@ void Keyboard_Test(void)
       {
         if(TASK_PersonalKeyMode()==TRUE)//单呼模式
         {
+          KeyPersonalCallingCount++;
+          PersonalCallingNum=KeyPersonalCallingCount;
+          if(PersonalCallingNum>GetAllUserNum()-1)
+          {
+            PersonalCallingNum=0;
+            KeyPersonalCallingCount=0;
+          }
+          api_lcd_pwr_on_hint(0,2,"                ");//清屏
+          api_lcd_pwr_on_hint(0,2,GetAllUserNameForDisplay(PersonalCallingNum));//显示当前选中的群组名
+          VOICE_Play(AllUserName);//播报按上键之后对应的用户名
+          KeyDownUpChoose_GroupOrUser_Flag=2;
         }
         else
         {
@@ -524,8 +541,7 @@ void Keyboard_Test(void)
           api_lcd_pwr_on_hint(0,2,"                ");//清屏
           api_lcd_pwr_on_hint(0,2,GetAllGroupNameForDisplay(GroupCallingNum));//显示当前选中的群组名
           VOICE_Play(AllGroupName);
-          UpDownSwitching_Flag=TRUE;
-          UpDownSwitchingCount=0;
+
           //api_lcd_pwr_on_hint("群组:   群组选择");//显示汉字
           //api_lcd_pwr_on_hint2(HexToChar_GroupCallingNum());//显示数据
           KeyDownUpChoose_GroupOrUser_Flag=1;
@@ -711,7 +727,8 @@ void Keyboard_Test(void)
           KeyDownUpChoose_GroupOrUser_Flag=0;//解决（个呼键→返回键→OK或PTT）屏幕显示错误的BUG
         }
         else//如果处于组呼模式则应该无变化*/
-        {
+
+          TASK_PersonalKeyModeSet(FALSE);
           MenuMode_Flag=0;
           api_disp_icoid_output(eICO_IDMESSAGEOff, TRUE, TRUE);//空图标-与选对应
           api_lcd_pwr_on_hint(0,2,"                ");//清屏
@@ -720,7 +737,8 @@ void Keyboard_Test(void)
           //用于PTT键及上下键返回默认状态
           KeyDownUpChoose_GroupOrUser_Flag=0;
           KeyUpDownCount=0;
-        }
+
+          
 
       }
 

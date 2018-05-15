@@ -17,6 +17,7 @@ const u8 *ucOneHundredPercentPower      = "3575cf917e7606527e76";
 const u8 *ucGroupMode                   = "07526263A47FC47E";
 const u8 *ucHandsetMode                 = "2c54527b216a0f5f";
 const u8 *ucHandfreeMode                = "4d51d063216a0f5f";
+const u8 *ucNoOnlineUser                = "4e006f0020006f006e006c0069006e00650020007500730065007200";
 typedef struct{
 	union{
 		struct{
@@ -101,6 +102,12 @@ void VOICE_Play(VOICEPLAY_TYPE id)
     break;
   case HandfreeMode:
     VOICE_SetOutput(ATVOICE_FreePlay,(u8*)ucHandfreeMode,strlen((char const*)ucHandfreeMode));//√‚Ã·ƒ£ Ω
+    break;
+  case AllUserName:
+    VOICE_SetOutput(ATVOICE_FreePlay,GetAllUserNameForVoice(PersonalCallingNum),strlen((char const*)GetAllUserNameForVoice(PersonalCallingNum)));
+    break;
+  case NoOnlineUser:
+    VOICE_SetOutput(ATVOICE_FreePlay,(u8*)ucNoOnlineUser,strlen((char const*)ucNoOnlineUser));//No Online User
     break;
   default:
     break;

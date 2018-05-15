@@ -3,7 +3,7 @@
 
 #define DrvMC8332_UseId_Len	        100//define UART Tx buffer length value
 #define APIPOC_GroupName_Len            32//unicode只存前2位，00不存，32/2=16,屏幕最多显示16个字符
-#define APIPOC_UserName_Len             48
+#define APIPOC_UserName_Len             38
 #define APIPOC_Group_Num                40
 #define APIPOC_User_Num                 25
 
@@ -81,10 +81,15 @@ typedef struct{
   u8 ReadBuffer[80];//存EEPROM读取的数据使用
   u8 NowWorkingGroupNameBuf[APIPOC_GroupName_Len];
   u8 AllGroupNameBuf[APIPOC_GroupName_Len];
+  u8 AllUserNameBuf[APIPOC_UserName_Len];
   u8 AllGroupNameForVoiceBuf[APIPOC_GroupName_Len*2+10];
+  u8 AllUserNameForVoiceBuf[APIPOC_UserName_Len*2+10];
+  u16 offline_user_count;
+  u16 all_user_num;//所有成员（包括离线）
   u16 GroupXuhao;
   u16 UserXuhao;
   u8 GroupIdBuf[5];
+  u8 UserIdBuf[8];
 }PocCmdDrv;
 
 
@@ -233,7 +238,7 @@ typedef struct{
 }PocCmdDrv;
 #endif
 static PocCmdDrv PocCmdDrvobj;
-
+static bool no_online_user(void);
 #if 0//CDMA 中兴
 void ApiPocCmd_PowerOnInitial(void)
 {
@@ -251,7 +256,7 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
 {
   u8 cBuf[4]={0,0,0,0};
   u8 primary_buf_len;
-  u16 i;
+  u16 i,temp_value;
   DrvMC8332_TxPort_SetValidable(ON);
   DrvGD83_UART_TxCommand((u8 *)ucAtPocHead,strlen((char const *)ucAtPocHead));
   switch(id)
@@ -285,6 +290,19 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
     DrvGD83_UART_TxCommand(PocCmdDrvobj.GroupIdBuf, 4);
     break;
   case PocComm_Invite:
+    DrvGD83_UART_TxCommand("0a0000", 6);
+    memset(PocCmdDrvobj.UserIdBuf,0,sizeof(PocCmdDrvobj.UserIdBuf));
+    COML_HexToAsc(PocCmdDrvobj.NameInfo.AllGroupUserName[PersonalCallingNum].ID,PocCmdDrvobj.UserIdBuf);
+    temp_value=strlen((char const*)PocCmdDrvobj.UserIdBuf);
+    if(temp_value<8)
+    {
+      for(i=temp_value;i<8;i++)
+      {
+        PocCmdDrvobj.UserIdBuf[i]=0x30;
+      }
+    }
+    COML_StringReverse(8,PocCmdDrvobj.UserIdBuf);
+    DrvGD83_UART_TxCommand(PocCmdDrvobj.UserIdBuf, 8);
     break;
   case PocComm_StartPTT://3
     DrvGD83_UART_TxCommand(ucStartPTT,strlen((char const *)ucStartPTT));
@@ -299,6 +317,7 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
     break;
   case PocComm_UserListInfo://6
 #if 1//Test OK
+    PocCmdDrvobj.offline_user_count=0;//发射0E指令前清零
     DrvGD83_UART_TxCommand(ucUserListInfo, strlen((char const *)ucUserListInfo));
     i=GetNowWorkingGroupXuhao()+1;//
     COML_HexToAsc(i,cBuf);
@@ -497,6 +516,12 @@ void ApiPocCmd_10msRenew(void)
     case 0x0D://获取群组信息
       break;
     case 0x0e://获取组成员信息
+      PocCmdDrvobj.all_user_num=COML_AscToHex(pBuf+10,0x02);
+      if(no_online_user()==TRUE)
+      {
+        VOICE_Play(NoOnlineUser);//无在线成员
+        TASK_PersonalKeyModeSet(FALSE);
+      }
       break;
     case 0x11://上报经纬度
       break;
@@ -538,15 +563,17 @@ void ApiPocCmd_10msRenew(void)
     case 0x81://组成员列表
       ucId=COML_AscToHex(pBuf+2, 0x02);
       if(ucId==0x01)//如果成员不在线则不获取群组名
-      {}
+      {
+        PocCmdDrvobj.offline_user_count++;
+      }
       else
       {
         ucUserId=COML_AscToHex(pBuf+12,0x08);
         PocCmdDrvobj.UserXuhao=COML_AscToHex(pBuf+8,0x04);
         PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].ID=ucUserId;//保存群组ID，从[0]开始存
-        if(Len >= 24)//如果群组id后面还有群组名
+        if(Len >= 20)//如果群组id后面还有群组名
         {
-          PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].NameLen= (Len-24)/2;//英文字符只存一半
+          PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].NameLen= (Len-20)/2;//英文字符只存一半
           if(PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].NameLen > APIPOC_UserName_Len)
           {
             PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].NameLen = APIPOC_UserName_Len;
@@ -558,8 +585,8 @@ void ApiPocCmd_10msRenew(void)
         }
         for(i = 0x00; 2*i<PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].NameLen; i++)
         {
-          PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].Name[2*i] = pBuf[4*i+24];//存入获取的群组名
-          PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].Name[2*i+1] = pBuf[4*i+1+24];
+          PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].Name[2*i] = pBuf[4*i+20];//存入获取的群组名
+          PocCmdDrvobj.NameInfo.AllGroupUserName[PocCmdDrvobj.UserXuhao].Name[2*i+1] = pBuf[4*i+1+20];
         }
       }
       break;
@@ -600,6 +627,7 @@ void ApiPocCmd_10msRenew(void)
       }
       break;
     case 0x86://通知用户进入群组信息
+      MenuDisplay(Menu_RefreshAllIco);
       ucId = COML_AscToHex(pBuf+4, 0x02);
       if(ucId==0xff)
       {
@@ -1160,6 +1188,16 @@ u8 *GetAllGroupNameForDisplay(u8 a)//所有群组：显示屏
   }
   return PocCmdDrvobj.AllGroupNameBuf;
 }
+u8 *GetAllUserNameForDisplay(u8 a)//所有用户：显示屏
+{
+  u8 i;
+  memset(PocCmdDrvobj.AllUserNameBuf,0,sizeof(PocCmdDrvobj.AllUserNameBuf));
+  for(i=0;2*i<=PocCmdDrvobj.NameInfo.AllGroupUserName[a].NameLen;i++)
+  {
+    PocCmdDrvobj.AllUserNameBuf[i]=COML_AscToHex(PocCmdDrvobj.NameInfo.AllGroupUserName[a].Name+(2*i), 0x02);
+  }
+  return PocCmdDrvobj.AllUserNameBuf;
+}
 
 u8 *GetAllGroupNameForVoice(u8 a)//所有群组：播报
 {
@@ -1172,6 +1210,18 @@ u8 *GetAllGroupNameForVoice(u8 a)//所有群组：播报
     PocCmdDrvobj.AllGroupNameForVoiceBuf[4*i+3]  = 0x30;
   }
   return PocCmdDrvobj.AllGroupNameForVoiceBuf;
+}
+u8 *GetAllUserNameForVoice(u8 a)//所有用户：播报
+{
+  u8 i;
+  for(i=0;2*i<=PocCmdDrvobj.NameInfo.AllGroupUserName[a].NameLen;i++)
+  {
+    PocCmdDrvobj.AllUserNameForVoiceBuf[4*i]    = PocCmdDrvobj.NameInfo.AllGroupUserName[a].Name[2*i];
+    PocCmdDrvobj.AllUserNameForVoiceBuf[4*i+1]  = PocCmdDrvobj.NameInfo.AllGroupUserName[a].Name[2*i+1];
+    PocCmdDrvobj.AllUserNameForVoiceBuf[4*i+2]  = 0x30;
+    PocCmdDrvobj.AllUserNameForVoiceBuf[4*i+3]  = 0x30;
+  }
+  return PocCmdDrvobj.AllUserNameForVoiceBuf;
 }
 
 //根据群组ID获取当前组的组索引
@@ -1192,5 +1242,28 @@ u16 GetNowWorkingGroupXuhao(void)
 u16 GetAllGroupNum(void)
 {
   return PocCmdDrvobj.GroupXuhao;
+}
+
+//获取用户的最大组索引，用户个数
+u16 GetAllUserNum(void)
+{
+  return PocCmdDrvobj.UserXuhao+1;
+}
+
+//判断是否群组成员在线
+static bool no_online_user(void)
+{
+  if(PocCmdDrvobj.all_user_num!=0)
+  {
+    if(PocCmdDrvobj.all_user_num==PocCmdDrvobj.offline_user_count)
+    {
+      return TRUE;
+    }
+    else
+    {
+      return FALSE;
+    }
+  }
+  return FALSE;
 }
 /************************/

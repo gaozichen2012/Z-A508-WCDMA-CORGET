@@ -273,6 +273,10 @@ if(ReadInput_KEY_3==0)//×éºô¼ü
     TaskDrvobj.status.PersonalKeyMode=TRUE;
     api_lcd_pwr_on_hint(0,2,"Personal Mode");
     VOICE_Play(PersonalMode);
+    DEL_SetTimer(0,120);
+    while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
+    ApiPocCmd_WritCommand(PocComm_UserListInfo,0,0);
+    KeyDownUpChoose_GroupOrUser_Flag=2;
   }
 /*******±¨¾¯¼ü×´Ì¬¼ì²â********************************************************************************************************************************************/
   if(ReadInput_KEY_4==0)//±¨¾¯¼ü

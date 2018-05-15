@@ -33,6 +33,7 @@ typedef enum{
   InGroup       =0x02
 }GroupStatsType;
 
+
 extern GroupStatsType ApiPocCmd_GroupStates(void);
 extern void ApiPocCmd_GroupStatesSet(GroupStatsType a);
 
@@ -57,9 +58,12 @@ extern void ApiPocCmd_ToneStateSet(bool a);
 extern u8 *GetNowWorkingGroupNameForDisplay(void);
 extern u8 GetNowWorkingGroupNameLenForDisplay(void);
 extern u8 *GetAllGroupNameForDisplay(u8 a);
+extern u8 *GetAllUserNameForDisplay(u8 a);//所有用户：显示屏
 extern u16 GetNowWorkingGroupXuhao(void);
 extern u16 GetAllGroupNum(void);
+extern u16 GetAllUserNum(void);
 extern u8 *GetAllGroupNameForVoice(u8 a);
+extern u8 *GetAllUserNameForVoice(u8 a);//所有用户：播报
 /*************/
 extern void ApiPocCmd_PowerOnInitial(void);
 extern void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len);

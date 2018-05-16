@@ -406,7 +406,7 @@ static void DEL_500msProcess(void)			//delay 500ms process server
       if(DelDrvObj.Count.PrimaryLowPowerCount>=2*30)
       {
         DelDrvObj.Count.PrimaryLowPowerCount=0;
-        VOICE_Play(PowerLowPleaseCharge);
+        VOICE_Play(LowBattery);
         PrimaryLowPower_Flag=FALSE;
       }
     }

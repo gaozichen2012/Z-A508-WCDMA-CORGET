@@ -986,7 +986,7 @@ void TASK_WriteFreq(void)
 void TASK_RunLoBattery(void)
 {
 #if 1
-  api_lcd_pwr_on_hint(0,2," µÁ¡øµÕ  «Î≥‰µÁ  ");
+  api_lcd_pwr_on_hint(0,2," Please charge  ");
   VOICE_Play(PowerLowPleaseCharge);
   DEL_SetTimer(0,1000);
   while(1){if(DEL_GetTimer(0) == TRUE) {break;}}

@@ -7,7 +7,8 @@ const u8 *ucABELL                       = "4100620065006C006C00";//ABELL
 const u8 *ucGroupSelected               = "530065006c0065006300740065006400";//Group Selected
 const u8 *ucNoSimCard                   = "6e006f002000730069006D0020006300610072006400";//NO SIM Card
 const u8 *ucNetworkSearching            = "6e006500740077006f0072006b00200073006500610072006300680069006e006700";//network searching
-const u8 *ucPowerLowPleaseCharge        = "f78b45513575";//Power Low Please Charge
+const u8 *ucPowerLowPleaseCharge        = "50006f0077006500720020006c006f0077002c0050006c0065006100730065002000430068006100720067006500";//Power Low Please Charge
+const u8 *ucLowBattery                  = "4c006f00770020004200610074007400650072007900";//Low Battery
 const u8 *ucFivePercentPower            = "3575cf917e7606524b4e3500";
 const u8 *ucTwentyPercentPower          = "3575cf917e7606524b4e32004153";
 const u8 *ucFortyPercentPower           = "3575cf917e7606524b4e34004153";
@@ -109,6 +110,8 @@ void VOICE_Play(VOICEPLAY_TYPE id)
   case NoOnlineUser:
     VOICE_SetOutput(ATVOICE_FreePlay,(u8*)ucNoOnlineUser,strlen((char const*)ucNoOnlineUser));//No Online User
     break;
+  case LowBattery:
+    VOICE_SetOutput(ATVOICE_FreePlay,(u8*)ucLowBattery,strlen((char const*)ucLowBattery));//µÁ¡øµÕ«Î≥‰µÁ
   default:
     break;
   }

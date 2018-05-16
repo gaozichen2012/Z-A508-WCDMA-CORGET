@@ -730,15 +730,12 @@ void Keyboard_Test(void)
 
           TASK_PersonalKeyModeSet(FALSE);
           MenuMode_Flag=0;
-          api_disp_icoid_output(eICO_IDMESSAGEOff, TRUE, TRUE);//空图标-与选对应
           api_lcd_pwr_on_hint(0,2,"                ");//清屏
           api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());//显示当前群组昵称
-          Key_Flag_1=1;//按键延时标志位
-          //用于PTT键及上下键返回默认状态
           KeyDownUpChoose_GroupOrUser_Flag=0;
           KeyUpDownCount=0;
 
-          
+          Key_Flag_1=1;//按键延时标志位
 
       }
 

@@ -28,7 +28,8 @@ typedef enum{
   HandsetMode           = 0x0e,
   HandfreeMode          = 0x0f,
   AllUserName           = 0x10,
-  NoOnlineUser          = 0x11
+  NoOnlineUser          = 0x11,
+  LowBattery            = 0x12
 }VOICEPLAY_TYPE;
 typedef enum
 {	

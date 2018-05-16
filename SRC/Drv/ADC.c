@@ -150,10 +150,14 @@ void LowVoltageDetection(void)
       else{}
       if(LowVoltageDetection_Flag==1)//识别从低电量到高电量的状态
       {
-        ApiPocCmd_WritCommand(PocComm_Cancel,(u8 *)ucQuitPersonalCalling,strlen((char const *)ucQuitPersonalCalling));
+        TASK_PersonalKeyModeSet(FALSE);
+        MenuMode_Flag=0;
+        api_lcd_pwr_on_hint(0,2,"                ");//清屏
+        api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());//显示当前群组昵称
+        KeyDownUpChoose_GroupOrUser_Flag=0;
+        KeyUpDownCount=0;
         LowVoltageDetection_Flag=FALSE;
       }
-      //SetTaskId(Task_NormalOperation);
     }
   }
 }

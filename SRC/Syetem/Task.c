@@ -155,7 +155,7 @@ void Task_RunNormalOperation(void)
             ApiPocCmd_WritCommand(PocComm_StartPTT,0,0);
           }
         }
-    break;
+        break;
   case 1://1:按下ptt瞬间
     ApiPocCmd_SetKeyPttState(2);
     if(LoosenPttMoment_Flag==TRUE)//如果松开PTT瞬间，发送endPTT指令
@@ -271,7 +271,7 @@ if(ReadInput_KEY_3==0)//组呼键
   if(ReadInput_KEY_2==0)//个呼键
   {
     TaskDrvobj.status.PersonalKeyMode=TRUE;
-    api_lcd_pwr_on_hint(0,2,"Personal Mode");
+    api_lcd_pwr_on_hint(0,2,"Personal Mode   ");
     VOICE_Play(PersonalMode);
     DEL_SetTimer(0,120);
     while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
@@ -283,87 +283,61 @@ if(ReadInput_KEY_3==0)//组呼键
   {
   }
 /***********判断正常进组；正常退出组;被单呼模式；退出单呼模式；主动开始单呼；单呼；主动退出单呼*************/
-  if(ApiPocCmd_GroupStates()==EnterGroup)
+  if(get_current_working_status()==m_group_mode)//组呼模式
   {
-    //刷新图标
-    //显示当前群组
-    api_lcd_pwr_on_hint(0,2,"                ");
-    api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());
-    ApiPocCmd_GroupStatesSet(InGroup);
-  }
-  else if(ApiPocCmd_GroupStates()==InGroup)
-  {
-    
-  }
-  else//LeaveGroup
-  {
-    
-  }
-#if 0
-  if(POC_EnterPersonalCalling_Flag==2)//1刚被呼
-  {
-  }
-  else if(POC_EnterPersonalCalling_Flag==1)//2被呼状态
-  {
-  }
-  else//进组、组内、退组、开始主呼、主呼中、主呼结束
-  {
-    if(POC_EnterGroupCalling_Flag==2)//1进组
+    if(ApiPocCmd_GroupStates()==EnterGroup)
     {
-      if(POC_AtEnterPersonalCalling_Flag==2)//主动开始单呼模式
-      {
-      }
-      else if(POC_AtEnterPersonalCalling_Flag==1)//单呼中
-      {
-      }
-      else
-      {
-      }
-      POC_EnterGroupCalling_Flag=1;//进入组内
+      api_lcd_pwr_on_hint(0,2,"                ");
+      api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());
+      ApiPocCmd_GroupStatesSet(InGroup);
     }
-    else if(POC_EnterGroupCalling_Flag==1)//2组内
+    else if(ApiPocCmd_GroupStates()==InGroup)
     {
-      if(POC_AtEnterPersonalCalling_Flag==2)//1刚主呼
-      {
-      }
-      else if(POC_AtEnterPersonalCalling_Flag==1)//2主呼中
-      {
-      }
-      else//3主呼结束
-      {
-      }
     }
-    else//退组
+    else//LeaveGroup
     {
-      if(POC_QuitGroupCalling_Flag==2)
-      {
-        if(POC_QuitPersonalCalling_Flag==2)//被呼模式退组
-        {
-          POC_QuitPersonalCalling_Flag=0;
-          Key_PersonalCalling_Flag=0;
-        }
-        if(POC_AtQuitPersonalCalling_Flag==2)//主呼模式退组
-        {
-          POC_AtQuitPersonalCalling_Flag=0;
-          Key_PersonalCalling_Flag=0;
-        }
-        
-        if(TASK_Ptt_StartPersonCalling_Flag==TRUE)//解决切换个呼,按PTT确认，播报单呼模式时，中间不应显示一下组呼信息，再显示个呼
-        {
-        }
-        else
-        {
-          api_disp_icoid_output( eICO_IDPOWERM, TRUE, TRUE);//显示组呼图标
-          PersonCallIco_Flag=0;
-        }
-        POC_QuitGroupCalling_Flag=1;
-      }
     }
-
   }
-#endif
+  else //单呼模式
+  {
+    if(ApiPocCmd_GroupStates()==EnterGroup)
+    {
+      api_lcd_pwr_on_hint(0,2,"                ");
+      api_lcd_pwr_on_hint(0,2,"Temporary groups");//Temporary groups临时群组
+      ApiPocCmd_GroupStatesSet(InGroup);
+    }
+    else if(ApiPocCmd_GroupStates()==InGroup)
+    {
+    }
+    else//LeaveGroup
+    {
+    }
+  }
 /*********判断发射接收图标状态****************************************************************************************************************************/
-#if 0
+#if 1//WCDMA
+  switch(ApiPocCmd_ReceivedVoicePlayStatesForDisplay())
+  {
+  case ReceivedVoiceNone:
+    break;
+  case ReceivedVoiceStart:
+    api_lcd_pwr_on_hint(0,2,"                ");
+    api_lcd_pwr_on_hint(0,2,GetSpeakingUserNameForDisplay());
+    api_disp_icoid_output( eICO_IDVOX, TRUE, TRUE);//接收信号图标
+    api_disp_all_screen_refresh();// 全屏统一刷新
+    ApiPocCmd_ReceivedVoicePlayStatesForDisplaySet(ReceivedVoiceBeing);
+    break;
+  case ReceivedVoiceBeing:
+    break;
+  case ReceivedVoiceEnd:
+    get_screen_display_group_name();
+    api_disp_icoid_output( eICO_IDTALKAR, TRUE, TRUE);//无发射无接收空图标
+    api_disp_all_screen_refresh();// 全屏统一刷新
+    ApiPocCmd_ReceivedVoicePlayStatesForDisplaySet(ReceivedVoiceNone);
+    break;
+  default:
+    break;
+  }
+#else
   if(PersonCallIco_Flag==1)
 {
   if(POC_ReceivedVoiceStart_Flag==2)//刚接收语音状态
@@ -390,10 +364,7 @@ else
   if(POC_ReceivedVoiceStart_Flag==2)//刚接收语音状态
   {
     api_lcd_pwr_on_hint("                ");//清屏
-    //api_lcd_pwr_on_hint4(UnicodeForGbk_SpeakerRightnowName());//显示当前说话人的昵称
-    //api_lcd_pwr_on_hint4("1234567890123");//显示当前说话人的昵称
     POC_ReceivedVoiceStart_Flag=1;//接收语音状态
-    //修复BUG： A机换组状态，B机呼A机后，A机按PTT却是换组（被呼后A机应该返回默认状态：）
     KeyDownUpChoose_GroupOrUser_Flag=0;
     KeyUpDownCount=0;
     //修复BUG：在菜单界面，B机呼A机，显示屏显示混乱的问题（现为被呼A机退出菜单）

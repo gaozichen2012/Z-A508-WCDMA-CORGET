@@ -449,20 +449,10 @@ static void DEL_500msProcess(void)			//delay 500ms process server
           if(TimeCount==KeylockTimeCount*2)
           {
             LockingState_Flag=TRUE;//超时锁定标志位
-            //解决BUG：锁屏后会影响一级二级菜单显示，现处理办法为锁屏就退回默认群组状态,所有菜单标志位初始化
             MenuDisplay(Menu_RefreshAllIco);
-            if(PersonCallIco_Flag==0)
-            {
-              api_lcd_pwr_on_hint(0,2,"                ");//清屏
-              //api_lcd_pwr_on_hint4(UnicodeForGbk_MainWorkName());//显示当前群组昵称
-              api_disp_all_screen_refresh();// 全屏统一刷新
-            }
-            else
-            {
-              api_lcd_pwr_on_hint(0,2,"                ");//清屏
-              //api_lcd_pwr_on_hint4(UnicodeForGbk_MainUserName());//显示当前用户昵称
-              api_disp_all_screen_refresh();// 全屏统一刷新
-            }
+            get_screen_display_group_name();//选择显示当前群组昵称（群组或单呼临时群组）
+            api_disp_all_screen_refresh();// 全屏统一刷新
+
             MenuModeCount=1;
             TheMenuLayer_Flag=0;
             MenuMode_Flag=0;
@@ -483,7 +473,7 @@ static void DEL_500msProcess(void)			//delay 500ms process server
         if(NumberKeyboardPressDown_flag==TRUE&&TimeCount>=KeylockTimeCount*2)//超过10秒后再按按键提示“按OK键再按*键”
         {
           DelDrvObj.Count.TimeCount2++;
-          api_lcd_pwr_on_hint(0,2,"按OK键,再按#键  ");//
+          api_lcd_pwr_on_hint(0,2,"Press OK then # ");//
           if(DelDrvObj.Count.TimeCount2>=2)//0.5s
           {
             DelDrvObj.Count.TimeCount2=0;
@@ -816,6 +806,7 @@ static void DEL_500msProcess(void)			//delay 500ms process server
       POC_ReceivedNoVoiceCount=0;
     }
 #endif
+
 /*****************************************************/
 #if 0
     if(UpDownSwitching_Flag==TRUE)
@@ -1016,7 +1007,14 @@ static void DEL_500msProcess(void)			//delay 500ms process server
             if(PersonCallIco_Flag==0)
             {
               api_lcd_pwr_on_hint("                ");//清屏
-              //api_lcd_pwr_on_hint(HexToChar_MainGroupId());//显示当前群组ID
+              
+          TASK_PersonalKeyModeSet(FALSE);
+          MenuMode_Flag=0;
+          api_lcd_pwr_on_hint(0,2,"                ");//清屏
+          api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());//显示当前群组昵称
+          KeyDownUpChoose_GroupOrUser_Flag=0;
+          KeyUpDownCount=0;
+              
               api_lcd_pwr_on_hint4(UnicodeForGbk_MainWorkName());//显示当前群组昵称
               api_disp_all_screen_refresh();// 全屏统一刷新
             }

@@ -6,28 +6,24 @@
   <configuration>
     <name>Debug</name>
     <outputs>
-      <file>$PROJ_DIR$\Debug\Obj\ApiLED.__cstat.et</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_flash.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_adc2.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_uart1.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\UnicodeToGbk.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_tim6.__cstat.et</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_wwdg.__cstat.et</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_i2c.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\DrvGT20L16S1Y.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_beep.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\ApiBeidou.pbi</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_clk.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_i2c.__cstat.et</file>
-      <file>$PROJ_DIR$\Debug\Obj\A508_DEMO1.pbd</file>
-      <file>$PROJ_DIR$\Debug\Obj\Flash_eeprom.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_tim4.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_gpio.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\sysclock.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\Beep.o</file>
+      <file>$TOOLKIT_DIR$\lib\dbgstm8mmd.a</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_tim1.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\ADC.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_spi.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_flash.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\Config.o</file>
+      <file>$TOOLKIT_DIR$\config\lnkstm8s007c8.icf</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_exti.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\ApiDisplay.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_wwdg.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_tim5.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\ApiMenu.__cstat.et</file>
       <file>$TOOLKIT_DIR$\lib\dlstm8mmn.a</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_gpio.pbi</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\UnicodeToGbk.c</file>
       <file>$TOOLKIT_DIR$\inc\c\ystdio.h</file>
       <file>$PROJ_DIR$\Debug\Obj\Tone.pbi</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\UnicodeToGbk.c</file>
       <file>$PROJ_DIR$\Debug\List\A508_DEMO1.map</file>
       <file>$PROJ_DIR$\Debug\Obj\Flash_eeprom.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_spi.__cstat.et</file>
@@ -36,30 +32,17 @@
       <file>$PROJ_DIR$\Debug\Obj\stm8s_itc.o</file>
       <file>$PROJ_DIR$\Debug\Obj\CommonLib.o</file>
       <file>$PROJ_DIR$\..\INCLUDE\unicodeTables.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_tim1.pbi</file>
-      <file>$TOOLKIT_DIR$\lib\dbgstm8mmd.a</file>
-      <file>$PROJ_DIR$\Debug\Obj\ADC.__cstat.et</file>
-      <file>$PROJ_DIR$\Debug\Obj\Beep.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_spi.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_flash.__cstat.et</file>
-      <file>$TOOLKIT_DIR$\config\lnkstm8s007c8.icf</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_exti.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\Config.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\ApiDisplay.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_wwdg.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_tim5.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\ApiMenu.__cstat.et</file>
       <file>$TOOLKIT_DIR$\lib\dlstm8mmn.h</file>
       <file>$PROJ_DIR$\Debug\Obj\ApiPocCmd.__cstat.et</file>
       <file>$PROJ_DIR$\Debug\Obj\CommonLib.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_uart4.__cstat.et</file>
       <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_exti.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_uart4.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\DrvGD83.o</file>
       <file>$TOOLKIT_DIR$\inc\c\stdlib.h</file>
       <file>$PROJ_DIR$\Debug\Obj\Beep.__cstat.et</file>
       <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_tim4.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\DrvGD83.o</file>
       <file>$PROJ_DIR$\Debug\Obj\ApiAtCmd.__cstat.et</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_iwdg.o</file>
       <file>$PROJ_DIR$\Debug\Obj\ApiKeyboard.pbi</file>
@@ -68,9 +51,9 @@
       <file>$PROJ_DIR$\Debug\Obj\Task.o</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_clk.o</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_iwdg.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_uart3.__cstat.et</file>
       <file>$TOOLKIT_DIR$\inc\c\xencoding_limits.h</file>
       <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_uart3.__cstat.et</file>
       <file>$PROJ_DIR$\Debug\Obj\KeyCmd.__cstat.et</file>
       <file>$PROJ_DIR$\Debug\Exe\A508_DEMO1.out</file>
       <file>$PROJ_DIR$\Debug\Obj\ApiBeidou.o</file>
@@ -82,6 +65,17 @@
       <file>$PROJ_DIR$\Debug\Obj\stm8s_adc1.__cstat.et</file>
       <file>$PROJ_DIR$\Debug\Obj\Voice.o</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_gpio.__cstat.et</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_uart2.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\ApiGpsCmd.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_clk.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_awu.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\DrvKeyboard.o</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_flash.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\ApiPocCmd.pbi</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_tim4.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_awu.pbi</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_can.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\KeyCmd.o</file>
       <file>$PROJ_DIR$\Debug\Obj\sysclock.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_tim5.o</file>
       <file>$PROJ_DIR$\Debug\Obj\System.pbi</file>
@@ -100,35 +94,24 @@
       <file>$PROJ_DIR$\Debug\Obj\stm8s_tim2.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_exti.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_uart3.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_exti.__cstat.et</file>
       <file>$TOOLKIT_DIR$\inc\c\DLib_Threads.h</file>
       <file>$PROJ_DIR$\Debug\Obj\main.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_exti.__cstat.et</file>
       <file>$PROJ_DIR$\Debug\Obj\Voice.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\DrvHTG12832.o</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_itc.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_it.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\Delay.__cstat.et</file>
-      <file>$PROJ_DIR$\Debug\Obj\ApiGpsCmd.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_clk.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\ApiDisplay.__cstat.et</file>
       <file>$PROJ_DIR$\Debug\Obj\uart3.o</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_uart2.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_awu.__cstat.et</file>
-      <file>$PROJ_DIR$\Debug\Obj\DrvKeyboard.o</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_flash.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\ApiPocCmd.pbi</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_tim4.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_awu.pbi</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_can.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\KeyCmd.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\DrvGT20L16S1Y.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\McuConfig.pbi</file>
       <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_tim3.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\DrvGT20L16S1Y.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\ADC.o</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_uart2.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_can.pbi</file>
       <file>$TOOLKIT_DIR$\inc\c\string.h</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_it.__cstat.et</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_can.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\DrvKeyboard.pbi</file>
       <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_adc1.h</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_rst.o</file>
@@ -139,9 +122,9 @@
       <file>$PROJ_DIR$\Debug\Exe\A508_DEMO1.hex</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_tim3.o</file>
       <file>$PROJ_DIR$\Debug\Obj\Flash_eeprom.__cstat.et</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_tim5.h</file>
       <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
       <file>$PROJ_DIR$\Debug\Obj\McuConfig.o</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_tim5.h</file>
       <file>$PROJ_DIR$\Debug\Obj\KeyCmd.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\UnicodeToGbk.o</file>
       <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_tim2.h</file>
@@ -166,75 +149,34 @@
       <file>$PROJ_DIR$\Debug\Obj\stm8s_tim5.__cstat.et</file>
       <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_adc2.h</file>
       <file>$PROJ_DIR$\..\INCLUDE\gbkTables.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\DrvHTG12832.pbi</file>
       <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
       <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_beep.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\DrvHTG12832.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_uart4.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\ApiGpsCmd.__cstat.et</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_tim6.o</file>
       <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_uart3.h</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_exti.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_flash.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_gpio.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_i2c.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_itc.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_iwdg.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_rst.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_spi.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim1.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim2.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim3.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim4.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_uart1.c</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\ApiDisplay.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim5.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim6.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_uart3.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_uart2.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_uart4.c</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_wwdg.c</file>
-      <file>$PROJ_DIR$\..\SRC\Support\CommonLib.c</file>
-      <file>$PROJ_DIR$\..\SRC\Support\Config.c</file>
-      <file>$PROJ_DIR$\..\SRC\Support\McuConfig.c</file>
-      <file>$PROJ_DIR$\..\SRC\Support\sysclock.c</file>
-      <file>$PROJ_DIR$\..\SRC\Support\System.c</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\ApiAtCmd.c</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\ApiBeidou.c</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\ApiGpsCmd.c</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\ApiKeyboard.c</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\ApiLED.c</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\ApiMenu.c</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\ApiPocCmd.c</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\Beep.c</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\Delay.c</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\Flash_eeprom.c</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\GT20L16_STM8_DOUBLE_MEDIUM_IAR.a</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\GT20L16P1Y_D.c</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\KeyCmd.c</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\Task.c</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\Tone.c</file>
-      <file>$PROJ_DIR$\..\SRC\Syetem\uart3.c</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_uart4.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\sysclock.o</file>
       <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_i2c.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_uart4.o</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_uart1.__cstat.et</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_tim3.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\sysclock.o</file>
       <file>$PROJ_DIR$\Debug\Obj\Delay.o</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_tim1.h</file>
       <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
       <file>$PROJ_DIR$\Debug\Obj\ApiPocCmd.o</file>
-      <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_tim1.h</file>
       <file>$PROJ_DIR$\Debug\Obj\ApiMenu.o</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_adc1.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\GT20L16P1Y_D.__cstat.et</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_can.__cstat.et</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_flash.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\ADC.pbi</file>
       <file>$TOOLKIT_DIR$\inc\c\stdio.h</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_tim2.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\System.__cstat.et</file>
-      <file>$PROJ_DIR$\Debug\Obj\Config.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\ADC.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\DrvHTG12832.__cstat.et</file>
       <file>$PROJ_DIR$\Debug\Obj\ApiDisplay.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\System.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\Config.pbi</file>
       <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_tim6.h</file>
       <file>$PROJ_DIR$\Debug\Obj\ApiKeyboard.o</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_i2c.pbi</file>
@@ -243,9 +185,9 @@
       <file>$PROJ_DIR$\Debug\Obj\DrvGD83.__cstat.et</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_spi.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\ApiAtCmd.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_beep.o</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_beep.__cstat.et</file>
       <file>$TOOLKIT_DIR$\inc\c\intrinsics.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_beep.o</file>
       <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_uart1.h</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_iwdg.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_can.o</file>
@@ -255,10 +197,10 @@
       <file>$PROJ_DIR$\Debug\Obj\CommonLib.__cstat.et</file>
       <file>$PROJ_DIR$\Debug\Obj\stm8s_gpio.o</file>
       <file>$PROJ_DIR$\Debug\Obj\ApiLED.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\GT20L16P1Y_D.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\stm8s_uart2.o</file>
       <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\Beep.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\GT20L16P1Y_D.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_uart2.o</file>
       <file>$PROJ_DIR$\..\INCLUDE\ADC.h</file>
       <file>$PROJ_DIR$\..\INCLUDE\AllHead.h</file>
       <file>$PROJ_DIR$\..\INCLUDE\ApiAtCmd.h</file>
@@ -307,13 +249,72 @@
       <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_beep.c</file>
       <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_can.c</file>
       <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_clk.c</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\ApiGpsCmd.c</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\ApiLED.c</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\ApiMenu.c</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\ApiKeyboard.c</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\ApiPocCmd.c</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\Beep.c</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\Delay.c</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\Flash_eeprom.c</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\GT20L16_STM8_DOUBLE_MEDIUM_IAR.a</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\GT20L16P1Y_D.c</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\KeyCmd.c</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\Task.c</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\Tone.c</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\uart3.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_flash.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\ApiLED.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_adc2.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_wwdg.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_tim6.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_i2c.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_uart1.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\UnicodeToGbk.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\DrvGT20L16S1Y.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_beep.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\ApiBeidou.pbi</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\inc\stm8s_clk.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_i2c.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\A508_DEMO1.pbd</file>
+      <file>$PROJ_DIR$\Debug\Obj\Flash_eeprom.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\stm8s_tim4.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\sysclock.__cstat.et</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_flash.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_gpio.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_exti.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_i2c.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_itc.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_iwdg.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_rst.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_spi.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim1.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim2.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim3.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim4.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_uart1.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim5.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim6.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_uart3.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_uart2.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_uart4.c</file>
+      <file>$PROJ_DIR$\..\SRC\MCU\src\stm8s_wwdg.c</file>
+      <file>$PROJ_DIR$\..\SRC\Support\CommonLib.c</file>
+      <file>$PROJ_DIR$\..\SRC\Support\Config.c</file>
+      <file>$PROJ_DIR$\..\SRC\Support\McuConfig.c</file>
+      <file>$PROJ_DIR$\..\SRC\Support\sysclock.c</file>
+      <file>$PROJ_DIR$\..\SRC\Support\System.c</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\ApiAtCmd.c</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\ApiBeidou.c</file>
+      <file>$PROJ_DIR$\..\SRC\Syetem\ApiDisplay.c</file>
+      <file>$PROJ_DIR$\..\..\A508\SRC\MCU\src\stm8s_gpio.c</file>
     </outputs>
     <file>
       <name>[ROOT_NODE]</name>
       <outputs>
         <tool>
           <name>ILINK</name>
-          <file> 66 22</file>
+          <file> 49 18</file>
         </tool>
       </outputs>
     </file>
@@ -322,17 +323,17 @@
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 4</file>
+          <file> 264</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 137</file>
+          <file> 120</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 109 89 63 286 138 154 148 11 210 126 117 159 239 158 161 37 243 86 83 216 111 240 166 29</file>
+          <file> 64 83 47 228 121 137 131 268 150 109 99 142 180 141 145 8 185 80 77 156 66 182 149 25</file>
         </tool>
       </inputs>
     </file>
@@ -341,265 +342,211 @@
       <outputs>
         <tool>
           <name>ILINK</name>
-          <file> 22</file>
+          <file> 18</file>
         </tool>
         <tool>
           <name>OBJCOPY</name>
-          <file> 130</file>
+          <file> 113</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>ILINK</name>
-          <file> 36 118 236 67 228 72 230 155 217 215 33 28 38 213 53 8 98 108 14 202 84 114 95 134 146 81 237 60 47 221 247 7 26 27 55 125 34 143 223 131 15 3 93 40 209 145 59 153 105 74 18 31</file>
+          <file> 7 101 178 50 168 55 172 138 159 158 0 24 6 155 32 265 92 63 271 251 78 69 90 118 129 75 181 43 31 163 189 262 22 23 38 108 4 126 166 114 272 263 87 10 154 128 42 136 97 57 13 1</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_exti.c</name>
+      <name>$PROJ_DIR$\..\MAIN\main.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 92</file>
+          <file> 191</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 47</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 96</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 138 286 109 89 154 148 11 210 126 117 63 239 158 161 37 243 86 83 216 111 240 166</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 37 63 286 158 154 161 11 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_flash.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 1</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 221</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 35</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 243 63 239 161 83 240 158 37 86 216 111 166 286 154 11 109 210 148 126 138 117 89</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 109 63 286 158 154 161 11 37 243 210 86 148 83 126 216 138 117 111 240 166 89 239</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_gpio.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 16</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 247</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 75</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 158 111 86 63 37 216 166 239 161 243 83 240 286 154 11 109 210 148 126 138 117 89</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 243 63 286 158 154 161 11 37 109 210 86 148 83 126 216 138 117 111 240 166 89 239</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_i2c.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 231</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 7</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 12</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 216 63 37 166 158 86 111 239 161 243 83 240 286 154 11 109 210 148 126 138 117 89</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 210 63 286 158 154 161 11 37 109 243 86 148 83 126 216 138 117 111 240 166 89 239</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_itc.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 99</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 27</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 127</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 11 126 63 210 117 286 154 109 148 138 89 239 158 161 37 243 86 83 216 111 240 166</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 86 63 286 158 154 161 11 37 109 243 210 148 83 126 216 138 117 111 240 166 89 239</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_iwdg.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 241</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 55</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 61</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 83 161 240 63 239 243 158 37 86 216 111 166 286 154 11 109 210 148 126 138 117 89</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 148 63 286 158 154 161 11 37 109 243 210 86 83 126 216 138 117 111 240 166 89 239</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_rst.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
           <file> 90</file>
         </tool>
         <tool>
-          <name>ICCSTM8</name>
-          <file> 125</file>
-        </tool>
-        <tool>
           <name>__cstat</name>
-          <file> 140</file>
+          <file> 135</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 240 161 83 239 63 243 158 37 86 216 111 166 286 154 11 109 210 148 126 138 117 89</file>
+          <file> 30 218 201 144 209 202 137 47 221 104 224 208 131 46 196 230 226 197 214 223 216 195 198 228 64 121 83 26 157 211 220 206 210 212 204 215 199 213 205 222 225 207 200 217 203 219 268 150 109 99 35 180 141 145 8 185 80 77 156 66 182 149 117 89</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 83 63 286 158 154 161 11 37 109 243 210 86 148 126 216 138 117 111 240 166 89 239</file>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_spi.c</name>
+      <name>$PROJ_DIR$\..\MAIN\stm8s_it.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 235</file>
+          <file> 94</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 34</file>
+          <file> 22</file>
         </tool>
         <tool>
           <name>__cstat</name>
-          <file> 24</file>
+          <file> 105</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 154 148 286 109 138 89 63 11 210 126 117 239 158 161 37 243 86 83 216 111 240 166</file>
+          <file> 30 180 47 220 144 205 185 204 200 46 196 145 77 182 210 199 225 203 26 157 211 64 141 8 80 156 66 149 206 212 215 213 222 207 217 219 35 230 228 137 268 150 131 109 121 99 83 221 209 226 104 197 201 214 224 223 202 216 208 195 218 198 117 89</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 126 63 286 158 154 161 11 37 109 243 210 86 148 83 216 138 117 111 240 166 89 239</file>
+          <file> 230 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 196 221 220 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim1.c</name>
+      <name>$PROJ_DIR$\..\SRC\Drv\ADC.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 30</file>
+          <file> 164</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
+          <file> 101</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 3</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 157 213 211 47 219 228 212 207 121 64 206 215 222 217 83 26 220 210 204 199 205 225 200 203 137 131 30 144 46 196 221 230 209 226 104 197 201 214 224 223 202 216 208 195 218 198 268 150 109 99 35 180 141 145 8 185 80 77 156 66 182 149 117 89</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Drv\DrvGD83.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 174</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 32</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 176</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 144 182 207 30 212 145 47 213 219 77 46 196 64 206 215 222 217 180 185 26 157 211 220 210 204 199 205 225 200 203 141 8 80 156 66 149 35 221 230 209 226 104 197 201 214 224 223 202 216 208 195 218 198 228 137 268 150 131 109 121 99 83 117 89</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Drv\DrvGT20L16S1Y.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 100</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 265</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 122</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 209 157 211 202 228 201 218 121 64 221 104 224 208 83 26 230 226 197 214 223 216 195 198 137 131 47 30 144 46 196 220 206 210 212 204 215 199 213 205 222 225 207 200 217 203 219 268 150 109 99 35 180 141 145 8 185 80 77 156 66 182 149 117 89</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Drv\DrvHTG12832.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
           <file> 143</file>
         </tool>
         <tool>
+          <name>ICCSTM8</name>
+          <file> 92</file>
+        </tool>
+        <tool>
           <name>__cstat</name>
-          <file> 70</file>
+          <file> 167</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 126 63 11 210 117 286 154 109 148 138 89 216 239 158 161 37 243 86 83 111 240 166</file>
+          <file> 157 211 230 228 223 121 64 197 195 83 26 226 214 216 198 137 131 47 30 144 46 196 221 209 104 201 224 202 208 218 268 150 109 99 35 215 213 220 206 210 212 204 199 205 222 225 207 200 217 203 219 180 141 145 8 185 80 77 156 66 182 149 117 89</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 216 63 286 158 154 161 11 37 109 243 210 86 148 83 126 138 117 111 240 166 89 239</file>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim2.c</name>
+      <name>$PROJ_DIR$\..\SRC\Drv\DrvKeyboard.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 106</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 63</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 111</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 224 109 47 221 104 208 268 209 201 202 218 150 99 144 35 196 215 213 230 226 197 214 223 216 195 198 228 137 64 131 121 83 30 46 26 157 211 220 206 210 212 204 199 205 222 225 207 200 217 203 219 180 141 145 8 185 80 77 156 66 182 149 117 89</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Drv\Voice.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
@@ -607,682 +554,165 @@
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 223</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 141</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 63 117 210 11 126 286 154 109 148 138 89 239 158 161 37 243 86 83 216 111 240 166</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 138 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 117 111 240 166 89 239</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim3.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 212</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 131</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 87</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 37 63 166 216 158 86 111 239 161 243 83 240 117 286 154 11 109 210 148 126 138 89</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 117 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 111 240 166 89 239</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim4.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 52</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 15</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 68</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 154 148 286 109 138 89 63 11 210 126 117 239 158 161 37 243 86 83 216 111 240 166</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 111 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 240 166 89 239</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_uart1.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 79</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 3</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 211</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 11 126 210 117 63 286 154 109 148 138 89 239 158 161 37 243 86 83 216 111 240 166</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 240 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 166 89 239</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\Syetem\ApiDisplay.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 39</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 228</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 104</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 271 269 83 254 63 277 62 109 270 265 161 240 46 160 264 273 280 275 239 243 43 214 120 278 268 262 257 263 283 258 261 158 37 86 216 111 166 51 279 288 267 284 255 259 272 282 281 260 274 266 253 276 256 286 154 11 210 148 126 138 117 89 133 94</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim5.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 41</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 77</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 157</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 161 240 63 83 239 243 158 37 86 216 111 166 135 286 154 11 109 210 148 126 138 117 89</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 135 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim6.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 129</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 165</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 5</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 83 161 240 63 239 243 158 37 86 216 111 166 286 154 11 109 210 148 126 138 117 89 229</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 229 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_uart3.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
           <file> 57</file>
         </tool>
         <tool>
-          <name>ICCSTM8</name>
-          <file> 93</file>
-        </tool>
-        <tool>
           <name>__cstat</name>
-          <file> 64</file>
+          <file> 74</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 83 63 161 240 239 243 158 37 86 216 111 166 286 154 11 109 210 148 126 138 117 89</file>
+          <file> 47 157 211 206 180 222 64 215 217 185 26 212 213 207 219 145 77 182 30 144 46 196 220 210 204 199 205 225 200 203 141 8 80 156 66 149 35 221 230 209 226 104 197 201 214 224 223 202 216 208 195 218 198 228 137 268 150 131 109 121 99 83 117 89</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 166 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 89 239</file>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_uart2.c</name>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_adc1.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 119</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 250</file>
+          <file> 160</file>
         </tool>
         <tool>
           <name>__cstat</name>
-          <file> 147</file>
+          <file> 56</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 161 240 63 83 239 243 158 37 86 216 111 166 106 286 154 11 109 210 148 126 138 117 89</file>
+          <file> 145 182 47 180 77 185 228 141 8 80 156 66 149 107 137 268 64 150 131 109 121 99 83</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 106 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239</file>
+          <file> 107 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_uart4.c</name>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_adc2.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 163</file>
+          <file> 259</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 208</file>
+          <file> 129</file>
         </tool>
         <tool>
           <name>__cstat</name>
-          <file> 48</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 126 11 63 210 117 286 154 109 148 138 89 239 158 161 37 243 86 83 216 111 240 166 85</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 85 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_wwdg.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 142</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 40</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 6</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 154 148 63 286 109 138 89 11 210 126 117 239 158 161 37 243 86 83 216 111 240 166</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 89 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 239</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\Support\CommonLib.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 45</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 28</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 246</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 271 269 83 254 63 277 62 109 270 265 161 240 46 160 264 273 280 275 239 243 43 214 278 268 262 257 263 283 258 261 158 37 86 216 111 166 51 279 288 267 284 120 255 259 272 282 281 260 274 266 253 276 256 286 154 11 210 148 126 138 117 89 133 94</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\Support\Config.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 225</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 38</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 71</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 258 286 262 214 278 263 138 268 257 283 261 109 89 43 254 63 264 270 273 271 280 265 275 277 154 148 46 160 62 269 279 288 267 284 120 255 259 272 282 281 260 274 266 253 276 256 11 210 126 117 51 239 158 161 37 243 86 83 216 111 240 166 133 94</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\Support\McuConfig.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 116</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 134</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 245</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 286 138 109 89 154 148 63 11 210 126 117 239 158 161 37 243 86 83 216 111 240 166 278</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 278 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\Support\sysclock.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
           <file> 76</file>
         </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 209</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 17</file>
-        </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 154 148 286 109 138 89 11 210 126 117 63 239 158 161 37 243 86 83 216 111 240 166 279</file>
+          <file> 109 268 150 99 47 228 137 64 131 121 83 180 141 145 8 185 80 77 156 66 182 149</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 279 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239</file>
+          <file> 141 47 228 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\Support\System.c</name>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_awu.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 78</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 145</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 224</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 63 271 269 277 148 254 270 265 62 109 264 273 280 275 154 46 160 278 268 262 257 263 283 258 261 286 138 89 43 214 279 288 267 284 120 255 259 272 282 281 260 274 266 253 276 256 11 210 126 117 51 239 158 161 37 243 86 83 216 111 240 166 133 94</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\Syetem\ApiAtCmd.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 25</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 236</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 54</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 63 272 269 148 254 256 62 109 284 274 154 46 160 288 255 281 253 286 138 89 43 214 279 267 120 259 282 260 266 276 11 210 126 117 51 273 271 278 264 268 270 262 257 263 280 283 265 258 275 261 277 239 158 161 37 243 86 83 216 111 240 166 133 94</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\Syetem\ApiBeidou.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 10</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
           <file> 67</file>
         </tool>
         <tool>
+          <name>ICCSTM8</name>
+          <file> 75</file>
+        </tool>
+        <tool>
           <name>__cstat</name>
-          <file> 69</file>
+          <file> 62</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 63 260 269 267 148 254 259 276 62 109 279 120 282 266 154 46 160 288 284 255 272 281 274 253 256 286 138 89 43 214 278 264 268 270 262 273 257 271 263 280 283 265 258 275 261 277 11 210 126 117 51 239 158 161 37 243 86 83 216 111 240 166 133 94</file>
+          <file> 83 64 47 228 121 137 131 268 150 109 99 180 141 145 8 185 80 77 156 66 182 149</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
+          <file> 137 47 228 141 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\Syetem\ApiGpsCmd.c</name>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_beep.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 102</file>
+          <file> 266</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 72</file>
+          <file> 181</file>
         </tool>
         <tool>
           <name>__cstat</name>
-          <file> 164</file>
+          <file> 179</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 279 282 126 63 214 120 266 11 51 267 259 260 276 210 117 160 254 222 288 284 255 272 281 274 253 256 286 154 109 148 138 89 49 278 264 268 270 262 273 257 271 263 280 283 265 258 275 261 277 239 158 161 37 243 86 83 216 111 240 166 46 62 43 269 133 94 19</file>
+          <file> 156 8 149 141 80 66 47 180 145 185 77 182 228 137 268 64 150 131 109 121 99 83</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277 222 19 49</file>
+          <file> 145 47 228 141 137 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\Syetem\ApiKeyboard.c</name>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_can.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 56</file>
+          <file> 103</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 230</file>
+          <file> 184</file>
         </tool>
         <tool>
           <name>__cstat</name>
-          <file> 156</file>
+          <file> 162</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 286 288 214 281 138 255 253 109 89 43 284 272 274 256 154 148 63 46 160 62 254 269 279 267 120 259 282 260 266 276 11 210 126 117 51 273 271 278 264 268 270 262 257 263 280 283 265 258 275 261 277 239 158 161 37 243 86 83 216 111 240 166 133 94</file>
+          <file> 145 182 47 77 180 185 141 8 80 156 66 149 68 228 137 268 64 150 131 109 121 99 83</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
+          <file> 68 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\Syetem\ApiLED.c</name>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_clk.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 248</file>
+          <file> 61</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 155</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 0</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 280 286 264 214 273 275 138 63 270 271 265 277 109 89 43 254 278 268 262 257 263 283 258 261 154 148 46 160 62 269 279 288 267 284 120 255 259 272 282 281 260 274 266 253 276 256 11 210 126 117 51 239 158 161 37 243 86 83 216 111 240 166 133 94</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\Syetem\ApiMenu.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 150</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 217</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 42</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 63 272 269 148 254 256 62 109 284 274 154 46 160 288 255 281 253 286 138 89 43 214 279 267 120 259 282 260 266 276 11 210 126 117 51 273 271 278 264 268 270 262 257 263 280 283 265 258 275 261 277 239 158 161 37 243 86 83 216 111 240 166 133 94</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\Syetem\ApiPocCmd.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 110</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 215</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 44</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 265 240 269 270 161 63 254 271 277 83 109 264 273 280 275 239 243 133 94 278 268 262 257 263 283 258 261 158 37 86 216 111 166 214 279 288 267 284 120 255 259 272 282 281 260 274 266 253 276 256 286 154 11 210 148 126 138 117 89 160 46 62 43 51</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\Syetem\Beep.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 252</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 33</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 50</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 282 126 63 279 109 120 266 11 267 259 260 276 210 117 133 94 254 288 284 255 272 281 274 253 256 286 154 148 138 89 214 160 269 278 264 268 270 262 273 257 271 263 280 283 265 258 275 261 277 239 158 161 37 243 86 83 216 111 240 166 46 62 43 51</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\Syetem\Delay.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 58</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 213</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 101</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 158 268 160 283 111 257 261 86 63 51 278 262 263 258 37 216 166 254 273 271 264 270 280 265 275 277 239 161 243 83 240 46 62 43 214 269 109 279 288 267 284 120 255 259 272 282 281 260 274 266 253 276 256 286 154 11 210 148 126 138 117 89 133 94</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\Syetem\Flash_eeprom.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 23</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 14</file>
+          <file> 43</file>
         </tool>
         <tool>
           <name>__cstat</name>
@@ -1292,257 +722,105 @@
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 154 83 286 109 240 63 11 210 239 158 161 37 243 86 216 111 166 274 148 126 138 117 89</file>
+          <file> 8 141 80 47 180 145 185 77 182 228 137 268 64 150 131 156 66 149 109 121 99 83</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 274 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239</file>
+          <file> 268 47 228 141 137 145 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\Syetem\GT20L16P1Y_D.c</name>
+      <name>$PROJ_DIR$\..\SRC\Syetem\ApiGpsCmd.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 249</file>
+          <file> 60</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 84</file>
+          <file> 55</file>
         </tool>
         <tool>
           <name>__cstat</name>
-          <file> 219</file>
-        </tool>
-      </outputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\Syetem\KeyCmd.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 136</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 114</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 65</file>
+          <file> 147</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 63 277 269 271 148 254 270 265 62 109 264 273 280 275 154 46 160 278 268 262 257 263 283 258 261 286 138 89 43 214 279 288 267 284 120 255 259 272 282 281 260 274 266 253 276 256 11 210 126 117 51 239 158 161 37 243 86 83 216 111 240 166 133 94</file>
+          <file> 221 224 109 47 157 104 208 268 209 201 202 218 150 99 196 165 230 226 197 214 223 216 195 198 228 137 64 131 121 83 144 35 33 220 206 210 212 204 215 199 213 205 222 225 207 200 217 203 219 180 141 145 8 185 80 77 156 66 182 149 30 46 26 211 117 89 16</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219 165 16 33</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\Syetem\Task.c</name>
+      <name>$PROJ_DIR$\..\SRC\Syetem\ApiLED.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 233</file>
+          <file> 190</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 59</file>
+          <file> 138</file>
         </tool>
         <tool>
           <name>__cstat</name>
-          <file> 244</file>
+          <file> 258</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 271 83 63 277 109 270 265 161 240 264 273 280 275 239 243 133 94 254 278 268 262 257 263 283 258 261 158 37 86 216 111 166 214 160 269 279 288 267 284 120 255 259 272 282 281 260 274 266 253 276 256 286 154 11 210 148 126 138 117 89 46 62 43 51</file>
+          <file> 30 222 206 144 215 217 137 47 212 213 207 219 131 46 196 220 210 204 199 205 225 200 203 228 64 121 83 26 157 211 221 230 209 226 104 197 201 214 224 223 202 216 208 195 218 198 268 150 109 99 35 180 141 145 8 185 80 77 156 66 182 149 117 89</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\Syetem\Tone.c</name>
+      <name>$PROJ_DIR$\..\SRC\Syetem\ApiMenu.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 20</file>
+          <file> 133</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 153</file>
+          <file> 159</file>
         </tool>
         <tool>
           <name>__cstat</name>
-          <file> 151</file>
+          <file> 12</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 63 120 239 266 279 282 267 259 260 276 243 133 94 254 288 284 255 272 281 274 253 256 161 83 240 109 278 264 268 270 262 273 257 271 263 280 283 265 258 275 261 277 158 37 86 216 111 166 214 160 269 286 154 11 210 148 126 138 117 89 46 62 43 51</file>
+          <file> 157 211 230 228 223 121 64 197 195 83 26 226 214 216 198 137 131 47 30 144 46 196 221 209 104 201 224 202 208 218 268 150 109 99 35 215 213 220 206 210 212 204 199 205 222 225 207 200 217 203 219 180 141 145 8 185 80 77 156 66 182 149 117 89</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\Syetem\uart3.c</name>
+      <name>$PROJ_DIR$\..\SRC\Syetem\ApiKeyboard.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 88</file>
+          <file> 39</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 105</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 144</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 158 268 269 283 111 257 261 86 63 133 94 109 278 262 263 258 37 216 166 120 264 270 273 271 280 265 275 277 239 161 243 83 240 214 160 254 279 288 267 284 255 259 272 282 281 260 274 266 253 276 256 286 154 11 210 148 126 138 117 89 46 62 43 51</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\MAIN\main.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 251</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 95</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 152</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 276 286 259 214 267 260 138 279 120 282 266 109 89 43 254 288 284 255 272 281 274 253 256 154 148 63 46 160 62 269 278 264 268 270 262 273 257 271 263 280 283 265 258 275 261 277 11 210 126 117 51 239 158 161 37 243 86 83 216 111 240 166 133 94</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\MAIN\stm8s_it.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 100</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 26</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 121</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 83 257 214 261 161 240 268 283 43 254 239 63 243 278 262 263 258 46 160 62 269 109 158 37 86 216 111 166 264 270 273 271 280 265 275 277 51 288 286 154 11 210 148 126 138 117 89 279 267 284 120 255 259 272 282 281 260 274 266 253 276 256 133 94</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 288 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 254 279 278 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\Drv\ADC.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 226</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 118</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 32</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 63 271 269 277 148 254 270 265 62 109 264 273 280 275 154 46 160 278 268 262 257 263 283 258 261 286 138 89 43 214 279 288 267 284 120 255 259 272 282 281 260 274 266 253 276 256 11 210 126 117 51 239 158 161 37 243 86 83 216 111 240 166 133 94</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\Drv\DrvGD83.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 232</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 53</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 234</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 160 240 265 46 270 161 63 271 277 83 62 254 269 109 264 273 280 275 239 243 43 214 278 268 262 257 263 283 258 261 158 37 86 216 111 166 51 279 288 267 284 120 255 259 272 282 281 260 274 266 253 276 256 286 154 11 210 148 126 138 117 89 133 94</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\Drv\DrvGT20L16S1Y.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 115</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 8</file>
+          <file> 172</file>
         </tool>
         <tool>
           <name>__cstat</name>
@@ -1552,47 +830,415 @@
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 63 267 269 260 148 254 259 276 62 109 279 120 282 266 154 46 160 288 284 255 272 281 274 253 256 286 138 89 43 214 278 264 268 270 262 273 257 271 263 280 283 265 258 275 261 277 11 210 126 117 51 239 158 161 37 243 86 83 216 111 240 166 133 94</file>
+          <file> 157 210 141 225 66 211 199 203 80 47 220 204 205 200 8 156 149 144 206 212 215 213 222 207 217 219 180 145 185 77 182 117 89 196 221 230 209 226 104 197 201 214 224 223 202 216 208 195 218 198 228 137 268 64 150 131 109 121 99 83 30 46 26 35</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\Drv\DrvHTG12832.c</name>
+      <name>$PROJ_DIR$\..\SRC\Syetem\ApiPocCmd.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 162</file>
+          <file> 65</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 98</file>
+          <file> 158</file>
         </tool>
         <tool>
           <name>__cstat</name>
-          <file> 227</file>
+          <file> 27</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 63 272 269 148 254 256 62 109 284 274 154 46 160 288 255 281 253 286 138 89 43 214 279 267 120 259 282 260 266 276 11 210 126 117 51 273 271 278 264 268 270 262 257 263 280 283 265 258 275 261 277 239 158 161 37 243 86 83 216 111 240 166 133 94</file>
+          <file> 137 47 157 226 211 216 30 214 198 131 64 230 197 223 195 228 121 83 26 221 209 104 201 224 202 208 218 268 150 109 99 144 46 196 220 206 210 212 204 215 199 213 205 222 225 207 200 217 203 219 180 141 145 8 185 80 77 156 66 182 149 35 117 89</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\Drv\DrvKeyboard.c</name>
+      <name>$PROJ_DIR$\..\SRC\Syetem\Beep.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 123</file>
+          <file> 192</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 0</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 34</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 47 209 202 99 64 201 218 150 117 89 221 104 224 208 268 109 196 230 226 197 214 223 216 195 198 228 137 131 121 83 157 144 211 220 206 210 212 204 215 199 213 205 222 225 207 200 217 203 219 180 141 145 8 185 80 77 156 66 182 149 30 46 26 35</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Syetem\Delay.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 41</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 155</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 95</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 47 209 202 99 201 218 150 117 89 221 104 224 208 268 109 196 230 226 197 214 223 216 195 198 228 137 64 131 121 83 157 144 211 149 220 206 210 212 204 215 199 213 205 222 225 207 200 217 203 219 180 141 145 8 185 80 77 156 66 182 30 46 26 35</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Syetem\Flash_eeprom.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 19</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 271</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 115</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 137 77 228 64 182 47 268 150 180 141 145 8 185 80 156 66 149 216 131 109 121 99 83</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 216 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Syetem\GT20L16P1Y_D.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 193</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 78</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 161</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Syetem\KeyCmd.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 119</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 69</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 48</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 47 157 219 211 213 228 212 207 121 64 206 215 222 217 83 26 220 210 204 199 205 225 200 203 137 131 30 144 46 196 221 230 209 226 104 197 201 214 224 223 202 216 208 195 218 198 268 150 109 99 35 180 141 145 8 185 80 77 156 66 182 149 117 89</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Syetem\Task.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 175</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 42</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 186</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 47 206 180 222 64 215 217 185 117 89 212 213 207 219 145 77 182 196 220 210 204 199 205 225 200 203 141 8 80 156 66 149 157 144 211 221 230 209 226 104 197 201 214 224 223 202 216 208 195 218 198 228 137 268 150 131 109 121 99 83 30 46 26 35</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Syetem\Tone.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 17</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 136</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 134</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 47 104 208 182 221 224 145 209 201 202 218 77 196 230 226 197 214 223 216 195 198 180 185 117 89 64 220 206 210 212 204 215 199 213 205 222 225 207 200 217 203 219 141 8 80 156 66 149 157 144 211 228 137 268 150 131 109 121 99 83 30 46 26 35</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Syetem\uart3.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 82</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 97</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 127</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 141 210 211 225 66 199 203 80 47 117 89 64 220 204 205 200 8 156 149 104 206 212 215 213 222 207 217 219 180 145 185 77 182 157 144 196 221 230 209 226 197 201 214 224 223 202 216 208 195 218 198 228 137 268 150 131 109 121 99 83 30 46 26 35</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_flash.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 257</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 163</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 5</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 185 47 180 145 77 182 141 8 80 156 66 149 228 137 268 64 150 131 109 121 99 83</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 64 47 228 141 137 145 268 8 185 150 80 131 77 109 156 121 99 66 182 149 83 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_gpio.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 14</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 189</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 58</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 141 66 80 47 8 156 149 180 145 185 77 182 228 137 268 64 150 131 109 121 99 83</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 185 47 228 141 137 145 268 8 64 150 80 131 77 109 156 121 99 66 182 149 83 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_exti.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 86</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 31</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 88</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 121 228 64 83 137 131 268 150 109 99 47 180 141 145 8 185 80 77 156 66 182 149</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 8 47 228 141 137 145 268 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_i2c.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 173</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 262</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 269</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 156 47 8 149 141 80 66 180 145 185 77 182 228 137 268 64 150 131 109 121 99 83</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 150 47 228 141 137 145 268 8 64 185 80 131 77 109 156 121 99 66 182 149 83 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_itc.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 93</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 23</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 110</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 268 109 47 150 99 228 137 64 131 121 83 180 141 145 8 185 80 77 156 66 182 149</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 80 47 228 141 137 145 268 8 64 185 150 131 77 109 156 121 99 66 182 149 83 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_iwdg.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 183</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 38</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 44</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 77 145 182 47 180 185 141 8 80 156 66 149 228 137 268 64 150 131 109 121 99 83</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 131 47 228 141 137 145 268 8 64 185 150 80 77 109 156 121 99 66 182 149 83 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_rst.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 84</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
@@ -1600,72 +1246,49 @@
         </tool>
         <tool>
           <name>__cstat</name>
-          <file> 128</file>
+          <file> 123</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 282 126 63 279 273 271 120 266 11 254 267 259 260 276 210 117 160 51 288 284 255 272 281 274 253 256 286 154 109 148 138 89 46 62 43 214 269 278 264 268 270 262 257 263 280 283 265 258 275 261 277 239 158 161 37 243 86 83 216 111 240 166 133 94</file>
+          <file> 182 145 77 180 47 185 141 8 80 156 66 149 228 137 268 64 150 131 109 121 99 83</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
+          <file> 77 47 228 141 137 145 268 8 64 185 150 80 131 109 156 121 99 66 182 149 83 180</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\Drv\Voice.c</name>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_spi.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 97</file>
+          <file> 177</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 74</file>
+          <file> 4</file>
         </tool>
         <tool>
           <name>__cstat</name>
-          <file> 80</file>
+          <file> 20</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 271 269 83 254 63 277 62 109 270 265 161 240 46 160 264 273 280 275 239 243 43 214 278 268 262 257 263 283 258 261 158 37 86 216 111 166 51 279 288 267 284 120 255 259 272 282 281 260 274 266 253 276 256 286 154 11 210 148 126 138 117 89 133 94</file>
+          <file> 137 131 228 64 121 83 47 268 150 109 99 180 141 145 8 185 80 77 156 66 182 149</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 254 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239 279 278 288 264 267 268 284 270 120 160 214 133 43 51 62 94 46 262 255 273 259 257 271 269 272 282 263 281 280 260 283 274 265 266 258 253 275 276 261 256 277</file>
+          <file> 109 47 228 141 137 145 268 8 64 185 150 80 131 77 156 121 99 66 182 149 83 180</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_adc1.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 218</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 73</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 161 240 63 239 83 243 286 158 37 86 216 111 166 124 154 11 109 210 148 126 138 117 89</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 124 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_adc2.c</name>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim1.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
@@ -1673,26 +1296,161 @@
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 146</file>
+          <file> 126</file>
         </tool>
         <tool>
           <name>__cstat</name>
-          <file> 82</file>
+          <file> 53</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 126 11 210 117 63 286 154 109 148 138 89 239 158 161 37 243 86 83 216 111 240 166</file>
+          <file> 109 47 268 150 99 228 137 64 131 121 83 156 180 141 145 8 185 80 77 66 182 149</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 158 63 286 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239</file>
+          <file> 156 47 228 141 137 145 268 8 64 185 150 80 131 77 109 121 99 66 182 149 83 180</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_awu.c</name>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim2.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 85</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 166</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 124</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 47 99 150 268 109 228 137 64 131 121 83 180 141 145 8 185 80 77 156 66 182 149</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 121 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 99 66 182 149 83 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim3.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 153</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 114</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 81</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 8 47 149 156 141 80 66 180 145 185 77 182 99 228 137 268 64 150 131 109 121 83</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 99 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 66 182 149 83 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim4.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 36</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 272</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 51</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 137 131 228 64 121 83 47 268 150 109 99 180 141 145 8 185 80 77 156 66 182 149</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 66 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 182 149 83 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_uart1.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 73</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 263</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 152</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 268 109 150 99 47 228 137 64 131 121 83 180 141 145 8 185 80 77 156 66 182 149</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 182 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 149 83 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim5.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 11</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 71</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 140</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 145 182 47 77 180 185 141 8 80 156 66 149 116 228 137 268 64 150 131 109 121 99 83</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 116 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim6.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
@@ -1700,26 +1458,323 @@
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 81</file>
+          <file> 148</file>
         </tool>
         <tool>
           <name>__cstat</name>
-          <file> 107</file>
+          <file> 261</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 89 109 63 286 138 154 148 11 210 126 117 239 158 161 37 243 86 83 216 111 240 166</file>
+          <file> 77 145 182 47 180 185 141 8 80 156 66 149 228 137 268 64 150 131 109 121 99 83 171</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 154 63 286 158 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239</file>
+          <file> 171 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180</file>
         </tool>
       </inputs>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_beep.c</name>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_uart3.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 40</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 87</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 45</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 77 47 145 182 180 185 141 8 80 156 66 149 228 137 268 64 150 131 109 121 99 83</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 149 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 83 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_uart2.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 102</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 194</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 130</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 145 182 47 77 180 185 141 8 80 156 66 149 59 228 137 268 64 150 131 109 121 99 83</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 59 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_uart4.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 146</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 151</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 29</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 109 268 47 150 99 228 137 64 131 121 83 180 141 145 8 185 80 77 156 66 182 149 79</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 79 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_wwdg.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 125</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 10</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 260</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 137 131 47 228 64 121 83 268 150 109 99 180 141 145 8 185 80 77 156 66 182 149</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 83 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Support\CommonLib.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 28</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 24</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 188</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 47 157 211 206 180 222 64 215 217 185 26 212 213 207 219 145 77 182 30 144 46 196 220 210 204 199 205 225 200 203 141 8 80 156 66 149 35 221 230 209 226 104 197 201 214 224 223 202 216 208 195 218 198 228 137 268 150 131 109 121 99 83 117 89</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Support\Config.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 170</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 6</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 54</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 30 200 204 144 220 205 137 47 210 199 225 203 131 46 196 206 212 215 213 222 207 217 219 228 64 121 83 26 157 211 221 230 209 226 104 197 201 214 224 223 202 216 208 195 218 198 268 150 109 99 35 180 141 145 8 185 80 77 156 66 182 149 117 89</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Support\McuConfig.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 98</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 118</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 187</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 228 121 64 83 137 131 47 268 150 109 99 180 141 145 8 185 80 77 156 66 182 149 220</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 220 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Support\sysclock.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 70</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 154</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 273</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 137 131 228 64 121 83 268 150 109 99 47 180 141 145 8 185 80 77 156 66 182 149 221</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 221 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Support\System.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 72</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 128</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 169</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 157 213 211 47 219 228 212 207 121 64 206 215 222 217 83 26 220 210 204 199 205 225 200 203 137 131 30 144 46 196 221 230 209 226 104 197 201 214 224 223 202 216 208 195 218 198 268 150 109 99 35 180 141 145 8 185 80 77 156 66 182 149 117 89</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Syetem\ApiAtCmd.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 21</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 178</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 37</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 157 211 230 228 223 121 64 197 195 83 26 226 214 216 198 137 131 47 30 144 46 196 221 209 104 201 224 202 208 218 268 150 109 99 35 215 213 220 206 210 212 204 199 205 222 225 207 200 217 203 219 180 141 145 8 185 80 77 156 66 182 149 117 89</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Syetem\ApiBeidou.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 267</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 50</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 52</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 202 157 211 209 228 201 218 121 64 221 104 224 208 83 26 230 226 197 214 223 216 195 198 137 131 47 30 144 46 196 220 206 210 212 204 215 199 213 205 222 225 207 200 217 203 219 268 150 109 99 35 180 141 145 8 185 80 77 156 66 182 149 117 89</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\SRC\Syetem\ApiDisplay.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
@@ -1727,78 +1782,32 @@
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 237</file>
+          <file> 168</file>
         </tool>
         <tool>
           <name>__cstat</name>
-          <file> 238</file>
+          <file> 96</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 216 37 166 158 86 111 63 239 161 243 83 240 286 154 11 109 210 148 126 138 117 89</file>
+          <file> 219 47 46 213 77 196 212 207 145 182 30 144 206 215 222 217 180 185 26 157 211 64 220 210 204 199 205 225 200 203 141 8 80 156 66 149 35 104 221 230 209 226 197 201 214 224 223 202 216 208 195 218 198 228 137 268 150 131 109 121 99 83 117 89</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 161 63 286 158 154 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239</file>
+          <file> 196 47 228 141 137 145 268 8 64 185 150 80 131 77 109 156 121 99 66 182 149 83 180 221 220 230 206 209 210 226 212 104 144 157 117 26 35 46 89 30 204 197 215 201 199 213 211 214 224 205 223 222 202 225 216 207 208 200 195 217 218 203 198 219</file>
         </tool>
       </inputs>
     </file>
-    <file>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_adc1.c</name>
+      <tool>ICCSTM8</tool>
+    </forcedrebuild>
+    <forcedrebuild>
       <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_can.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 122</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 242</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 220</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 161 240 63 83 239 243 158 37 86 216 111 166 113 286 154 11 109 210 148 126 138 117 89</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 113 63 286 158 154 161 11 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_clk.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 103</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 60</file>
-        </tool>
-        <tool>
-          <name>__cstat</name>
-          <file> 149</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 37 158 86 63 239 161 243 83 240 286 154 11 109 210 148 216 111 166 126 138 117 89</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 11 63 286 158 154 161 37 109 243 210 86 148 83 126 216 138 117 111 240 166 89 239</file>
-        </tool>
-      </inputs>
-    </file>
+      <tool>ICCSTM8</tool>
+    </forcedrebuild>
     <forcedrebuild>
       <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_tim5.c</name>
       <tool>ICCSTM8</tool>
@@ -1813,14 +1822,6 @@
     </forcedrebuild>
     <forcedrebuild>
       <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_uart4.c</name>
-      <tool>ICCSTM8</tool>
-    </forcedrebuild>
-    <forcedrebuild>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_adc1.c</name>
-      <tool>ICCSTM8</tool>
-    </forcedrebuild>
-    <forcedrebuild>
-      <name>$PROJ_DIR$\..\SRC\MCU\src\stm8s_can.c</name>
       <tool>ICCSTM8</tool>
     </forcedrebuild>
   </configuration>

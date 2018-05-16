@@ -152,8 +152,7 @@ void LowVoltageDetection(void)
       {
         TASK_PersonalKeyModeSet(FALSE);
         MenuMode_Flag=0;
-        api_lcd_pwr_on_hint(0,2,"                ");//清屏
-        api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());//显示当前群组昵称
+        get_screen_display_group_name();//选择显示当前群组昵称（群组或单呼临时群组）
         KeyDownUpChoose_GroupOrUser_Flag=0;
         KeyUpDownCount=0;
         LowVoltageDetection_Flag=FALSE;

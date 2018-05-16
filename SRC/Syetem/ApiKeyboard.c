@@ -198,7 +198,7 @@ void Keyboard_Test(void)
           UpDownSwitchingCount=0;//解决选中单呼后切换群组，语音中断的问题
           DEL_SetTimer(0,40);
           while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
-          ApiPocCmd_WritCommand(PocComm_EnterGroup,"0000000101",strlen((char const *)"0000000101"));
+          ApiPocCmd_WritCommand(PocComm_EnterGroup,0,0);
           KeyDownUpChoose_GroupOrUser_Flag=3;
           EnterKeyTimeCount=0;
           KeyUpDownCount=0;
@@ -610,8 +610,7 @@ void Keyboard_Test(void)
         {
 #if 1
           MenuDisplay(Menu_RefreshAllIco);
-          api_lcd_pwr_on_hint(0,2,"                ");//清屏
-          api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());//显示当前群组昵称
+          get_screen_display_group_name();//选择显示当前群组昵称（群组或单呼临时群组）
           MenuModeCount=1;
           TheMenuLayer_Flag=0;
           MenuMode_Flag=0;
@@ -719,26 +718,22 @@ void Keyboard_Test(void)
       }
       else
       {
-       /* if(Key_PersonalCalling_Flag==1||POC_EnterPersonalCalling_Flag==1||POC_AtEnterPersonalCalling_Flag==1)//如果处于单呼模式，按返回键进入组呼
+        if(get_current_working_status()==m_personal_mode)//单呼状态按返回键
         {
-          ApiPocCmd_WritCommand(PocComm_Cancel,(u8 *)ucQuitPersonalCalling,strlen((char const *)ucQuitPersonalCalling));
-          Key_Flag_1=1;//按键延时标志位
-          Key_PersonalCalling_Flag=0;//进入组呼标志位
-          KeyDownUpChoose_GroupOrUser_Flag=0;//解决（个呼键→返回键→OK或PTT）屏幕显示错误的BUG
+          ApiPocCmd_WritCommand(PocComm_EnterGroup,0,0);
         }
-        else//如果处于组呼模式则应该无变化*/
-
-          TASK_PersonalKeyModeSet(FALSE);
-          MenuMode_Flag=0;
-          api_lcd_pwr_on_hint(0,2,"                ");//清屏
-          api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());//显示当前群组昵称
-          KeyDownUpChoose_GroupOrUser_Flag=0;
-          KeyUpDownCount=0;
-
-          Key_Flag_1=1;//按键延时标志位
-
+        else
+        {
+          
+        }
+        TASK_PersonalKeyModeSet(FALSE);
+        MenuMode_Flag=0;
+        api_lcd_pwr_on_hint(0,2,"                ");//清屏
+        api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());//显示当前群组昵称
+        KeyDownUpChoose_GroupOrUser_Flag=0;
+        KeyUpDownCount=0;
+        Key_Flag_1=1;//按键延时标志位
       }
-
     }
     break;  
   default:

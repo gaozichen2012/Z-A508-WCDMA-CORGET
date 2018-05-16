@@ -41,12 +41,14 @@ typedef struct{
   }NetState;
   
   struct{
+    working_status_type current_working_status;
     PocStatesType PocStatus;
     GroupStatsType GroupStats;
     u8 KeyPttState;
     bool ReceivedVoicePlayStates;
     bool ReceivedVoicePlayStates_Intermediate;//喇叭
     bool ReceivedVoicePlayStatesForLED;
+    ReceivedVoicePlayStatesType ReceivedVoicePlayStatesForDisplay;
     bool ToneState;
     bool ToneState_Intermediate;
   }States;
@@ -82,6 +84,8 @@ typedef struct{
   u8 NowWorkingGroupNameBuf[APIPOC_GroupName_Len];
   u8 AllGroupNameBuf[APIPOC_GroupName_Len];
   u8 AllUserNameBuf[APIPOC_UserName_Len];
+  u8 SpeakingUserNameBuf[APIPOC_UserName_Len];
+  
   u8 AllGroupNameForVoiceBuf[APIPOC_GroupName_Len*2+10];
   u8 AllUserNameForVoiceBuf[APIPOC_UserName_Len*2+10];
   u16 offline_user_count;
@@ -482,7 +486,7 @@ bool ApiPocCmd_user_info_set(u8 *pBuf, u8 len)//cTxBuf为存放ip账号密码的信息
 #if 1 //WCDMA 卓智达
 void ApiPocCmd_10msRenew(void)
 {
-  u8 ucId, Len,i;
+  u8 ucId, Len,i,temp_id;
   u8 * pBuf;
   u16 ucNameId;
   u32 ucUserId;
@@ -494,8 +498,18 @@ void ApiPocCmd_10msRenew(void)
     case 0x02://获取POC参数
       break;
     case 0x09://进入一个群组
+      ucUserId =  COML_AscToHex(pBuf+2, 0x06);
+      if(ucUserId==0x000000)
+      {
+        PocCmdDrvobj.States.current_working_status=m_group_mode;
+      }
       break;
     case 0x0A://单呼某用户
+      ucUserId =  COML_AscToHex(pBuf+2, 0x06);
+      if(ucUserId==0x000000)
+      {
+        PocCmdDrvobj.States.current_working_status=m_personal_mode;
+      }
       break;
     case 0x0B://按下PTT
       ucId = COML_AscToHex(pBuf+2, 0x02);
@@ -612,6 +626,42 @@ void ApiPocCmd_10msRenew(void)
       }
       break;
     case 0x83://返回讲话用户信息
+      ucId = COML_AscToHex(pBuf+2, 0x02);
+      if(ucId==0x00)
+      {
+        //自己无法讲话
+      }
+      else
+      {
+        //自己可以中断讲话人讲话
+      }
+      
+      ucUserId=COML_AscToHex(pBuf+12,0x08);
+      if(ucUserId==0xffffffff)
+      {
+        
+      }
+      else
+      {
+        if(Len >= 12)//如果群组id后面还有群组名
+        {
+          PocCmdDrvobj.NameInfo.SpeakingUserName.NameLen= (Len-12)/2;//英文字符只存一半
+          if(PocCmdDrvobj.NameInfo.SpeakingUserName.NameLen > APIPOC_UserName_Len)
+          {
+            PocCmdDrvobj.NameInfo.SpeakingUserName.NameLen = APIPOC_UserName_Len;
+          }
+        }
+        else//无群组名
+        {
+          PocCmdDrvobj.NameInfo.SpeakingUserName.NameLen = 0x00;
+        }
+        for(i = 0x00; 2*i<PocCmdDrvobj.NameInfo.SpeakingUserName.NameLen; i++)
+        {
+          PocCmdDrvobj.NameInfo.SpeakingUserName.Name[2*i] = pBuf[4*i+12];//存入
+          PocCmdDrvobj.NameInfo.SpeakingUserName.Name[2*i+1] = pBuf[4*i+1+12];
+        }
+      }
+
       break;
     case 0x84://返回提示信息
       break;
@@ -627,7 +677,18 @@ void ApiPocCmd_10msRenew(void)
       }
       break;
     case 0x86://通知用户进入群组信息
-      MenuDisplay(Menu_RefreshAllIco);
+      temp_id = COML_AscToHex(pBuf+2, 0x02);
+      if(temp_id==0x01)
+      {
+        PocCmdDrvobj.States.current_working_status=m_personal_mode;
+      }
+      else
+      {
+        PocCmdDrvobj.States.current_working_status=m_group_mode;
+        TASK_PersonalKeyModeSet(FALSE);//解决单呼被结束，机器不退出单呼模式的问题
+        
+      }
+      
       ucId = COML_AscToHex(pBuf+4, 0x02);
       if(ucId==0xff)
       {
@@ -636,25 +697,29 @@ void ApiPocCmd_10msRenew(void)
       else
       {
         PocCmdDrvobj.States.GroupStats=EnterGroup;
-        PocCmdDrvobj.NameInfo.NowWorkingGroupName.ID=COML_AscToHex(pBuf+8,0x04);;//保存群组ID，从[0]开始存
-        if(Len >= 12)//如果群组id后面还有群组名
+        if(PocCmdDrvobj.States.current_working_status==m_group_mode)
         {
-          PocCmdDrvobj.NameInfo.NowWorkingGroupName.NameLen= (Len-12)/2;//英文字符只存一半
-          if(PocCmdDrvobj.NameInfo.NowWorkingGroupName.NameLen > APIPOC_GroupName_Len)
+          PocCmdDrvobj.NameInfo.NowWorkingGroupName.ID=COML_AscToHex(pBuf+8,0x04);;//保存群组ID，从[0]开始存
+          if(Len >= 12)//如果群组id后面还有群组名
           {
-            PocCmdDrvobj.NameInfo.NowWorkingGroupName.NameLen = APIPOC_GroupName_Len;
+            PocCmdDrvobj.NameInfo.NowWorkingGroupName.NameLen= (Len-12)/2;//英文字符只存一半
+            if(PocCmdDrvobj.NameInfo.NowWorkingGroupName.NameLen > APIPOC_GroupName_Len)
+            {
+              PocCmdDrvobj.NameInfo.NowWorkingGroupName.NameLen = APIPOC_GroupName_Len;
+            }
+          }
+          else//无群组名
+          {
+            PocCmdDrvobj.NameInfo.NowWorkingGroupName.NameLen = 0x00;
+          }
+          for(i = 0x00; 2*i<PocCmdDrvobj.NameInfo.NowWorkingGroupName.NameLen; i++)
+          {
+            PocCmdDrvobj.NameInfo.NowWorkingGroupName.Name[2*i] = pBuf[4*i+12];//存入获取的群组名
+            PocCmdDrvobj.NameInfo.NowWorkingGroupName.Name[2*i+1] = pBuf[4*i+1+12];
           }
         }
-        else//无群组名
-        {
-          PocCmdDrvobj.NameInfo.NowWorkingGroupName.NameLen = 0x00;
-        }
-        for(i = 0x00; 2*i<PocCmdDrvobj.NameInfo.NowWorkingGroupName.NameLen; i++)
-        {
-          PocCmdDrvobj.NameInfo.NowWorkingGroupName.Name[2*i] = pBuf[4*i+12];//存入获取的群组名
-          PocCmdDrvobj.NameInfo.NowWorkingGroupName.Name[2*i+1] = pBuf[4*i+1+12];
-        }
       }
+      MenuDisplay(Menu_RefreshAllIco);
       break;
     case 0x87://通知用户名字信息
       break;
@@ -666,15 +731,19 @@ void ApiPocCmd_10msRenew(void)
       ucId = COML_AscToHex(pBuf+4, 0x02);
       if(ucId==0x01)
       {
-        PocCmdDrvobj.States.ReceivedVoicePlayStates=TRUE;//喇叭控制使用
+        PocCmdDrvobj.States.ReceivedVoicePlayStates=TRUE;//指示灯使用
         PocCmdDrvobj.States.ReceivedVoicePlayStatesForLED=TRUE;//指示灯使用
+        PocCmdDrvobj.States.ReceivedVoicePlayStatesForDisplay=ReceivedVoiceStart;//喇叭控制/接收图标/显示呼叫用户名/使用
       }
-      else
+      else if(ucId==0x00)
       {
         
         PocCmdDrvobj.States.ReceivedVoicePlayStates_Intermediate=TRUE;//喇叭控制使用
         PocCmdDrvobj.States.ReceivedVoicePlayStatesForLED=FALSE;//指示灯使用
+        PocCmdDrvobj.States.ReceivedVoicePlayStatesForDisplay=ReceivedVoiceEnd;//喇叭控制/接收图标/显示呼叫用户名/使用
       }
+      else
+      {}
       break;
     case 0x8C://通知接收其他终端发来的消息
       break;
@@ -1131,6 +1200,16 @@ void ApiPocCmd_ReceivedVoicePlayStatesSet(bool a)
 {
   PocCmdDrvobj.States.ReceivedVoicePlayStates=a;
 }
+
+ReceivedVoicePlayStatesType ApiPocCmd_ReceivedVoicePlayStatesForDisplay(void)
+{
+  return PocCmdDrvobj.States.ReceivedVoicePlayStatesForDisplay;
+}
+void ApiPocCmd_ReceivedVoicePlayStatesForDisplaySet(ReceivedVoicePlayStatesType a)
+{
+  PocCmdDrvobj.States.ReceivedVoicePlayStatesForDisplay=a;
+}
+
 bool ApiPocCmd_ReceivedVoicePlayStatesIntermediate(void)//中间变量
 {
   return PocCmdDrvobj.States.ReceivedVoicePlayStates_Intermediate;
@@ -1187,6 +1266,16 @@ u8 *GetAllGroupNameForDisplay(u8 a)//所有群组：显示屏
     PocCmdDrvobj.AllGroupNameBuf[i]=COML_AscToHex(PocCmdDrvobj.NameInfo.AllGroupName[a].Name+(2*i), 0x02);
   }
   return PocCmdDrvobj.AllGroupNameBuf;
+}
+u8 *GetSpeakingUserNameForDisplay(void)//说话的用户：显示屏
+{
+  u8 i;
+  memset(PocCmdDrvobj.SpeakingUserNameBuf,0,sizeof(PocCmdDrvobj.SpeakingUserNameBuf));
+  for(i=0;2*i<=PocCmdDrvobj.NameInfo.SpeakingUserName.NameLen;i++)
+  {
+    PocCmdDrvobj.SpeakingUserNameBuf[i]=COML_AscToHex(PocCmdDrvobj.NameInfo.SpeakingUserName.Name+(2*i), 0x02);
+  }
+  return PocCmdDrvobj.SpeakingUserNameBuf;
 }
 u8 *GetAllUserNameForDisplay(u8 a)//所有用户：显示屏
 {
@@ -1266,4 +1355,25 @@ static bool no_online_user(void)
   }
   return FALSE;
 }
+
+//判断当前工作模式（单呼或组呼）
 /************************/
+working_status_type get_current_working_status(void)
+{
+  return PocCmdDrvobj.States.current_working_status;
+}
+
+//选择当前显示的是组呼名还是单呼临时群组名
+void get_screen_display_group_name(void)
+{
+ if(PocCmdDrvobj.States.current_working_status==m_group_mode)//组呼模式
+  {
+    api_lcd_pwr_on_hint(0,2,"                ");
+    api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());
+  }
+  else //单呼模式
+  {
+    api_lcd_pwr_on_hint(0,2,"                ");
+    api_lcd_pwr_on_hint(0,2,"Temporary groups");//Temporary groups临时群组
+  }
+}

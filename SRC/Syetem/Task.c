@@ -15,6 +15,7 @@ bool EnterPttMoment_Flag=FALSE;
 bool LoosenPttMoment_Flag=FALSE;
 u8 EnterPttMomentCount=0;
 u8 LoosenPttMomentCount=0;
+u8 *ucCODECCTL                  = "at^codecctl=F000,9000,0";//T1ƒ¨»œ
 #else //CDMA ÷––À
 u8 SSWLCount=0;
 u8 StartingUpStep=0;
@@ -71,6 +72,7 @@ void Task_RunStart(void)
         {
           if(TaskDrvobj.status.AccountConfig==FALSE)
           {
+            ApiAtCmd_WritCommand(ATCOMM_Test,ucCODECCTL,strlen((char const *)ucCODECCTL));//≈‰÷√µ«¬º’À∫≈√‹¬Î°¢IP
             ApiPocCmd_WritCommand(PocComm_SetParam,0,0);//≈‰÷√µ«¬º’À∫≈√‹¬Î°¢IP
             TaskDrvobj.status.AccountConfig=TRUE;
             ApiPocCmd_WritCommand(PocComm_OpenPOC,0,0);//¥Úø™POC”¶”√
@@ -215,12 +217,17 @@ void Task_RunNormalOperation(void)
       VOICE_Play(GroupSelected);
       DEL_SetTimer(0,40);
       while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
-      //ApiPocCmd_WritCommand(PocComm_EnterGroup,ucPocOpenConfig,strlen((char const *)ucPocOpenConfig));
-      KeyDownUpChoose_GroupOrUser_Flag=3;
-      EnterKeyTimeCount=0;
+      ApiPocCmd_WritCommand(PocComm_EnterGroup,0,0);
+      KeyDownUpChoose_GroupOrUser_Flag=0;
       KeyUpDownCount=0;
       break;
     case 2://=2,∫ÙΩ–ƒ≥”√ªß
+      VOICE_Play(GroupSelected);
+      DEL_SetTimer(0,40);
+      while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
+      ApiPocCmd_WritCommand(PocComm_Invite,0,0);
+      KeyDownUpChoose_GroupOrUser_Flag=0;
+      KeyPersonalCallingCount=0;
       break;
     case 3:
       break;

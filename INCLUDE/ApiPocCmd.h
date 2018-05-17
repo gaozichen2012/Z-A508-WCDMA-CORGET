@@ -17,6 +17,7 @@ typedef enum{
   PocComm_EndPTT		= 0x0C,
   PocComm_GroupListInfo	        = 0x0D,
   PocComm_UserListInfo          = 0x0E,
+  PocComm_SetGps                = 0x0F,
   PocComm_Key			= 0x10
 }PocCommType;
 

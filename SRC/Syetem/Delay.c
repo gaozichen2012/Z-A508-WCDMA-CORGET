@@ -27,8 +27,6 @@ u8 PowerOnCount=0;
 
 u8 LandingTimeCount=0;
 u8 ForbiddenSendPttCount=0;
-u8 EnterKeyTimeCount=0;
-u8 UpDownSwitchingCount=0;
 u8 TaskStartDeleteDelay1Count=0;
 u8 TaskStartDeleteDelay3Count=0;
 u8 TaskStartDeleteDelay4Count=0;
@@ -86,6 +84,7 @@ typedef struct {
     u8 PPPStatusOpenCount;
     u8 ToneStateCount;
     u8 ReceivedVoicePlayStatesCount;
+    u8 beidou_valid_count;
   }Count;
   u8 BacklightTimeBuf[1];//背光灯时间(需要设置进入eeprom)
   u8 KeylockTimeBuf[1];//键盘锁时间(需要设置进入eeprom)
@@ -387,18 +386,7 @@ static void DEL_500msProcess(void)			//delay 500ms process server
         DelDrvObj.Count.WriteFreqTimeCount=0;
       }
       DelDrvObj.Count.WriteFreqTimeCount++;
-    }
-/***************/
-    if(KeyDownUpChoose_GroupOrUser_Flag==3)
-    {
-      if(EnterKeyTimeCount>=4)
-      {
-        EnterKeyTimeCount=0;
-        EnterKeyTime_2s_Flag=TRUE;
-      }
-      EnterKeyTimeCount++;
-    }
-    
+    }  
 /*********初级电量报警30s播报一次********************************/
     if(PrimaryLowPower_Flag==TRUE)
     {
@@ -411,7 +399,21 @@ static void DEL_500msProcess(void)			//delay 500ms process server
       }
     }
 /*********登录超过60s重启*********************************/
-
+    
+/****定位成功后5s上报一次定位*****/
+    if(beidou_valid()==TRUE)
+    {
+      DelDrvObj.Count.beidou_valid_count++;
+      if(DelDrvObj.Count.beidou_valid_count>2*5)
+      {
+        ApiPocCmd_WritCommand(PocComm_SetGps,0,0);
+        DelDrvObj.Count.beidou_valid_count=0;
+      }
+    }
+    else
+    {
+      DelDrvObj.Count.beidou_valid_count=0;
+    }
 /***********************************************************/
     FILE_Read(0x236,1,DelDrvObj.BacklightTimeBuf);//背光时间【秒】
     FILE_Read(0x247,1,DelDrvObj.KeylockTimeBuf);//键盘锁时间【秒】

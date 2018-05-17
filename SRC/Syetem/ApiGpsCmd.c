@@ -543,7 +543,7 @@ void ApiGpsCmd_100msRenew(void)//决定什么时候发送什么数据
                   {
 #if 1//测试不注册鉴权，直接发送位置信息
 #ifdef BEIDOU//使用外置北斗
-                    if(BDValid==1)
+                    if(beidou_valid()==TRUE)
 #else//使用内置GPS
                     if(1)
 #endif
@@ -780,10 +780,10 @@ static void GpsCmd_GbDataTransave(GpsCommType GpsComm)//定位信息转换，等会要用到
   pPositInfo->stParam.WorkStatus.Bits.bNorthOrSouth = 0;//GpsFunDrvObj.InfoRecord.Position.Msg.bNorthOrSouth;
   pPositInfo->stParam.WorkStatus.Bits.bEastOrWest = 0;//GpsFunDrvObj.InfoRecord.Position.Msg.bEastOrWest;
 #ifdef BEIDOU//使用外置北斗
-  GpsFunDrvObj.InfoRecord.Position.ulLongitude =(BDLongitude_Degree*1000000)+((BDLongitude_Minute*10000+BDLongitude_Second)*10/6);//经度Longitude
-  GpsFunDrvObj.InfoRecord.Position.ulLatitude=(BDLatitude_Degree*1000000)+((BDLatitude_Minute*10000+BDLatitude_Second)*10/6);
-  GpsFunDrvObj.InfoRecord.Position.usSpeed=BDSpeed*6;
-  GpsFunDrvObj.InfoRecord.Position.usDirection=BDDirection;
+  GpsFunDrvObj.InfoRecord.Position.ulLongitude =(beidou_longitude_degree()*1000000)+((beidou_longitude_minute()*10000+beidou_longitude_minute())*10/6);//经度Longitude
+  GpsFunDrvObj.InfoRecord.Position.ulLatitude=(beidou_latitude_degree()*1000000)+((beidou_latitude_minute()*10000+beidou_latitude_second())*10/6);
+  //GpsFunDrvObj.InfoRecord.Position.usSpeed=BDSpeed*6;
+  //GpsFunDrvObj.InfoRecord.Position.usDirection=BDDirection;
 #else//使用内置GPS
 
 #endif

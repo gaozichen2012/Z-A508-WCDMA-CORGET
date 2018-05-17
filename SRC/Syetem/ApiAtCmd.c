@@ -155,6 +155,8 @@ bool ApiAtCmd_WritCommand(AtCommType id, u8 *buf, u16 len)
     break;
   case ATCOMM_RESET:
     DrvGD83_UART_TxCommand((u8*)ucTxReset, strlen((char const*)ucTxReset));
+  case ATCOMM_Test:
+    DrvGD83_UART_TxCommand(buf, len);
     break;
   default:
     break;
@@ -356,18 +358,6 @@ bool ApiAtCmd_PlayVoice(AtVoiceType id, u8 *buf, u8 len)
   r  = DrvMc8332_UART_TxTail();
   DrvMC8332_TxPort_SetValidable(OFF);
   return r;
-}
-
-u32  CHAR_TO_Digital(u8 * pBuf, u8 Len)
-{
-	u8 i;
-	u32 buf = 0;
-	for(i = 0; i < Len; i++)
-	{
-		buf *= 10;
-		buf += (pBuf[i] - 0x30);
-	}
-	return buf;
 }
 
 void HDRCSQSignalIcons(void)

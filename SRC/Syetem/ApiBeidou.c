@@ -3,27 +3,28 @@ u8 BeidouRxData[75];
 u8 BeidouRxDataLen=0;
 u8 RxStartFlag[6];
 //北斗消息体
-#if 1
-u8  BDValid=0;
-u32 BDLongitude_Degree;//度
-u32 BDLongitude_Minute;//分
-u32 BDLongitude_Second;//小数点后的数
-u32 BDLatitude_Degree;//度
-u32 BDLatitude_Minute;//分
-u32 BDLatitude_Second;//小数点后的数
-u16 BDSpeed;//速度
-u16 BDDirection;//方向
-#endif
+
+
+typedef struct{
+  bool  BDValid;
+  u32 BDLongitude_Degree;//度
+  u32 BDLongitude_Minute;//分
+  u32 BDLongitude_Second;//小数点后的数
+  u32 BDLatitude_Degree;//度
+  u32 BDLatitude_Minute;//分
+  u32 BDLatitude_Second;//小数点后的数
+  u16 BDSpeed;//速度
+  u16 BDDirection;//方向
+}BeidouFunDrv;
+
+static BeidouFunDrv BeidouFunDrvObj;
 
 void ApiBeidou_Get_location_Information(void)
 {
   u8 *pBuf;
   u8 i=0,Ccomma=0,cDot=0,cHead=0;
 /***************获取经纬度数据*********************************************************************************************************/
-  ////$GNRMC,000829.799,V,,,,,0.00,0.00,060180,,,N*58 \r
- // $GNRMC,025357.000,A,2231.0305,N,11355.0570,E,0.44,273.66,310118,,,A*7F
-  //      0          1 2         3 4          5 6    7      8      
-  //if(UART_BeidouGNRMCCommand()==TRUE)
+
   pBuf=BeidouRxData;
   for(i=0;i<BeidouRxDataLen;i++)
   {
@@ -35,16 +36,16 @@ void ApiBeidou_Get_location_Information(void)
           break;
         case 1:
           if(pBuf[i+1]=='A')
-            BDValid=1;
+            BeidouFunDrvObj.BDValid=TRUE;
           else
-            BDValid=0;
+            BeidouFunDrvObj.BDValid=FALSE;
           break;
         case 2:
           break;
         case 3:
           if((i - cHead) >= 4)
           {
-           BDLatitude_Second  = CHAR_TO_Digital(&pBuf[cHead], i-cHead);//纬度后四位
+           BeidouFunDrvObj.BDLatitude_Second  = CHAR_TO_Digital(&pBuf[cHead], i-cHead);//纬度后四位
           }
           break;
         case 4://N
@@ -52,7 +53,7 @@ void ApiBeidou_Get_location_Information(void)
         case 5:
           if((i - cHead) >= 4)
           {
-            BDLongitude_Second = CHAR_TO_Digital(&pBuf[cHead], i-cHead);//经度后四位
+            BeidouFunDrvObj.BDLongitude_Second = CHAR_TO_Digital(&pBuf[cHead], i-cHead);//经度后四位
           }
           break;
         case 6:
@@ -76,23 +77,23 @@ void ApiBeidou_Get_location_Information(void)
         case 1://纬度22
           if((i - cHead) >= 4)
           {
-            BDLatitude_Degree  = CHAR_TO_Digital(&pBuf[cHead],2);//纬度前2位
-            BDLatitude_Minute  = CHAR_TO_Digital(&pBuf[cHead+2],2);//纬度中2位   
+            BeidouFunDrvObj.BDLatitude_Degree  = CHAR_TO_Digital(&pBuf[cHead],2);//纬度前2位
+            BeidouFunDrvObj.BDLatitude_Minute  = CHAR_TO_Digital(&pBuf[cHead+2],2);//纬度中2位   
           }
           break;
         case 2:
           if((i - cHead) >= 5)
           {
-            BDLongitude_Degree = CHAR_TO_Digital(&pBuf[cHead], 3);//经度前2位
-            BDLongitude_Minute = CHAR_TO_Digital(&pBuf[cHead+3],2);//经度中2位
+            BeidouFunDrvObj.BDLongitude_Degree = CHAR_TO_Digital(&pBuf[cHead], 3);//经度前2位
+            BeidouFunDrvObj.BDLongitude_Minute = CHAR_TO_Digital(&pBuf[cHead+3],2);//经度中2位
           }
           break;
         case 3:
-          BDSpeed = (u16)(1.85*CHAR_TO_Digital(&pBuf[cHead], i-cHead));//速度（1.85*海里/小时）
+          BeidouFunDrvObj.BDSpeed = (u16)(1.85*CHAR_TO_Digital(&pBuf[cHead], i-cHead));//速度（1.85*海里/小时）
           //BDSpeed = 20;//速度（1.85*海里/小时）
           break;
         case 4:
-          BDDirection=CHAR_TO_Digital(&pBuf[cHead], i-cHead);
+          BeidouFunDrvObj.BDDirection=CHAR_TO_Digital(&pBuf[cHead], i-cHead);
           break;
         default:
           break;
@@ -102,4 +103,83 @@ void ApiBeidou_Get_location_Information(void)
       }
     }
   }
+}
+
+u32  CHAR_TO_Digital(u8 * pBuf, u8 Len)
+{
+	u8 i;
+	u32 buf = 0;
+	for(i = 0; i < Len; i++)
+	{
+		buf *= 10;
+		buf += (pBuf[i] - 0x30);
+	}
+	return buf;
+}
+void  Digital_TO_CHAR(u8 * pBuf, u32 data, u8 Len)
+{
+	u8 i;
+	for(i = Len-1; i != 0; i--)
+	{
+		pBuf[i] = data%10 + 0x30;
+		data /= 10;
+	}
+	pBuf[0] = data+0x30;
+}
+
+void  CHAR_TO_DIV_CHAR(u8 * pPrimary, u8 * pDestination, u8 Len)
+{
+	u8 i, j , buf;
+	for(i =0; i != Len; i++)
+	{
+		buf = (pPrimary[i] >> 0x04) & 0x0F;
+		j = i * 2;
+		if(buf < 0x0A)
+		{
+			pDestination[j] = buf + 0x30;
+		}
+		else
+		{
+			pDestination[j] = buf + 0x57;
+		}
+		buf = pPrimary[i] & 0x0F;
+		if(buf < 0x0A)
+		{
+			pDestination [j + 1] = buf + 0x30;
+		}
+		else
+		{
+			pDestination[j + 1] = buf + 0x57;
+		}
+	}
+}
+
+bool beidou_valid(void)
+{
+  return BeidouFunDrvObj.BDValid;
+}
+
+u32 beidou_longitude_degree(void)//度
+{
+  return BeidouFunDrvObj.BDLongitude_Degree;
+}
+u32 beidou_longitude_minute(void)//分
+{
+  return BeidouFunDrvObj.BDLongitude_Minute;
+}
+u32 beidou_longitude_second(void)//小数点后的数
+{
+  return BeidouFunDrvObj.BDLongitude_Second;
+}
+u32 beidou_latitude_degree(void)//度
+{
+  return BeidouFunDrvObj.BDLatitude_Degree;
+}
+u32 beidou_latitude_minute(void)//分
+{
+  return BeidouFunDrvObj.BDLatitude_Minute;
+}
+u32 beidou_latitude_second(void)//小数点后的数
+{
+  return BeidouFunDrvObj.BDLatitude_Second;
 }

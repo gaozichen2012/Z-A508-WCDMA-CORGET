@@ -8,6 +8,7 @@ typedef enum{
   ATCOMM_ZPPPOPEN               = 0x01,
   ATCOMM_CSQ                    = 0x02,
   ATCOMM_RESET                  = 0x03,
+  ATCOMM_Test                   = 0x04
 }AtCommType;
 #else //CDMA ÖÐÐË
 typedef enum{
@@ -60,5 +61,4 @@ extern void ApiAtCmd_10msRenew(void);
 extern u8 ApiAtCmd_GetIccId(u8 **pBuf);
 extern void ApiGetIccidBuf(void);
 extern u8 ApiAtCmd_Ppp_state(void);
-extern u32  CHAR_TO_Digital(u8 * pBuf, u8 Len);
 #endif

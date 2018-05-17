@@ -23,10 +23,8 @@ DELAPI u8 TaskStartDeleteDelay6Count;
 DELAPI bool LockingState_Flag;
 DELAPI u16 TimeCount;//超时时间
 DELAPI u16 TimeCount3;
-DELAPI u8 EnterKeyTimeCount;
 DELAPI u8 BacklightTimeCount;//背光灯时间(需要设置进入eeprom)
 DELAPI u16 KeylockTimeCount;//键盘锁时间(需要设置进入eeprom)
-DELAPI u8 UpDownSwitchingCount;//没按一次换组换呼键至零一次
 DELAPI void DEL_PowerOnInitial(void);
 DELAPI void DEL_Interrupt(void);
 DELAPI void DEL_Renew(void);

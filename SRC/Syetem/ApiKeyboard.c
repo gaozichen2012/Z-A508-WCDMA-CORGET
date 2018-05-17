@@ -195,16 +195,19 @@ void Keyboard_Test(void)
           break;
         case 1://=1，进入某群组
           VOICE_Play(GroupSelected);
-          UpDownSwitchingCount=0;//解决选中单呼后切换群组，语音中断的问题
           DEL_SetTimer(0,40);
           while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
           ApiPocCmd_WritCommand(PocComm_EnterGroup,0,0);
-          KeyDownUpChoose_GroupOrUser_Flag=3;
-          EnterKeyTimeCount=0;
+          KeyDownUpChoose_GroupOrUser_Flag=0;
           KeyUpDownCount=0;
           break;
         case 2://=2,呼叫某用户
-          ApiPocCmd_WritCommand(PocComm_Invite,"0000000101",strlen((char const *)"0000000101"));
+          VOICE_Play(GroupSelected);
+          DEL_SetTimer(0,40);
+          while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
+          ApiPocCmd_WritCommand(PocComm_Invite,0,0);
+          KeyDownUpChoose_GroupOrUser_Flag=0;
+          KeyPersonalCallingCount=0;
           break;
         case 3:
           break;
@@ -446,7 +449,7 @@ void Keyboard_Test(void)
     if(TestNum11>=KeyCountNum)
     {
       TestNum11=0;
-    NumberKeyboardPressDown_flag=TRUE;
+      NumberKeyboardPressDown_flag=TRUE;
     }
     break;  
   case 0x00200000://#

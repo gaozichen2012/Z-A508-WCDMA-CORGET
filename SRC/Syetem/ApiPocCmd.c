@@ -14,6 +14,7 @@ u8 *ucStartPTT                  = "0B0000";
 u8 *ucEndPTT                    = "0C0000";
 u8 *ucGroupListInfo             = "0d0000";
 u8 *ucUserListInfo              = "0e00000000";
+u8 *ucSetGPS                  = "110000";
 typedef struct{
   struct{
     union{
@@ -94,6 +95,7 @@ typedef struct{
   u16 UserXuhao;
   u8 GroupIdBuf[5];
   u8 UserIdBuf[8];
+  u8 gps_info_report[45];
 }PocCmdDrv;
 
 
@@ -261,6 +263,7 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
   u8 cBuf[4]={0,0,0,0};
   u8 primary_buf_len;
   u16 i,temp_value;
+  u8 gps_info_buf[25];
   DrvMC8332_TxPort_SetValidable(ON);
   DrvGD83_UART_TxCommand((u8 *)ucAtPocHead,strlen((char const *)ucAtPocHead));
   switch(id)
@@ -345,6 +348,21 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
     COML_StringReverse(4,cBuf);
     DrvGD83_UART_TxCommand(cBuf,4);
 #endif
+    break;
+  case PocComm_SetGps:
+    DrvGD83_UART_TxCommand(ucSetGPS,strlen((char const *)ucSetGPS));
+    Digital_TO_CHAR(&gps_info_buf[0],beidou_latitude_degree(),2);
+    gps_info_buf[2] = 0x2E;//上报和下发纬度22在前，经度130
+    Digital_TO_CHAR(&gps_info_buf[3],((beidou_latitude_minute()*10000+beidou_latitude_second())*10/6),6);//换算+转换格式二合一
+    gps_info_buf[9] = 0x2C;
+    Digital_TO_CHAR(&gps_info_buf[10],beidou_longitude_degree(),3);
+    gps_info_buf[13] = 0x2E;
+    Digital_TO_CHAR(&gps_info_buf[14],((beidou_longitude_minute()*10000+beidou_longitude_minute())*10/6),6);//经度Longitude换算+转换格式二合一
+    
+    CHAR_TO_DIV_CHAR(gps_info_buf, PocCmdDrvobj.gps_info_report, 20);//20
+    PocCmdDrvobj.gps_info_report[41]='0';
+    PocCmdDrvobj.gps_info_report[42]='0';
+    DrvGD83_UART_TxCommand(PocCmdDrvobj.gps_info_report,strlen((char const *)PocCmdDrvobj.gps_info_report));
     break;
   case PocComm_Key://7
     DrvGD83_UART_TxCommand(buf, len);

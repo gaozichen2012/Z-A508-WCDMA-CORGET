@@ -11,6 +11,8 @@
   #define BEIDOUAPI 
 #endif
 
+
+extern void ApiBeidou_PowerOnInitial(void);
 extern bool beidou_valid(void);
 extern u32 beidou_longitude_degree(void);//¶È
 extern u32 beidou_longitude_minute(void);//·Ö

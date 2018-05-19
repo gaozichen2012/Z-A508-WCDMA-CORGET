@@ -6,7 +6,7 @@ const u8 *ucPersonalMode                = "50006500720073006f006e0061006c0020004
 const u8 *ucABELL                       = "4100620065006C006C00";//ABELL
 const u8 *ucGroupSelected               = "530065006c0065006300740065006400";//Group Selected
 const u8 *ucNoSimCard                   = "6e006f002000730069006D0020006300610072006400";//NO SIM Card
-const u8 *ucNetworkSearching            = "6e006500740077006f0072006b00200073006500610072006300680069006e006700";//network searching
+const u8 *ucNetworkSearching            = "6e006500740077006f0072006b002000730065006100720063006800";//network searching
 const u8 *ucPowerLowPleaseCharge        = "50006f0077006500720020006c006f0077002c0050006c0065006100730065002000430068006100720067006500";//Power Low Please Charge
 const u8 *ucLowBattery                  = "4c006f00770020004200610074007400650072007900";//Low Battery
 const u8 *ucFivePercentPower            = "3575cf917e7606524b4e3500";
@@ -19,6 +19,7 @@ const u8 *ucGroupMode                   = "07526263A47FC47E";
 const u8 *ucHandsetMode                 = "2c54527b216a0f5f";
 const u8 *ucHandfreeMode                = "4d51d063216a0f5f";
 const u8 *ucNoOnlineUser                = "4e006f0020006f006e006c0069006e00650020007500730065007200";
+const u8 *ucLoggingIn                   = "4100630063006f0075006e007400200043006f006e00660069006700750072006100740069006f006e00";//Account Config
 typedef struct{
 	union{
 		struct{
@@ -112,6 +113,9 @@ void VOICE_Play(VOICEPLAY_TYPE id)
     break;
   case LowBattery:
     VOICE_SetOutput(ATVOICE_FreePlay,(u8*)ucLowBattery,strlen((char const*)ucLowBattery));//µÁ¡øµÕ«Î≥‰µÁ
+  case LoggingIn:
+    VOICE_SetOutput(ATVOICE_FreePlay,(u8*)ucLoggingIn,strlen((char const*)ucLoggingIn));//Account Config
+    break;
   default:
     break;
   }

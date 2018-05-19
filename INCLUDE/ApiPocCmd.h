@@ -71,6 +71,8 @@ extern bool ApiPocCmd_ToneState(void);
 extern void ApiPocCmd_ToneStateSet(bool a);
 
 extern working_status_type get_current_working_status(void);
+
+extern PocStatesType poccmd_states_poc_status(void);
 /*****群组用户名相关调用函数****************/
 extern u8 *GetNowWorkingGroupNameForDisplay(void);
 extern u8 GetNowWorkingGroupNameLenForDisplay(void);

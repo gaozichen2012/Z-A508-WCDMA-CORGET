@@ -405,7 +405,6 @@ void api_disp_icoid_output(u8 IcoIdIndex, bool IcoDefault,bool on_off)
 	{
           api_diap_ico_pos_get(&IcoInfo, IcoIdIndex);
 	}
-	
 	api_disp_ico_output(IcoInfo, &IcoDataBuf[0]);
 	//api_disp_all_screen_refresh();// 全屏统一刷新//屏蔽，添加此指令会使开机时获取群组名发生错误
 	return;

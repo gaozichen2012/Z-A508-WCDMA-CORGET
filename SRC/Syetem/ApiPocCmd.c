@@ -1,5 +1,4 @@
 #include "ALLHead.h"
-#if 1//WCDMA 卓智达
 
 #define DrvMC8332_UseId_Len	        100//define UART Tx buffer length value
 #define APIPOC_GroupName_Len            32//unicode只存前2位，00不存，32/2=16,屏幕最多显示16个字符
@@ -98,162 +97,28 @@ typedef struct{
   u8 gps_info_report[45];
 }PocCmdDrv;
 
-
-#else
-#define DrvMC8332_GroupName_Len		16			//define UART Tx buffer length value
-
-#define APIPOC_UserList_Len			16
-#define APIPOC_UserLoad_Len			8
-#define APIPOC_UserName_Len			39//39 in20180303 群组名最多7位，群组数最大40个
-#define APIPOC_CalledUserName_Len	        44//成员名长度
-
-u8 POC_GetAllGroupNameStart_Flag=0;
-
-u8 InvalidCallCount=0;
-u8 ASCII_ActiveUserID[22];//Test 存EEPROM读取的数据使用
-u8 Get_Unicode_ActiveUserIDBuf[45];//
-u8 Get_0X_ActiveUserIDBuf[11];//
-u8 UnicodeForGbk_AllUserNameBuf[25];
-u8 UnicodeForGbk_AllGrounpNameBuf[25];
-u8 UnicodeForGbk_MainWorkNameBuf[15];
-u8 UnicodeForGbk_MainUserNameBuf[25];
-u8 UnicodeForGbk_SpeakerRightnowNameBuf[25];
-
-const u8 *ucTingEnd   = "0B0000";
-const u8 *ucTingStart   = "0B0001";
-
-
-u8 POC_GetAllGroupNameDone_Flag=FALSE; 
-u8 POC_EnterPersonalCalling_Flag=0;
-u8 POC_QuitPersonalCalling_Flag=0;
-u8 POC_AtEnterPersonalCalling_Flag=0;
-u8 POC_AtQuitPersonalCalling_Flag=0;
-u8 POC_EnterGroupCalling_Flag=0;
-u8 POC_QuitGroupCalling_Flag=0;
-bool POC_ReceivedVoice_Flag=FALSE;
-bool ApiPocCmd_Tone_Flag=FALSE;
-bool ApiPocCmd_PlayReceivedVoice_Flag=FALSE;//开关喇叭使用
-bool SwitchGroupBUG=FALSE;
-//bool POC_ReceivedNoVoice_Flag=FALSE;
-bool EnterPersonalCalling=FALSE;
-u8 POC_ReceivedVoiceStart_Flag=0;
-u8 POC_ReceivedVoiceEnd_Flag=0;
-u8 POC_ReceivedVoiceEndForXTSF_Flag=0;
-bool POC_Receive86_Flag=FALSE;
-u8 OffLineCount=0;
-u8 OnlineMembership=0;
-
-bool PocNoOnlineMember_Flag=FALSE;
-bool PocNoOnlineMember_Flag2=FALSE;
-bool GettheOnlineMembersDone=FALSE;
-typedef struct{
-  struct{
-    union{
-      struct{
-        u16 bUserInfo	: 3;
-        u16 bUserWrite	: 1;
-        u16 bPocReset	: 1;
-        u16 bPocOpen	: 1;
-        u16 bModeChange	: 1;
-        u16	 bMode	: 3;
-        u16 bNetStat	: 2;
-        u16 bUnline	: 1;
-        u16             : 1;
-        u16             : 2;
-      }Bits;
-      u16 Byte;
-    }Msg;
-    //u8 Buf[10];
-    u8 Buf2[10];
-    u8 Buf3[3];
-    u8 Buf4[3];
-    u8 Buf5[3];
-    u8 Buf6[3];
-    u8 Buf7[3];
-    u8 Buf8[9];
-    struct{
-      struct{
-        u8 bSet	: 1;
-        u8 Len	: 7;
-      }Msg;
-      u8 Buf[DrvMC8332_UseId_Len];
-    }LoginInfo;
-  }NetState;
-  struct{
-    struct{
-      union{
-        struct{
-          u16 bInitial		        : 1;
-          u16 bPttState		        : 1;			//0: ptt involide; 1 :ptt volide
-          u16 bPttUser		        : 1;			//ptt operrtor 0: oneself; 1: other
-          u16 bWorkGrpVolide	        : 3;
-          u16 bEnterGroup		: 1;
-          u16 bCallFail	                : 1;
-          u16 bLogin                    : 1;
-          u16 AlarmMode            	: 1;
-          u16 PersonalCallingMode 	: 1;
-          u16 			        : 5;
-        }Bits;
-        u16 Byte;
-      }Msg;
-                        struct{
-                                u8 PresentUserId;
-				u8 Name[APIPOC_CalledUserName_Len];
-				u8 NameLen;
-			}SpeakerRightnow;
-			struct{
-                          
-				u8 PresentGroupId;
-                                u8 GroupNum;
-				u8 Id[8];
-				u8 Name[APIPOC_UserName_Len];
-				u8 NameLen;
-			}MainWorkGroup;
-                        struct{
-                                u8 PresentUserId;
-                                u8 UserNum;
-				u8 Id[8];
-				u8 Name[APIPOC_CalledUserName_Len];
-				u8 NameLen;
-			}PttUserName;
-#if 1//POC:80 added by Tom in 2017.11.21
-			struct{
-                                u8 Id[8];
-				u8 Name[APIPOC_UserName_Len];
-				u8 NameLen;
-			}Group[30];//当群组大于30时会导致个呼后，最后一个群组异常
-                        struct{
-                                u8 Id[8];
-				u8 Name[APIPOC_CalledUserName_Len];
-				u8 NameLen;
-			}UserName[20];
-#endif
-			struct{
-				u8 Id[8];
-				u8 Name[APIPOC_UserName_Len];
-				u8 NameLen;
-			}WorkGroup;
-			
-			struct{
-				u8 Id[8];
-				u8 Name[APIPOC_CalledUserName_Len];
-				u8 NameLen;
-			}WorkUserName;
-		}UseState;
-	}WorkState;
-}PocCmdDrv;
-#endif
 static PocCmdDrv PocCmdDrvobj;
 static bool no_online_user(void);
-#if 0//CDMA 中兴
+#if 1//CDMA 中兴
 void ApiPocCmd_PowerOnInitial(void)
 {
-  PocCmdDrvobj.NetState.Msg.Byte = 0x00;
-  PocCmdDrvobj.WorkState.UseState.Msg.Byte = 0x00;
-  PocCmdDrvobj.WorkState.UseState.Msg.Bits.bInitial = 0x01;
-  PocCmdDrvobj.WorkState.UseState.Msg.Bits.bLogin=0;
+  PocCmdDrvobj.States.current_working_status = m_group_mode;
+  PocCmdDrvobj.States.PocStatus = OffLine;
+  PocCmdDrvobj.States.GroupStats = LeaveGroup;
+  PocCmdDrvobj.States.KeyPttState = 0;
+  PocCmdDrvobj.States.ReceivedVoicePlayStates = FALSE;
+  PocCmdDrvobj.States.ReceivedVoicePlayStates_Intermediate = FALSE;//喇叭
+  PocCmdDrvobj.States.ReceivedVoicePlayStatesForLED = FALSE;
+  PocCmdDrvobj.States.ReceivedVoicePlayStatesForDisplay = ReceivedVoiceNone;
+  PocCmdDrvobj.States.ToneState = FALSE;
+  PocCmdDrvobj.States.ToneState_Intermediate = FALSE;
   
-  PocCmdDrvobj.States.PocStatus=OffLine;
+  PocCmdDrvobj.offline_user_count=0;
+  PocCmdDrvobj.all_user_num=0;
+  PocCmdDrvobj.GroupXuhao=0;
+  PocCmdDrvobj.UserXuhao=0;
+  
+  PocCmdDrvobj.NetState.Msg.Byte = 0x00;
 }
 #endif
 
@@ -1394,4 +1259,9 @@ void get_screen_display_group_name(void)
     api_lcd_pwr_on_hint(0,2,"                ");
     api_lcd_pwr_on_hint(0,2,"Temporary groups");//Temporary groups临时群组
   }
+}
+
+PocStatesType poccmd_states_poc_status(void)
+{
+  return PocCmdDrvobj.States.PocStatus;
 }

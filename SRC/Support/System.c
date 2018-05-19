@@ -76,12 +76,24 @@ void main_init(void)
   ITC_SetSoftwarePriority(ITC_IRQ_UART1_TX,ITC_PRIORITYLEVEL_3);
   ITC_SetSoftwarePriority(ITC_IRQ_UART3_RX,ITC_PRIORITYLEVEL_2);
   ITC_SetSoftwarePriority(ITC_IRQ_TIM3_OVF,ITC_PRIORITYLEVEL_1);
-
-  LED_Init();
+  
+  //POC初始化
+  ApiPocCmd_PowerOnInitial();
+  
+  //AT初始化
+  ApiAtCmd_PowerOnInitial();
+  
+  //北斗初始化
+  ApiBeidou_PowerOnInitial();
+  
   //定时初始化
   DEL_PowerOnInitial();
-  //通讯模块初始化
-  //DrvGD83_Init();
+  
+  //登录代码初始化
+  Task_PowerOnInitial();
+  
+  LED_Init();
+
   DrvMC8332_Software_Initial();
   ApiGpsCmd_PowerOnInitial();
   //
@@ -119,6 +131,7 @@ void main_init(void)
   MCU_LCD_BACKLIGTH(ON);//打开背光灯
   api_disp_icoid_output( eICO_IDBATT5, TRUE, TRUE);//显示电池满电图标
   api_disp_icoid_output( eICO_IDTemper, TRUE, TRUE);//免提模式图标
+  api_lcd_pwr_on_hint(0,2,"                ");
   api_lcd_pwr_on_hint(5,2,"ABELL");
   NoUseNum=ApiAtCmd_WritCommand(ATCOMM_RESET,(void*)0, 0);
   

@@ -33,6 +33,7 @@ typedef enum{
 #endif
 
 #if 1//WCDMA ×¿ÖÇ´ï
+extern void ApiAtCmd_PowerOnInitial(void);
 extern u16 ApiAtCmd_bStartingUp(void);
 extern u16 ApiAtCmd_bCardIn(void);
 extern u16 ApiAtCmd_bNoCard(void);

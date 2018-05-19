@@ -19,6 +19,19 @@ typedef struct{
 
 static BeidouFunDrv BeidouFunDrvObj;
 
+void ApiBeidou_PowerOnInitial(void)
+{
+  BeidouFunDrvObj.BDValid = FALSE;
+  BeidouFunDrvObj.BDLongitude_Degree = 0;
+  BeidouFunDrvObj.BDLongitude_Minute = 0;
+  BeidouFunDrvObj.BDLongitude_Second = 0;
+  BeidouFunDrvObj.BDLatitude_Degree  = 0;
+  BeidouFunDrvObj.BDLatitude_Minute  = 0;
+  BeidouFunDrvObj.BDLatitude_Second  = 0;
+  BeidouFunDrvObj.BDSpeed = 0;
+  BeidouFunDrvObj.BDDirection = 0;
+}
+
 void ApiBeidou_Get_location_Information(void)
 {
   u8 *pBuf;

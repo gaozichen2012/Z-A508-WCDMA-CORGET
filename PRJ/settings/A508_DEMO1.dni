@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=1419601251
+Checksum=1170200675
 [CodeCoverage]
 Enabled=_ 0
 [CallStack]
@@ -208,8 +208,7 @@ Category=_ 0
 LoggingEnabled=_ 0
 LogFile=_ ""
 [Breakpoints]
-Bp0=_ "STD_CODE" "{$PROJ_DIR$\..\SRC\Syetem\Delay.c}.410.9" 1 0 0 0 "" 0 ""
-Count=1
+Count=0
 [Aliases]
 A0=_ "C:\Users\lei\Desktop\IAR\GT20L16P1Y.c" ""
 Count=1

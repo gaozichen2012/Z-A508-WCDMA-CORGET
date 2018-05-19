@@ -17,51 +17,8 @@ const u8 *ucRxPASTATE1 = "PASTATE:1";
 const u8 *ucRxZTTS0 = "ZTTS:0";
 
 u8 KeyDownUpChoose_GroupOrUser_Flag=0;
-u8 HDRCSQValue=0;//HDRCSQ的值
 #endif
 
-
-
-#if 0//中兴
-u8 BootProcess_SIMST_Flag=0;
-u8 BootProcess_PPPCFG_Flag=0;
-u8 ApiAtCmd_TrumpetVoicePlay_Flag=0;//功放控制标志位
-bool ApiAtCmd_ZTTS_Flag=FALSE;
-u8 CSQ_Flag=0;
-u8 CSQ99Count_Flag=0;
-
-
-const u8 *ucGD83Reset  = "at^reset";
-
-const u8 *ucRxPASTATE0 = "PASTATE:0";
-
-const u8 *ucCheckRssi = "AT+CSQ?";
-const u8 *ucHDRCSQ = "AT^HDRCSQ";
-const u8 *ucRxCSQ = "CSQ:";
-const u8 *ucRxHDRCSQ = "^HDRCSQ:";
-const u8 *ucGpsPosition = "LATLON:";
-const u8 *ucCDMATIME = "^CDMATIME:";
-const u8 *ucGPSINFO = "^GPSINFO:";
-const u8 *ucGPSCNO = "^GPSCNO:";
-const u8 *ucSIMST1="^SIMST:1";
-const u8 *ucSIMST255="^SIMST:255";
-const u8 *ucCaretPPPCFG="^PPPCFG:";
-const u8 *ucCheckTcp = "at^pocsockstat=";//检查TCP Ip是否连接正常
-const u8 *ucSetIp = "at^POCSETUPUDP=0";//设置TCP连接1 UDP:0
-const u8 *ucSendTcp = "at^POCSENDUDP=0,";//at^pocsendudp=0,123.56.80.107,6969,0x
-const u8 *ucRxCheckTcp = "^POCSOCKSTAT: 0";//TCP连接正常下发指令
-const u8 *ucZpppOpen = "at^pocnetopen";//设置PPP连接
-const u8 *ucCheckPPP = "AT^POCNETOPEN?";//检查PPP连接是否正常工作
-const u8 *ucRxCheckPppOpen = "^POCNETOPEN:1";
-const u8 *ucRxCheckPppClose = "^POCNETOPEN:0";
-const u8 *ucCheckCard = "AT^GETICCID";
-bool PositionInformationSendToATPORT_Flag=FALSE;
-bool PositionInfoSendToATPORT_RedLed_Flag=FALSE;
-bool PositionInfoSendToATPORT_SetPPP_Flag=FALSE;
-bool PositionInfoSendToATPORT_InfoDisplay_Flag=FALSE;
-#endif
-
-#if 1//WCDMA 卓智达
 typedef struct{
   union{
     struct{
@@ -82,61 +39,19 @@ typedef struct{
   u8 Buf[30];
   u8 Len;
 }AtCmdDrv;
-#else
-typedef struct{
-	struct{
-		union{
-			struct{
-				u16 bFunOff	: 1;
-				u16 bFun	: 1;
-				u16 bEsn	: 1;
-				u16 bCard	: 1;
-				u16 bRssi	: 1;
-				u16 bPppStep	: 2;
-				u16 bPppOk	: 1;
-				u16 bTcp	: 1;
-				u16 bTcpOk	: 1;
-				u16 bUdp	: 1;
-				u16 bUdpOk	: 1;
-				u16 bFirstPlay  : 1;
-				u16		: 3;
-			}Bits;
-			u16 Byte;
-		}Msg;
-
-                struct{
-                  u8 Buf[21];//存放AT收到的经纬度信息
-                  u8 BufLen;//接收经纬度信息的数据长度
-                  u8 Longitude_Minute;//小数点前的数
-                  u32 Longitude_Second;//小数点后的数
-                  u8 Latitude_Minute;
-                  u32 Latitude_Second;
-                }Position;
-                u8 SouXingConut;
-                u16 SignalToNoiseMax;//最大信号值
-                bool EffectiveLocation;//是否收到经纬度信息
-                u8 TimeBuf[20];//存放AT收到的时间信息
-                u8 TimeBufLen;//接收时间信息的数据长度
-                u8 GpsInfoBuf[30];//存放AT收到的速度数据
-                u8 GpsInfoBufLen;//接收速度的数据长度
-                u8 GpsCnoBuf[10];//存放CNO收到的速度数据
-                u8 GpsCnoBufLen;//接收Cno的数据长度
-                u8 ucDate[3];//年月日
-                u8 ucTime[3];//时分秒
-                u16 ucSpeed;
-		u8 Buf[30];
-		u8 Len;
-                u8 HDRCSQBuf[2];
-                u8 HDRCSQLen;
-                u8 CSQBuf[2];
-                u8 CSQLen;
-	}NetState;
-}AtCmdDrv;
-
-#endif
 
 static AtCmdDrv AtCmdDrvobj;
-static void AtCmd_NetParamCode(void);//获取TCP IP地址
+
+void ApiAtCmd_PowerOnInitial(void)
+{
+  KeyDownUpChoose_GroupOrUser_Flag = 0;
+  AtCmdDrvobj.Msg.Byte = 0;
+  AtCmdDrvobj.CSQParam.Buf[0] = 0x00;
+  AtCmdDrvobj.CSQParam.Buf[1] = 0x00;
+  AtCmdDrvobj.CSQParam.Len = 0x00;
+  AtCmdDrvobj.CSQParam.Value = 0x00;
+}
+
 #if 1//WCDMA 卓智达
 bool ApiAtCmd_WritCommand(AtCommType id, u8 *buf, u16 len)
 {
@@ -268,9 +183,10 @@ void ApiAtCmd_100msRenew(void)
     {
     }
 }
+
 void ApiCaretCmd_10msRenew(void)
 {
-  u8 * pBuf, ucRet, Len,i;
+  u8 * pBuf, Len;
   while((Len = DrvMC8332_CaretNotify_Queue_front(&pBuf)) != 0)
   {
   }
@@ -368,19 +284,19 @@ void HDRCSQSignalIcons(void)
     {
       api_disp_icoid_output( eICO_IDSPEAKER, TRUE, TRUE);//5格信号
     }
-    else if(ApiAtCmd_CSQValue()>=25&&ApiAtCmd_CSQValue()<31)
+    else if(ApiAtCmd_CSQValue()>=28&&ApiAtCmd_CSQValue()<31)
     {
       api_disp_icoid_output( eICO_IDSCANPA, TRUE, TRUE);//4格信号
     }
-    else if(ApiAtCmd_CSQValue()>=20&&ApiAtCmd_CSQValue()<25)
+    else if(ApiAtCmd_CSQValue()>=25&&ApiAtCmd_CSQValue()<28)
     {
       api_disp_icoid_output( eICO_IDSCAN, TRUE, TRUE);//3格信号
     }
-    else if(ApiAtCmd_CSQValue()>=15&&ApiAtCmd_CSQValue()<20)
+    else if(ApiAtCmd_CSQValue()>=22&&ApiAtCmd_CSQValue()<25)
     {
       api_disp_icoid_output( eICO_IDRXNULL, TRUE, TRUE);//2格信号
     }
-    else if(ApiAtCmd_CSQValue()>=10&&ApiAtCmd_CSQValue()<15)
+    else if(ApiAtCmd_CSQValue()>=19&&ApiAtCmd_CSQValue()<22)
     {
       api_disp_icoid_output( eICO_IDRXFULL, TRUE, TRUE);//1格信号
     }

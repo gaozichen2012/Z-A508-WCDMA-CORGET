@@ -35,6 +35,8 @@ typedef enum{
 }Key3_OptionType;
 
 #if 1 //WCDMA
+extern void Task_PowerOnInitial(void);
+extern bool task_status_account_config(void);
 extern bool TASK_PersonalKeyMode(void);
 extern void TASK_PersonalKeyModeSet(bool a);
 #endif

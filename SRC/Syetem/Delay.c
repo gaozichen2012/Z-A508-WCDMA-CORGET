@@ -5,49 +5,6 @@
 #define DEL_IDLE		0x00
 #define DEL_RUN			0x01
 
-
-#if 1//WCDMA 卓智达
-
-#else //CDMA 中兴
-
-u8 *ucGPSSendToAtPort   ="AT+GPSFUNC=21";
-u8 *ucGPSUploadTime_5s  ="AT+GPSFUNC=1";
-u8 *ucRequestUserListInfo       = "0E000000000001";
-
-u8 ShowTime_Flag=FALSE;
-u8 DEL_500ms_Count=0;
-u8 DEL_500ms_Count2=0;
-u16 TimeCount=0;
-
-u16 TimeCount3=0;
-
-u8 ToneTimeCount=0;
-u8 GpsReconnectionTimeCount=0;
-u8 PowerOnCount=0;
-
-u8 LandingTimeCount=0;
-u8 ForbiddenSendPttCount=0;
-u8 TaskStartDeleteDelay1Count=0;
-u8 TaskStartDeleteDelay3Count=0;
-u8 TaskStartDeleteDelay4Count=0;
-u8 TaskStartDeleteDelay6Count=0;
-u8 ApiAtCmd_TrumpetVoicePlayCount=0;
-u8 POC_ReceivedVoiceCount=0;
-
-u8 PocNoOnlineMemberCount=0;
-u8 GetNoOnlineMembersCount=0;
-u8 POC_GetAllGroupNameDoneCount=0;
-u8 ApiAtCmd_ZTTSCount=0;
-u8 ShowTimeCount=0;
-bool LockingState_Flag=FALSE;
-u8 BacklightTimeCount;//=10;//背光灯时间(需要设置进入eeprom)
-u16 KeylockTimeCount;//=30;//键盘锁时间(需要设置进入eeprom)
-u8 GetAllGroupMemberNameCount=0;
-u8 PersonalCallingCount=0;
-u8 KEY_4Count=0;
-
-#endif
-
 typedef struct {
   union {
     struct {
@@ -85,6 +42,7 @@ typedef struct {
     u8 ToneStateCount;
     u8 ReceivedVoicePlayStatesCount;
     u8 beidou_valid_count;
+    u8 poc_status_count;
   }Count;
   u8 BacklightTimeBuf[1];//背光灯时间(需要设置进入eeprom)
   u8 KeylockTimeBuf[1];//键盘锁时间(需要设置进入eeprom)
@@ -107,6 +65,21 @@ void DEL_PowerOnInitial(void)//原瑞撒單片機多長時間進一次中斷
   DelDrvObj.c500msLen = 0x05;
   DelDrvObj.c1SLen    = 0x01;
   DelDrvObj.c2SLen    = 0x02;
+  
+  DelDrvObj.Count.TimeCount_Light = 0;
+  DelDrvObj.Count.CSQTimeCount = 0;
+  DelDrvObj.Count.WriteFreqTimeCount = 0;
+  DelDrvObj.Count.LobatteryTask_StartCount = 0;
+  DelDrvObj.Count.PrimaryLowPowerCount = 0;
+  DelDrvObj.Count.SignalPoorCount = 0;
+  DelDrvObj.Count.TimeCount2 = 0;
+  DelDrvObj.Count.CIMICount = 0;
+  DelDrvObj.Count.NoCardCount = 0;
+  DelDrvObj.Count.PPPStatusOpenCount = 0;
+  DelDrvObj.Count.ToneStateCount = 0;
+  DelDrvObj.Count.ReceivedVoicePlayStatesCount = 0;
+  DelDrvObj.Count.beidou_valid_count = 0;
+  DelDrvObj.Count.poc_status_count = 0;
   return;
 }
 
@@ -314,10 +287,10 @@ static void DEL_500msProcess(void)			//delay 500ms process server
       DelDrvObj.Count.CSQTimeCount=0;
       ApiAtCmd_WritCommand(ATCOMM_CSQ, (void*)0, 0);
       
-      if(GetTaskId()==Task_Start&&ApiAtCmd_CSQValue()<25)
+      if(GetTaskId()==Task_Start&&task_status_account_config()==FALSE&&ApiAtCmd_CSQValue()<25)//如果处于开机状态、未写入账号状态、网络信号小于25状态
       {
         VOICE_Play(NetworkSearching);
-        api_lcd_pwr_on_hint(0,2,"NET searching   ");
+        api_lcd_pwr_on_hint(0,2,"Network Search  ");
       }
 
       HDRCSQSignalIcons();
@@ -400,6 +373,20 @@ static void DEL_500msProcess(void)			//delay 500ms process server
     }
 /*********登录超过60s重启*********************************/
     
+/*******收到离线指令过1分钟未登陆重启*******/
+    if(poccmd_states_poc_status()==OffLine)
+    {
+      DelDrvObj.Count.poc_status_count++;
+      if(DelDrvObj.Count.poc_status_count>2*60)
+      {
+        DelDrvObj.Count.poc_status_count=0;
+        main_init();//重启
+      }
+    }
+    else
+    {
+      DelDrvObj.Count.poc_status_count=0;
+    }
 /****定位成功后5s上报一次定位*****/
     if(beidou_valid()==TRUE)
     {

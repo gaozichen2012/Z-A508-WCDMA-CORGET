@@ -1,7 +1,7 @@
 #define TASKABLE
 #include "AllHead.h"
 
-#if 1//WCDMA 卓智达
+
 typedef struct{
   struct{
     bool AccountConfig;
@@ -16,41 +16,19 @@ bool LoosenPttMoment_Flag=FALSE;
 u8 EnterPttMomentCount=0;
 u8 LoosenPttMomentCount=0;
 u8 *ucCODECCTL                  = "at^codecctl=F000,9000,0";//T1默认
-#else //CDMA 中兴
-u8 SSWLCount=0;
-u8 StartingUpStep=0;
-Key3_OptionType Key3Option;
-bool NoUseNum=FALSE;
-u8 AlarmCount=4;//2G3G切换计数,默认为3G模式
-u8 NetworkType_2Gor3G_Flag=3;
-u8 PersonCallIco_Flag=0;//根据显示组呼个呼图标判断状态
-u8 Key_PersonalCalling_Flag=0;
-bool TASK_Ptt_StartPersonCalling_Flag=FALSE;
-bool Task_Landing_Flag=FALSE;
 
-
-bool EnterKeyTime_2s_Flag=FALSE;
-bool KEY_4_Flag=FALSE;
-u8 TaskStartDeleteDelay1=0;
-u8 TaskStartDeleteDelay2=0;
-u8 TaskStartDeleteDelay3=0;
-u8 TaskStartDeleteDelay4=1;
-u8 TaskStartDeleteDelay5=0;
-u8 TaskStartDeleteDelay6=0;
-
-u8 *ucCLVL                       = "AT+CLVL=7";//音量增益7
-u8 *ucVGR                       = "AT+VGR=7";//音量增益7
-u8 *ucCODECCTL                  = "at^codecctl=3000,2500,0";//T1默认
-u8 *ucOSSYSHWID                 = "AT^OSSYSHWID=1";
-u8 *ucPrefmode2                  = "AT^prefmode=2";//网络模式2G
-u8 *ucPrefmode4                  = "AT^prefmode=4";//网络模式3G
-u8 *ucPrefmode8                  = "AT^prefmode=8";//网络模式2/3G自动切换
-u8 *ucCSQ                       = "AT+CSQ?";
-u8 *ucPPPCFG                    = "AT^PPPCFG=echat,ctnet@mycdma.cn,vnet.mobi";
-u8 *ucZTTS_Abell                = "AT+ZTTS=1,\"2d4e745113663d6d20007f5edf57f95bb28b\"";
-
-#endif
 void Key3_PlayVoice(void);
+
+void Task_PowerOnInitial(void)
+{
+  TaskDrvobj.status.AccountConfig = FALSE;
+  TaskDrvobj.status.BootPrompt    = FALSE;
+  TaskDrvobj.status.PersonalKeyMode = FALSE;
+  EnterPttMoment_Flag = FALSE;
+  LoosenPttMoment_Flag = FALSE;
+  EnterPttMomentCount = 0;
+  LoosenPttMomentCount = 0;
+}
 
 
 void Task_RunStart(void)
@@ -77,6 +55,8 @@ void Task_RunStart(void)
             TaskDrvobj.status.AccountConfig=TRUE;
             ApiPocCmd_WritCommand(PocComm_OpenPOC,0,0);//打开POC应用
             ApiPocCmd_WritCommand(PocComm_SetURL,0,0);//设置URL
+            VOICE_Play(LoggingIn);
+            api_lcd_pwr_on_hint(0,2,"Account Config..");
           }
         }
       }
@@ -119,7 +99,6 @@ void Task_RunNormalOperation(void)
     ApiPocCmd_WritCommand(PocComm_EndPTT,0,0);
   }
 /***********PTT状态检测*************************************************************************************************************************/
-  
   if(ReadInput_KEY_PTT==0)//判断按下PTT的瞬间
   {
     EnterPttMomentCount++;
@@ -310,7 +289,7 @@ if(ReadInput_KEY_3==0)//组呼键
     if(ApiPocCmd_GroupStates()==EnterGroup)
     {
       api_lcd_pwr_on_hint(0,2,"                ");
-      api_lcd_pwr_on_hint(0,2,"Temporary groups");//Temporary groups临时群组
+      api_lcd_pwr_on_hint(0,2,"Individual Call ");//Individual Call临时群组
       ApiPocCmd_GroupStatesSet(InGroup);
     }
     else if(ApiPocCmd_GroupStates()==InGroup)
@@ -450,7 +429,6 @@ void Task_RunNormalOperation(void)
   {
     Keyboard_Test();
   }
-  
   UART3_ToMcuMain();
 /***********PTT状态检测*************************************************************************************************************************/
   if(ReadInput_KEY_PTT==0)//判断按下PTT的瞬间
@@ -507,7 +485,7 @@ void Task_RunNormalOperation(void)
         }
       }
     }
-#else
+#else 
     if(KeyDownUpChoose_GroupOrUser_Flag==0)
     {
       if(POC_ReceivedVoice_Flag==TRUE)//解决对方说话时按PTT接收语音异常的问题
@@ -1066,4 +1044,8 @@ bool TASK_PersonalKeyMode(void)
 void TASK_PersonalKeyModeSet(bool a)
 {
   TaskDrvobj.status.PersonalKeyMode=a;
+}
+bool task_status_account_config(void)
+{
+  return TaskDrvobj.status.AccountConfig;
 }

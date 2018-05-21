@@ -47,6 +47,11 @@ typedef enum{
   m_personal_mode  = 0x01
 }working_status_type;
 
+extern u32 poc_longitude_integer(void);
+extern u32 poc_longitude_float(void);
+extern u32 poc_latitude_integer(void);
+extern u32 poc_latitude_float(void);
+
 extern GroupStatsType ApiPocCmd_GroupStates(void);
 extern void ApiPocCmd_GroupStatesSet(GroupStatsType a);
 
@@ -80,11 +85,13 @@ extern u8 GetNowWorkingGroupNameLenForDisplay(void);
 extern u8 *GetAllGroupNameForDisplay(u8 a);
 extern u8 *GetSpeakingUserNameForDisplay(void);//说话的用户：显示屏
 extern u8 *GetAllUserNameForDisplay(u8 a);//所有用户：显示屏
+extern u8 *GetLocalUserNameForDisplay(void);//本机用户：显示屏
 extern u16 GetNowWorkingGroupXuhao(void);
 extern u16 GetAllGroupNum(void);
 extern u16 GetAllUserNum(void);
 extern u8 *GetAllGroupNameForVoice(u8 a);
 extern u8 *GetAllUserNameForVoice(u8 a);//所有用户：播报
+extern u8 *GetLocalUserNameForVoice(void);//本机用户：播报
 extern u8 *GetNowWorkingGroupNameForVoice(void);//当前群组：播报
 extern void get_screen_display_group_name(void);
 /*************/

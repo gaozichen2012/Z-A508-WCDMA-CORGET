@@ -4,7 +4,7 @@
 #define APIPOC_GroupName_Len            32//unicode只存前2位，00不存，32/2=16,屏幕最多显示16个字符
 #define APIPOC_UserName_Len             38
 #define APIPOC_Group_Num                40
-#define APIPOC_User_Num                 25
+#define APIPOC_User_Num                 20
 
 const u8 *ucAtPocHead          = "AT+POC=";
 const u8 *ucSetIPAndID         = "010000";
@@ -85,10 +85,12 @@ typedef struct{
   u8 AllGroupNameBuf[APIPOC_GroupName_Len];
   u8 AllUserNameBuf[APIPOC_UserName_Len];
   u8 SpeakingUserNameBuf[APIPOC_UserName_Len];
+  u8 LocalUserNameBuf[APIPOC_UserName_Len];
   
   u8 NowWorkingGroupNameForVoiceBuf[APIPOC_GroupName_Len*2+10];
   u8 AllGroupNameForVoiceBuf[APIPOC_GroupName_Len*2+10];
   u8 AllUserNameForVoiceBuf[APIPOC_UserName_Len*2+10];
+  u8 LocalUserNameForVoiceBuf[APIPOC_UserName_Len*2+10];
   u16 offline_user_count;
   u16 all_user_num;//所有成员（包括离线）
   u16 GroupXuhao;
@@ -96,6 +98,12 @@ typedef struct{
   u8 GroupIdBuf[5];
   u8 UserIdBuf[8];
   u8 gps_info_report[45];
+  struct{
+    u32 longitude_integer ;//度
+    u32 longitude_float;//小数点后的数
+    u32 latitude_integer;//度
+    u32 latitude_float;//小数点后的数
+  }Position;
 }PocCmdDrv;
 
 static PocCmdDrv PocCmdDrvobj;
@@ -217,13 +225,18 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
     break;
   case PocComm_SetGps:
     DrvGD83_UART_TxCommand(ucSetGPS,strlen((char const *)ucSetGPS));
-    Digital_TO_CHAR(&gps_info_buf[0],beidou_latitude_degree(),2);
-    gps_info_buf[2] = 0x2E;//上报和下发纬度22在前，经度130
-    Digital_TO_CHAR(&gps_info_buf[3],((beidou_latitude_minute()*10000+beidou_latitude_second())*10/6),6);//换算+转换格式二合一
+#if 1 //经纬度小数位合并换算及参数传递
+    PocCmdDrvobj.Position.longitude_integer=beidou_longitude_degree();
+    PocCmdDrvobj.Position.longitude_float = ((beidou_longitude_minute()*10000+beidou_longitude_minute())*10/6);//小数点后的数
+    PocCmdDrvobj.Position.latitude_integer = beidou_latitude_degree();//度
+    PocCmdDrvobj.Position.latitude_float = (beidou_latitude_minute()*10000+beidou_latitude_second())*10/6;//小数位合并换算
+#endif
+    Digital_TO_CHAR(&gps_info_buf[0],PocCmdDrvobj.Position.latitude_integer,2);
+    Digital_TO_CHAR(&gps_info_buf[3],PocCmdDrvobj.Position.latitude_float,6);//转换格式二合一
     gps_info_buf[9] = 0x2C;
-    Digital_TO_CHAR(&gps_info_buf[10],beidou_longitude_degree(),3);
+    Digital_TO_CHAR(&gps_info_buf[10],PocCmdDrvobj.Position.longitude_integer,3);
     gps_info_buf[13] = 0x2E;
-    Digital_TO_CHAR(&gps_info_buf[14],((beidou_longitude_minute()*10000+beidou_longitude_minute())*10/6),6);//经度Longitude换算+转换格式二合一
+    Digital_TO_CHAR(&gps_info_buf[14],PocCmdDrvobj.Position.longitude_float,6);//经度Longitude换算+转换格式二合一
     
     CHAR_TO_DIV_CHAR(gps_info_buf, PocCmdDrvobj.gps_info_report, 20);//20
     PocCmdDrvobj.gps_info_report[41]='0';
@@ -500,7 +513,23 @@ void ApiPocCmd_10msRenew(void)
         break;
       case 0x02://登录成功
         PocCmdDrvobj.States.PocStatus=LandSuccess;
-        //PocCmdDrvobj.LocalUserName.Name
+        if(Len >= 12)//保存本机用户名
+        {
+          PocCmdDrvobj.NameInfo.LocalUserName.NameLen= (Len-12)/2;//英文字符只存一半
+          if(PocCmdDrvobj.NameInfo.LocalUserName.NameLen > APIPOC_UserName_Len)
+          {
+            PocCmdDrvobj.NameInfo.LocalUserName.NameLen = APIPOC_UserName_Len;
+          }
+        }
+        else//无群组名
+        {
+          PocCmdDrvobj.NameInfo.LocalUserName.NameLen = 0x00;
+        }
+        for(i = 0x00; 2*i<PocCmdDrvobj.NameInfo.LocalUserName.NameLen; i++)
+        {
+          PocCmdDrvobj.NameInfo.LocalUserName.Name[2*i] = pBuf[4*i+12];//存入获取的群组名
+          PocCmdDrvobj.NameInfo.LocalUserName.Name[2*i+1] = pBuf[4*i+1+12];
+        }
         break;
       case 0x03://注销中
         PocCmdDrvobj.States.PocStatus=Logout;
@@ -1172,6 +1201,17 @@ u8 *GetAllUserNameForDisplay(u8 a)//所有用户：显示屏
   return PocCmdDrvobj.AllUserNameBuf;
 }
 
+u8 *GetLocalUserNameForDisplay(void)//本机用户：显示屏
+{
+  u8 i;
+  memset(PocCmdDrvobj.LocalUserNameBuf,0,sizeof(PocCmdDrvobj.LocalUserNameBuf));
+  for(i=0;2*i<=PocCmdDrvobj.NameInfo.LocalUserName.NameLen;i++)
+  {
+    PocCmdDrvobj.LocalUserNameBuf[i]=COML_AscToHex(PocCmdDrvobj.NameInfo.LocalUserName.Name+(2*i), 0x02);
+  }
+  return PocCmdDrvobj.LocalUserNameBuf;
+}
+
 u8 *GetNowWorkingGroupNameForVoice(void)//当前群组：播报
 {
   u8 i;
@@ -1197,6 +1237,7 @@ u8 *GetAllGroupNameForVoice(u8 a)//所有群组：播报
   }
   return PocCmdDrvobj.AllGroupNameForVoiceBuf;
 }
+
 u8 *GetAllUserNameForVoice(u8 a)//所有用户：播报
 {
   u8 i;
@@ -1208,6 +1249,19 @@ u8 *GetAllUserNameForVoice(u8 a)//所有用户：播报
     PocCmdDrvobj.AllUserNameForVoiceBuf[4*i+3]  = 0x30;
   }
   return PocCmdDrvobj.AllUserNameForVoiceBuf;
+}
+
+u8 *GetLocalUserNameForVoice(void)//本机用户：播报
+{
+  u8 i;
+  for(i=0;2*i<=PocCmdDrvobj.NameInfo.LocalUserName.NameLen;i++)
+  {
+    PocCmdDrvobj.LocalUserNameForVoiceBuf[4*i]    = PocCmdDrvobj.NameInfo.LocalUserName.Name[2*i];
+    PocCmdDrvobj.LocalUserNameForVoiceBuf[4*i+1]  = PocCmdDrvobj.NameInfo.LocalUserName.Name[2*i+1];
+    PocCmdDrvobj.LocalUserNameForVoiceBuf[4*i+2]  = 0x30;
+    PocCmdDrvobj.LocalUserNameForVoiceBuf[4*i+3]  = 0x30;
+  }
+  return PocCmdDrvobj.LocalUserNameForVoiceBuf;
 }
 
 //根据群组ID获取当前组的组索引
@@ -1278,4 +1332,24 @@ void get_screen_display_group_name(void)
 PocStatesType poccmd_states_poc_status(void)
 {
   return PocCmdDrvobj.States.PocStatus;
+}
+
+u32 poc_longitude_integer(void)
+{
+  return PocCmdDrvobj.Position.longitude_integer;
+}
+
+u32 poc_longitude_float(void)
+{
+  return PocCmdDrvobj.Position.longitude_float;
+}
+
+u32 poc_latitude_integer(void)
+{
+  return PocCmdDrvobj.Position.latitude_integer;
+}
+
+u32 poc_latitude_float(void)
+{
+  return PocCmdDrvobj.Position.latitude_float;
 }

@@ -173,8 +173,8 @@ void MenuDisplay(MenuDisplayType id)
 
 void SubmenuMenuDisplay(SubmenuMenuDisplayType id)
 {
-  u8 Buf1[16];//={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-  u8 Buf2[16];//={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+  u8 Buf1[22];//={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+  u8 Buf2[22];//={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
   switch(id)
   {
   case GroupSwitch: 
@@ -192,32 +192,32 @@ void SubmenuMenuDisplay(SubmenuMenuDisplayType id)
     }
     else
     {
-    //换算并显示经度
-    Buf1[0]=0xbe;
-    Buf1[1]=0xad;
-    Buf1[2]=0xb6;
-    Buf1[3]=0xc8;
-    Buf1[4]=0x3a;
-    //COML_DecToAsc(Data_Latitude_Minute(), Buf1+5);
-    COML_StringReverse(3,Buf1+5);
-    Buf1[8]=0x2e;
-    //COML_DecToAsc(Data_Latitude_Second(), Buf1+9);
-    COML_StringReverse(6,Buf1+9);
-    Buf1[15]='\0';
-    api_lcd_pwr_on_hint(0,0,Buf1);
-    //换算并显示纬度
-    Buf2[0]=0xce;
-    Buf2[1]=0xb3;
-    Buf2[2]=0xb6;
-    Buf2[3]=0xc8;
-    Buf2[4]=0x3a;
-    //COML_DecToAsc(Data_Longitude_Minute(), Buf2+5);
-    COML_StringReverse(2,Buf2+5);
-    Buf2[7]=0x2e;
-    //COML_DecToAsc(Data_Longitude_Second(), Buf2+8);
-    COML_StringReverse(6,Buf2+8);
-    Buf2[14]='\0';
-    api_lcd_pwr_on_hint(0,2,Buf2);
+      //换算并显示经度
+      Buf1[0]=0x4c;
+      Buf1[1]=0x6e;
+      Buf1[2]=0x67;
+      Buf1[3]=0x20;
+      Buf1[4]=0x3a;
+      COML_DecToAsc(poc_latitude_integer(), Buf1+5);
+      COML_StringReverse(3,Buf1+5);
+      Buf1[8]=0x2e;
+      COML_DecToAsc(poc_latitude_float(), Buf1+9);
+      COML_StringReverse(6,Buf1+9);
+      Buf1[15]='\0';
+      api_lcd_pwr_on_hint(0,0,Buf1);
+      //换算并显示纬度
+      Buf2[0]=0x4c;
+      Buf2[1]=0x61;
+      Buf2[2]=0x74;
+      Buf2[3]=0x20;
+      Buf2[4]=0x3a;
+      COML_DecToAsc(poc_longitude_integer(), Buf2+5);
+      COML_StringReverse(2,Buf2+5);
+      Buf2[7]=0x2e;
+      COML_DecToAsc(poc_longitude_float(), Buf2+8);
+      COML_StringReverse(6,Buf2+8);
+      Buf2[14]='\0';
+      api_lcd_pwr_on_hint(0,2,Buf2);
     }
     break;
   case NativeInfoMenu:

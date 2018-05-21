@@ -43,6 +43,7 @@ typedef struct {
     u8 ReceivedVoicePlayStatesCount;
     u8 beidou_valid_count;
     u8 poc_status_count;
+    u8 choose_write_freq_or_gps_count;
   }Count;
   u8 BacklightTimeBuf[1];//背光灯时间(需要设置进入eeprom)
   u8 KeylockTimeBuf[1];//键盘锁时间(需要设置进入eeprom)
@@ -80,6 +81,7 @@ void DEL_PowerOnInitial(void)//原瑞撒單片機多長時間進一次中斷
   DelDrvObj.Count.ReceivedVoicePlayStatesCount = 0;
   DelDrvObj.Count.beidou_valid_count = 0;
   DelDrvObj.Count.poc_status_count = 0;
+  DelDrvObj.Count.choose_write_freq_or_gps_count = 0;
   return;
 }
 
@@ -386,6 +388,21 @@ static void DEL_500msProcess(void)			//delay 500ms process server
     else
     {
       DelDrvObj.Count.poc_status_count=0;
+    }
+/****登陆成功一分钟后禁用写频功能、开启外部定位上报模式*********/
+    if(GetTaskId()==Task_NormalOperation)
+    {
+      DelDrvObj.Count.choose_write_freq_or_gps_count++;
+      if(DelDrvObj.Count.choose_write_freq_or_gps_count>2*60)
+      {
+        GPIO_WriteLow(GPIOB,GPIO_PIN_3);//NFC
+        GPIO_WriteHigh(GPIOB,GPIO_PIN_4);//北斗
+        DelDrvObj.Count.choose_write_freq_or_gps_count = 2*60+1;
+      }
+    }
+    else
+    {
+      DelDrvObj.Count.choose_write_freq_or_gps_count = 0;
     }
 /****定位成功后5s上报一次定位*****/
     if(beidou_valid()==TRUE)

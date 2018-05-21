@@ -222,15 +222,14 @@ void Task_RunNormalOperation(void)
 
   }
 /*******组呼键状态检测***********************************************************************************************************************************/
-#if 0//WCDMA 卓智达
-if(ReadInput_KEY_3==0)//组呼键
+#if 1//WCDMA 卓智达
+  if(ReadInput_KEY_3==0)//组呼键
   {
-    if(GetPersonalCallingMode()==1)//如果是单呼模式，则退出单呼
+    if(get_current_working_status()==m_personal_mode)//单呼状态按返回键
     {
-      api_lcd_pwr_on_hint("    退出单呼    ");
-      Delay_100ms(5);
-      ApiPocCmd_WritCommand(PocComm_Cancel,(u8 *)ucQuitPersonalCalling,strlen((char const *)ucQuitPersonalCalling));
-      api_lcd_pwr_on_hint("群组:   组呼模式");
+      DEL_SetTimer(0,40);
+      while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
+      ApiPocCmd_WritCommand(PocComm_EnterGroup,0,0);
     }
     else
     {
@@ -972,16 +971,14 @@ void Key3_PlayVoice(void)
   {
   case Key3_OptionZero://播报本机账号、当前群组、电池电量
     //当前用户：
-    api_lcd_pwr_on_hint(0,2,"                ");//显示当前群组昵称
-    //api_lcd_pwr_on_hint4(Get_GBK_ActiveUserID());//显示当前用户名
-    //VOICE_SetOutput(ATVOICE_FreePlay,Get_Unicode_ActiveUserID(),strlen((char const *)Get_Unicode_ActiveUserID()));//播报当前用户手机号
+    api_lcd_pwr_on_hint(0,2,"                ");
+    VOICE_SetOutput(ATVOICE_FreePlay,GetNowWorkingGroupNameForVoice(),strlen((char const *)GetNowWorkingGroupNameForVoice()));//播报当前用户手机号
     DEL_SetTimer(0,285);
     while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
     //当前群组
-    api_lcd_pwr_on_hint(0,2,"                ");//显示当前群组昵称
-    //api_lcd_pwr_on_hint(HexToChar_MainGroupId());//显示当前群组ID
-    //api_lcd_pwr_on_hint4(UnicodeForGbk_MainWorkName());//显示当前群组昵称
-    //VOICE_SetOutput(ATVOICE_FreePlay,ApiAtCmd_GetMainWorkName(),strlen((char const *)ApiAtCmd_GetMainWorkName()));
+    api_lcd_pwr_on_hint(0,2,"                ");
+    api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());
+    VOICE_SetOutput(ATVOICE_FreePlay,GetNowWorkingGroupNameForVoice(),strlen((char const *)GetNowWorkingGroupNameForVoice()));//播报当前用户手机号
     DEL_SetTimer(0,200);
     while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
     //电量播报
@@ -991,15 +988,13 @@ void Key3_PlayVoice(void)
     break;
   case Key3_OptionOne://播报本机账号、电池电量
     //当前用户：
-    api_lcd_pwr_on_hint(0,2,"                ");//显示当前群组昵称
-    //api_lcd_pwr_on_hint4(Get_GBK_ActiveUserID());//显示当前用户名
-    //VOICE_SetOutput(ATVOICE_FreePlay,Get_Unicode_ActiveUserID(),strlen((char const *)Get_Unicode_ActiveUserID()));//播报当前用户手机号
+    api_lcd_pwr_on_hint(0,2,"                ");
+    VOICE_SetOutput(ATVOICE_FreePlay,GetNowWorkingGroupNameForVoice(),strlen((char const *)GetNowWorkingGroupNameForVoice()));//播报当前用户手机号
     DEL_SetTimer(0,285);
     while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
     //当前群组
     api_lcd_pwr_on_hint(0,2,"                ");//显示当前群组昵称
-    //api_lcd_pwr_on_hint(HexToChar_MainGroupId());//显示当前群组ID
-    //api_lcd_pwr_on_hint4(UnicodeForGbk_MainWorkName());//显示当前群组昵称
+    api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());
     //电量播报
     KeyBatteryReport();
     DEL_SetTimer(0,20);
@@ -1007,22 +1002,19 @@ void Key3_PlayVoice(void)
     break;
   case Key3_OptionTwo://播报本机账号
     //当前用户：
-    api_lcd_pwr_on_hint(0,2,"                ");//显示当前群组昵称
-    //api_lcd_pwr_on_hint4(Get_GBK_ActiveUserID());//显示当前用户名
-    //VOICE_SetOutput(ATVOICE_FreePlay,Get_Unicode_ActiveUserID(),strlen((char const *)Get_Unicode_ActiveUserID()));//播报当前用户手机号
+    api_lcd_pwr_on_hint(0,2,"                ");
+    VOICE_SetOutput(ATVOICE_FreePlay,GetNowWorkingGroupNameForVoice(),strlen((char const *)GetNowWorkingGroupNameForVoice()));//播报当前用户手机号
     DEL_SetTimer(0,200);
     while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
     //当前群组
-    api_lcd_pwr_on_hint(0,2,"                ");//显示当前群组昵称
-    //api_lcd_pwr_on_hint(HexToChar_MainGroupId());//显示当前群组ID
+    api_lcd_pwr_on_hint(0,2,"                ");
     //api_lcd_pwr_on_hint4(UnicodeForGbk_MainWorkName());//显示当前群组昵称
     break;
   case Key3_OptionThree://播报当前群组
     //当前群组
-    api_lcd_pwr_on_hint(0,2,"                ");//显示当前群组昵称
-    //api_lcd_pwr_on_hint(HexToChar_MainGroupId());//显示当前群组ID
-    //api_lcd_pwr_on_hint4(UnicodeForGbk_MainWorkName());//显示当前群组昵称
-    //VOICE_SetOutput(ATVOICE_FreePlay,ApiAtCmd_GetMainWorkName(),strlen((char const *)ApiAtCmd_GetMainWorkName()));
+    api_lcd_pwr_on_hint(0,2,"                ");
+    api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());
+    VOICE_SetOutput(ATVOICE_FreePlay,GetNowWorkingGroupNameForVoice(),strlen((char const *)GetNowWorkingGroupNameForVoice()));//播报当前用户手机号
     DEL_SetTimer(0,20);
     while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
     break;

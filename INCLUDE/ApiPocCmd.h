@@ -41,6 +41,7 @@ typedef enum{
   ReceivedVoiceEnd      = 0x03
 }ReceivedVoicePlayStatesType;
 
+
 typedef enum{
   m_group_mode     =0x00,
   m_personal_mode  = 0x01
@@ -84,6 +85,7 @@ extern u16 GetAllGroupNum(void);
 extern u16 GetAllUserNum(void);
 extern u8 *GetAllGroupNameForVoice(u8 a);
 extern u8 *GetAllUserNameForVoice(u8 a);//所有用户：播报
+extern u8 *GetNowWorkingGroupNameForVoice(void);//当前群组：播报
 extern void get_screen_display_group_name(void);
 /*************/
 extern void ApiPocCmd_PowerOnInitial(void);

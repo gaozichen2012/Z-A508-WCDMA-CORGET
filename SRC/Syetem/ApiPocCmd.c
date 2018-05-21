@@ -86,6 +86,7 @@ typedef struct{
   u8 AllUserNameBuf[APIPOC_UserName_Len];
   u8 SpeakingUserNameBuf[APIPOC_UserName_Len];
   
+  u8 NowWorkingGroupNameForVoiceBuf[APIPOC_GroupName_Len*2+10];
   u8 AllGroupNameForVoiceBuf[APIPOC_GroupName_Len*2+10];
   u8 AllUserNameForVoiceBuf[APIPOC_UserName_Len*2+10];
   u16 offline_user_count;
@@ -1169,6 +1170,19 @@ u8 *GetAllUserNameForDisplay(u8 a)//所有用户：显示屏
     PocCmdDrvobj.AllUserNameBuf[i]=COML_AscToHex(PocCmdDrvobj.NameInfo.AllGroupUserName[a].Name+(2*i), 0x02);
   }
   return PocCmdDrvobj.AllUserNameBuf;
+}
+
+u8 *GetNowWorkingGroupNameForVoice(void)//当前群组：播报
+{
+  u8 i;
+  for(i=0;2*i<=PocCmdDrvobj.NameInfo.NowWorkingGroupName.NameLen;i++)
+  {
+    PocCmdDrvobj.NowWorkingGroupNameForVoiceBuf[4*i]    = PocCmdDrvobj.NameInfo.NowWorkingGroupName.Name[2*i];
+    PocCmdDrvobj.NowWorkingGroupNameForVoiceBuf[4*i+1]  = PocCmdDrvobj.NameInfo.NowWorkingGroupName.Name[2*i+1];
+    PocCmdDrvobj.NowWorkingGroupNameForVoiceBuf[4*i+2]  = 0x30;
+    PocCmdDrvobj.NowWorkingGroupNameForVoiceBuf[4*i+3]  = 0x30;
+  }
+  return PocCmdDrvobj.NowWorkingGroupNameForVoiceBuf;
 }
 
 u8 *GetAllGroupNameForVoice(u8 a)//所有群组：播报

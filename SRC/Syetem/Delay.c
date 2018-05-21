@@ -395,8 +395,10 @@ static void DEL_500msProcess(void)			//delay 500ms process server
       DelDrvObj.Count.choose_write_freq_or_gps_count++;
       if(DelDrvObj.Count.choose_write_freq_or_gps_count>2*60)
       {
+#if 0//≤‚ ‘∂¡–¥∆µπ¶ƒ‹‘› ±∆¡±Œ
         GPIO_WriteLow(GPIOB,GPIO_PIN_3);//NFC
         GPIO_WriteHigh(GPIOB,GPIO_PIN_4);//±±∂∑
+#endif
         DelDrvObj.Count.choose_write_freq_or_gps_count = 2*60+1;
       }
     }

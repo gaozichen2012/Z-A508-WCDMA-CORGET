@@ -50,10 +50,10 @@ void Task_RunStart(void)
         {
           if(TaskDrvobj.status.AccountConfig==FALSE)
           {
-            ApiAtCmd_WritCommand(ATCOMM_Test,ucCODECCTL,strlen((char const *)ucCODECCTL));//配置登录账号密码、IP
-            ApiPocCmd_WritCommand(PocComm_SetParam,0,0);//配置登录账号密码、IP
+            ApiAtCmd_WritCommand(ATCOMM_Test,ucCODECCTL,strlen((char const *)ucCODECCTL));//设置音量增益
             TaskDrvobj.status.AccountConfig=TRUE;
             ApiPocCmd_WritCommand(PocComm_OpenPOC,0,0);//打开POC应用
+            ApiPocCmd_WritCommand(PocComm_SetParam,0,0);//配置登录账号密码、IP
             ApiPocCmd_WritCommand(PocComm_SetURL,0,0);//设置URL
             VOICE_Play(LoggingIn);
             api_lcd_pwr_on_hint(0,2,"Account Config..");
@@ -997,7 +997,6 @@ void Key3_PlayVoice(void)
     api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());
     //电量播报
     KeyBatteryReport();
-    while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
     break;
   case Key3_OptionTwo://播报本机账号
     //当前用户：

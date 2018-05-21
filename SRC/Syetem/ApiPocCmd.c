@@ -81,6 +81,7 @@ typedef struct{
 /**************************/
   }NameInfo;
   u8 ReadBuffer[80];//存EEPROM读取的数据使用
+  u8 ReadBuffer2[80];//存EEPROM读取的数据使用
   u8 NowWorkingGroupNameBuf[APIPOC_GroupName_Len];
   u8 AllGroupNameBuf[APIPOC_GroupName_Len];
   u8 AllUserNameBuf[APIPOC_UserName_Len];
@@ -108,7 +109,7 @@ typedef struct{
 
 static PocCmdDrv PocCmdDrvobj;
 static bool no_online_user(void);
-#if 1//CDMA 中兴
+
 void ApiPocCmd_PowerOnInitial(void)
 {
   PocCmdDrvobj.States.current_working_status = m_group_mode;
@@ -128,8 +129,10 @@ void ApiPocCmd_PowerOnInitial(void)
   PocCmdDrvobj.UserXuhao=0;
   
   PocCmdDrvobj.NetState.Msg.Byte = 0x00;
+  memset(PocCmdDrvobj.ReadBuffer,0,sizeof(PocCmdDrvobj.ReadBuffer));
+  FILE_Read(0,80,PocCmdDrvobj.ReadBuffer);//80位
 }
-#endif
+
 
 #if 1//WCDMA 卓智达
 void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
@@ -146,8 +149,6 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
     DrvGD83_UART_TxCommand((u8*)ucPocOpenConfig, strlen((char const *)ucPocOpenConfig));
     break;
   case PocComm_SetParam://设置账号密码
-    memset(PocCmdDrvobj.ReadBuffer,0,sizeof(PocCmdDrvobj.ReadBuffer));
-    FILE_Read(0,80,PocCmdDrvobj.ReadBuffer);//80位
     primary_buf_len=strlen((char const*)PocCmdDrvobj.ReadBuffer);
     PocCmdDrvobj.ReadBuffer[primary_buf_len]='0';
     PocCmdDrvobj.ReadBuffer[primary_buf_len+1]='0';
@@ -331,9 +332,9 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
 u8 ApiPocCmd_user_info_get(u8 ** pBuf)
 {
   u8 Len=0;
-  Len = Combine2Hex(PocCmdDrvobj.ReadBuffer, strlen((char const *)PocCmdDrvobj.ReadBuffer), PocCmdDrvobj.ReadBuffer);
-  *pBuf = PocCmdDrvobj.ReadBuffer;
-  return (strlen((char const *)PocCmdDrvobj.ReadBuffer))/2;
+  Len = Combine2Hex(PocCmdDrvobj.ReadBuffer, strlen((char const *)PocCmdDrvobj.ReadBuffer), PocCmdDrvobj.ReadBuffer2);
+  *pBuf = PocCmdDrvobj.ReadBuffer2;
+  return (strlen((char const *)PocCmdDrvobj.ReadBuffer2));
 }
 
 //写频写入数据存入EEPROM

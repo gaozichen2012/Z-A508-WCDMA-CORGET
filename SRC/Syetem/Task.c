@@ -41,7 +41,6 @@ void Task_RunStart(void)
       VOICE_Play(ABELL);
       TaskDrvobj.status.BootPrompt=TRUE;
     }
-    
     if(ApiAtCmd_bCardIn()==1)//检测到卡
     {
       if(ApiAtCmd_CSQValue()>=25)
@@ -266,6 +265,9 @@ void Task_RunNormalOperation(void)
 /*******报警键状态检测********************************************************************************************************************************************/
   if(ReadInput_KEY_4==0)//报警键
   {
+    ApiPocCmd_WritCommand(PocComm_Alarm,0,0);
+    DEL_SetTimer(0,100);
+    while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
   }
 /***********判断正常进组；正常退出组;被单呼模式；退出单呼模式；主动开始单呼；单呼；主动退出单呼*************/
   if(get_current_working_status()==m_group_mode)//组呼模式

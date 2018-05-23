@@ -4,16 +4,18 @@
 #define APIPOC_GroupName_Len            32//unicode只存前2位，00不存，32/2=16,屏幕最多显示16个字符
 #define APIPOC_UserName_Len             38
 #define APIPOC_Group_Num                40
-#define APIPOC_User_Num                 20
+#define APIPOC_User_Num                 18
 
 const u8 *ucAtPocHead          = "AT+POC=";
 const u8 *ucSetIPAndID         = "010000";
-const u8 *ucPocOpenConfig      ="00000001010101";
+const u8 *ucPocOpenConfig      = "00000001010101";
 u8 *ucStartPTT                  = "0B0000";
 u8 *ucEndPTT                    = "0C0000";
 u8 *ucGroupListInfo             = "0d0000";
 u8 *ucUserListInfo              = "0e00000000";
-u8 *ucSetGPS                  = "110000";
+u8 *ucSetGPS                    = "110000";
+u8 *ucAlarm1                    = "2100000000";
+u8 *ucAlarm2                    = "00000000736f73";
 typedef struct{
   struct{
     union{
@@ -51,6 +53,7 @@ typedef struct{
     ReceivedVoicePlayStatesType ReceivedVoicePlayStatesForDisplay;
     bool ToneState;
     bool ToneState_Intermediate;
+    bool receive_sos_statas;
   }States;
   struct{
 /*****组名**************/
@@ -78,6 +81,10 @@ typedef struct{
       u8 Name[APIPOC_UserName_Len];
       u8 NameLen;
     }SpeakingUserName;//当前说话人的名字
+    struct{
+      u8 Name[APIPOC_UserName_Len];
+      u8 NameLen;
+    }ReceiveMessagesUserName;
 /**************************/
   }NameInfo;
   u8 ReadBuffer[80];//存EEPROM读取的数据使用
@@ -87,6 +94,7 @@ typedef struct{
   u8 AllUserNameBuf[APIPOC_UserName_Len];
   u8 SpeakingUserNameBuf[APIPOC_UserName_Len];
   u8 LocalUserNameBuf[APIPOC_UserName_Len];
+  u8 ReceiveMessagesUserNameBuf[APIPOC_UserName_Len];
   
   u8 NowWorkingGroupNameForVoiceBuf[APIPOC_GroupName_Len*2+10];
   u8 AllGroupNameForVoiceBuf[APIPOC_GroupName_Len*2+10];
@@ -246,6 +254,13 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
     break;
   case PocComm_Key://7
     DrvGD83_UART_TxCommand(buf, len);
+    break;
+  case PocComm_Alarm:
+    DrvGD83_UART_TxCommand(ucAlarm1,strlen((char const *)ucAlarm1));
+    COML_HexToAsc(PocCmdDrvobj.NameInfo.AllGroupName[GroupCallingNum].ID,PocCmdDrvobj.GroupIdBuf);
+    COML_StringReverse(4,PocCmdDrvobj.GroupIdBuf);
+    DrvGD83_UART_TxCommand(PocCmdDrvobj.GroupIdBuf, 4);
+    DrvGD83_UART_TxCommand(ucAlarm2,strlen((char const *)ucAlarm2));
     break;
   default:
     break;
@@ -640,6 +655,25 @@ void ApiPocCmd_10msRenew(void)
     case 0x88://通知监听群组信息
       break;
     case 0x8A://通知接收到信息
+      if(Len >= 20)//如果群组id后面还有群组名
+      {
+        PocCmdDrvobj.NameInfo.ReceiveMessagesUserName.NameLen= (Len-20)/2;//英文字符只存一半
+        if(PocCmdDrvobj.NameInfo.ReceiveMessagesUserName.NameLen > APIPOC_UserName_Len)
+          {
+            PocCmdDrvobj.NameInfo.ReceiveMessagesUserName.NameLen = APIPOC_UserName_Len;
+          }
+        }
+        else//无群组名
+        {
+          PocCmdDrvobj.NameInfo.ReceiveMessagesUserName.NameLen = 0x00;
+        }
+        for(i = 0x00; 2*i<PocCmdDrvobj.NameInfo.ReceiveMessagesUserName.NameLen; i++)
+        {
+          PocCmdDrvobj.NameInfo.ReceiveMessagesUserName.Name[2*i] = pBuf[4*i+20];//存入
+          PocCmdDrvobj.NameInfo.ReceiveMessagesUserName.Name[2*i+1] = pBuf[4*i+1+20];
+        }
+      PocCmdDrvobj.States.receive_sos_statas = TRUE;
+      api_lcd_pwr_on_hint(0,2,GetReceiveMessagesUserNameForDisplay());
       break;
     case 0x8B://通知音频播放状态
       ucId = COML_AscToHex(pBuf+4, 0x02);
@@ -1213,6 +1247,25 @@ u8 *GetLocalUserNameForDisplay(void)//本机用户：显示屏
   return PocCmdDrvobj.LocalUserNameBuf;
 }
 
+u8 *GetReceiveMessagesUserNameForDisplay(void)//发送短信的用户：显示屏
+{
+  u8 i,ReceiveMessagesUserNameBufLen;
+  memset(PocCmdDrvobj.ReceiveMessagesUserNameBuf,0,sizeof(PocCmdDrvobj.ReceiveMessagesUserNameBuf));
+  for(i=0;2*i<=PocCmdDrvobj.NameInfo.ReceiveMessagesUserName.NameLen;i++)
+  {
+    PocCmdDrvobj.ReceiveMessagesUserNameBuf[i]=COML_AscToHex(PocCmdDrvobj.NameInfo.ReceiveMessagesUserName.Name+(2*i), 0x02);
+  }
+  ReceiveMessagesUserNameBufLen=strlen((char const*)PocCmdDrvobj.ReceiveMessagesUserNameBuf);
+  if(PocCmdDrvobj.ReceiveMessagesUserNameBuf[ReceiveMessagesUserNameBufLen]==0
+     &&PocCmdDrvobj.ReceiveMessagesUserNameBuf[ReceiveMessagesUserNameBufLen+1]!=0
+       &&PocCmdDrvobj.ReceiveMessagesUserNameBuf[ReceiveMessagesUserNameBufLen+2]!=0
+         &&PocCmdDrvobj.ReceiveMessagesUserNameBuf[ReceiveMessagesUserNameBufLen+3]!=0)//如果用户名后面还有SOS的话将0x00变成0x20即空格
+  {
+    PocCmdDrvobj.ReceiveMessagesUserNameBuf[ReceiveMessagesUserNameBufLen]=0x20;
+  }
+  return PocCmdDrvobj.ReceiveMessagesUserNameBuf;
+}
+
 u8 *GetNowWorkingGroupNameForVoice(void)//当前群组：播报
 {
   u8 i;
@@ -1353,4 +1406,14 @@ u32 poc_latitude_integer(void)
 u32 poc_latitude_float(void)
 {
   return PocCmdDrvobj.Position.latitude_float;
+}
+
+bool poc_receive_sos_statas(void)
+{
+  return PocCmdDrvobj.States.receive_sos_statas;
+}
+
+void set_poc_receive_sos_statas(bool a)
+{
+  PocCmdDrvobj.States.receive_sos_statas = a;
 }

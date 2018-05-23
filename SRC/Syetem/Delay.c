@@ -44,6 +44,7 @@ typedef struct {
     u8 beidou_valid_count;
     u8 poc_status_count;
     u8 choose_write_freq_or_gps_count;
+    u8 receive_sos_statas_count;
   }Count;
   u8 BacklightTimeBuf[1];//背光灯时间(需要设置进入eeprom)
   u8 KeylockTimeBuf[1];//键盘锁时间(需要设置进入eeprom)
@@ -373,7 +374,26 @@ static void DEL_500msProcess(void)			//delay 500ms process server
         PrimaryLowPower_Flag=FALSE;
       }
     }
-/*********登录超过60s重启*********************************/
+/********收到0x8a则进入一键报警********/
+    if(poc_receive_sos_statas()==TRUE)
+    {
+      BEEP_SetOutput(BEEP_IDPowerOff,ON,0x00,TRUE);
+      ApiPocCmd_ToneStateSet(TRUE);
+      AUDIO_IOAFPOW(ON);
+      DelDrvObj.Count.receive_sos_statas_count++;
+      if(DelDrvObj.Count.receive_sos_statas_count>=2*5)
+      {
+        set_poc_receive_sos_statas(FALSE);
+        DelDrvObj.Count.receive_sos_statas_count=0;
+        BEEP_SetOutput(BEEP_IDPowerOff,OFF,0x00,TRUE);
+        ApiPocCmd_ToneStateSet(FALSE);
+        AUDIO_IOAFPOW(OFF);
+      }
+    }
+    else
+    {
+      DelDrvObj.Count.receive_sos_statas_count=0;
+    }
     
 /*******收到离线指令过1分钟未登陆重启*******/
     if(poccmd_states_poc_status()==OffLine)
@@ -395,7 +415,7 @@ static void DEL_500msProcess(void)			//delay 500ms process server
       DelDrvObj.Count.choose_write_freq_or_gps_count++;
       if(DelDrvObj.Count.choose_write_freq_or_gps_count>2*60)
       {
-#if 0//测试读写频功能暂时屏蔽
+#if 1//测试读写频功能暂时屏蔽
         GPIO_WriteLow(GPIOB,GPIO_PIN_3);//NFC
         GPIO_WriteHigh(GPIOB,GPIO_PIN_4);//北斗
 #endif

@@ -18,7 +18,8 @@ typedef enum{
   PocComm_GroupListInfo	        = 0x0D,
   PocComm_UserListInfo          = 0x0E,
   PocComm_SetGps                = 0x0F,
-  PocComm_Key			= 0x10
+  PocComm_Key			= 0x10,
+  PocComm_Alarm                 = 0x11
 }PocCommType;
 
 typedef enum{
@@ -79,6 +80,8 @@ extern void ApiPocCmd_ToneStateSet(bool a);
 extern working_status_type get_current_working_status(void);
 
 extern PocStatesType poccmd_states_poc_status(void);
+extern bool poc_receive_sos_statas(void);
+extern void set_poc_receive_sos_statas(bool a);
 /*****群组用户名相关调用函数****************/
 extern u8 *GetNowWorkingGroupNameForDisplay(void);
 extern u8 GetNowWorkingGroupNameLenForDisplay(void);
@@ -86,6 +89,7 @@ extern u8 *GetAllGroupNameForDisplay(u8 a);
 extern u8 *GetSpeakingUserNameForDisplay(void);//说话的用户：显示屏
 extern u8 *GetAllUserNameForDisplay(u8 a);//所有用户：显示屏
 extern u8 *GetLocalUserNameForDisplay(void);//本机用户：显示屏
+extern u8 *GetReceiveMessagesUserNameForDisplay(void);//发送短信的用户：显示屏
 extern u16 GetNowWorkingGroupXuhao(void);
 extern u16 GetAllGroupNum(void);
 extern u16 GetAllUserNum(void);

@@ -7,8 +7,8 @@ void main(void)
   FLASH_SetProgrammingTime(FLASH_PROGRAMTIME_STANDARD);
   /* Unlock EEPROM Data memory */
   FLASH_Unlock(FLASH_MEMTYPE_DATA);
-  FLASH_ProgramByte(0x487F,0xAA);
   FLASH_ProgramByte(0x487E,0x55);
+  FLASH_ProgramByte(0x487F,0xAA);
   FLASH_Lock(FLASH_MEMTYPE_DATA);
   main_app();
 }

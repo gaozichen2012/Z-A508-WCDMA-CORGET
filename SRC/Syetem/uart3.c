@@ -107,7 +107,7 @@ void UART3_Interrupt(void)
     Res = UART3_ReceiveData8();
     UartDrvObj.cData= (u8)Res;
     UartDrvObj.bRunPos   = UART_RUN;
-#if 1//beidou
+#if 1//beidou，消息头GNRMC可能会导致定位经纬度异常，可参考测试GPS天线版本软件
     switch(UartDrvObj.cData)
     {
           case '$':

@@ -185,10 +185,10 @@ void SubmenuMenuDisplay(SubmenuMenuDisplayType id)
   case GpsInfoMenu:
      api_lcd_pwr_on_hint(0,2,"                ");//清屏
     api_lcd_pwr_on_hint(0,0,"                ");//清屏
-  if(1)//未定位显示000
+    if(beidou_valid()==FALSE)
     {
-      api_lcd_pwr_on_hint(0,0,"Lng :000.000000 ");//清屏
-      api_lcd_pwr_on_hint(0,2,"Lat :00.000000  ");//清屏
+      api_lcd_pwr_on_hint(0,0,"Lat :00.000000 ");//清屏
+      api_lcd_pwr_on_hint(0,2,"Lng :000.000000  ");//清屏
     }
     else
     {
@@ -199,11 +199,11 @@ void SubmenuMenuDisplay(SubmenuMenuDisplayType id)
       Buf1[3]=0x20;
       Buf1[4]=0x3a;
       COML_DecToAsc(poc_latitude_integer(), Buf1+5);
-      COML_StringReverse(3,Buf1+5);
-      Buf1[8]=0x2e;
-      COML_DecToAsc(poc_latitude_float(), Buf1+9);
-      COML_StringReverse(6,Buf1+9);
-      Buf1[15]='\0';
+      COML_StringReverse(2,Buf1+5);
+      Buf1[7]=0x2e;
+      COML_DecToAsc(poc_latitude_float(), Buf1+8);
+      COML_StringReverse(6,Buf1+8);
+      Buf1[14]='\0';
       api_lcd_pwr_on_hint(0,0,Buf1);
       //换算并显示纬度
       Buf2[0]=0x4c;
@@ -212,11 +212,11 @@ void SubmenuMenuDisplay(SubmenuMenuDisplayType id)
       Buf2[3]=0x20;
       Buf2[4]=0x3a;
       COML_DecToAsc(poc_longitude_integer(), Buf2+5);
-      COML_StringReverse(2,Buf2+5);
-      Buf2[7]=0x2e;
-      COML_DecToAsc(poc_longitude_float(), Buf2+8);
-      COML_StringReverse(6,Buf2+8);
-      Buf2[14]='\0';
+      COML_StringReverse(3,Buf2+5);
+      Buf2[8]=0x2e;
+      COML_DecToAsc(poc_longitude_float(), Buf2+9);
+      COML_StringReverse(6,Buf2+9);
+      Buf2[15]='\0';
       api_lcd_pwr_on_hint(0,2,Buf2);
     }
     break;

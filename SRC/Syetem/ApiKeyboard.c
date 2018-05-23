@@ -736,6 +736,14 @@ void Keyboard_Test(void)
         KeyDownUpChoose_GroupOrUser_Flag=0;
         KeyUpDownCount=0;
         Key_Flag_1=1;//按键延时标志位
+
+#if 1//报警时按返回键退出
+        set_poc_receive_sos_statas(FALSE);
+        BEEP_SetOutput(BEEP_IDPowerOff,OFF,0x00,TRUE);
+        ApiPocCmd_ToneStateSet(FALSE);
+        AUDIO_IOAFPOW(OFF);  
+#endif
+        
       }
     }
     break;  

@@ -443,7 +443,6 @@ void api_disp_ico_output(DISP_ICO IcoInfo, u8 *IcoData)
 		}
 		yPage++;
 	}
-        
 }
 /*******************************************************************************
 * Description	: ico default location display process

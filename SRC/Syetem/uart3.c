@@ -30,7 +30,7 @@ typedef struct {							//define UART drive data type
 	u8 		: 5;
 	u8 cData;
 	struct {
-		u8 cTxBuf[UART_TXBUFLEN+18];
+		u8 cTxBuf[UART_TXBUFLEN+18+49];
 		u8 cRxBuf[UART_RXBUFLEN];
 	}TxRxBuf;
 }UART_DRV;
@@ -257,7 +257,6 @@ static bool UART_Link(u8 cId)
 	
 	if (cId == 0x5A)									//0x5A null password 
 	{
-          
 		UartDrvObj.TxRxBuf.cTxBuf[0] = UART_START;
 		UART_TxSend(1);
 	}
@@ -623,10 +622,6 @@ UARTReadCommand_Exit:
 static bool UART_PocCommand(void)
 {
 	u16  i;
-       // len;
-	//u8 aBuffer[10];
-	//u8 *pBuffer = 0;
-
 	for(i = 0; i < 3; i++)								//dbg command scan process
 	{
 		if (POC_TABLE[i] != UartDrvObj.TxRxBuf.cRxBuf[i]) 
@@ -686,7 +681,7 @@ bool api_poc_command_set(u8 cId, u8 *pBuf)
   switch (cId & 0x7F)
   {
   case 0://set cdma use id
-    if(len <= 50)
+    if(len <= 100)
     {
       UART_RightAck(len);
       while((len-i) >= 8)//>8 or /8 process

@@ -45,6 +45,7 @@ typedef struct {
     u8 poc_status_count;
     u8 choose_write_freq_or_gps_count;
     u8 receive_sos_statas_count;
+    u8 ztts_states_intermediate_count;
   }Count;
   u8 BacklightTimeBuf[1];//背光灯时间(需要设置进入eeprom)
   u8 KeylockTimeBuf[1];//键盘锁时间(需要设置进入eeprom)
@@ -83,6 +84,8 @@ void DEL_PowerOnInitial(void)//原瑞撒單片機多長時間進一次中斷
   DelDrvObj.Count.beidou_valid_count = 0;
   DelDrvObj.Count.poc_status_count = 0;
   DelDrvObj.Count.choose_write_freq_or_gps_count = 0;
+  DelDrvObj.Count.receive_sos_statas_count = 0;
+  DelDrvObj.Count.ztts_states_intermediate_count = 0;
   return;
 }
 
@@ -315,19 +318,19 @@ static void DEL_500msProcess(void)			//delay 500ms process server
         DelDrvObj.Count.PPPStatusOpenCount=0;
       }
     }
-/******按下PTT BB提示音过0.5秒关闭,解决提示音未播报完就关闭喇叭的问题***********************/
-    if(ApiPocCmd_ToneStateIntermediate()==TRUE)
+/******喇叭控制相关函数************************/
+    if(ApiAtCmd_bZTTSStates_Intermediate()==1)//语音播报喇叭延迟2秒关闭
     {
-      DelDrvObj.Count.ToneStateCount++;
-      if(DelDrvObj.Count.ToneStateCount>1)
+      DelDrvObj.Count.ztts_states_intermediate_count++;
+      if(DelDrvObj.Count.ztts_states_intermediate_count>2*2)
       {
-        ApiPocCmd_ToneStateSet(FALSE);
-        ApiPocCmd_ToneStateIntermediateSet(FALSE);
-        DelDrvObj.Count.ToneStateCount=0;
+        set_ApiAtCmd_bZTTSStates_Intermediate(0);
+        set_ApiAtCmd_bZTTSStates(0);
+        DelDrvObj.Count.ztts_states_intermediate_count = 0;
       }
     }
-/******接收完语音过0.5s关闭喇叭，解决接收结束BB提示音听不到的问题************************/
-    if(ApiPocCmd_ReceivedVoicePlayStatesIntermediate()==TRUE)
+    
+    if(ApiPocCmd_ReceivedVoicePlayStatesIntermediate()==TRUE)//对讲语音
     {
       DelDrvObj.Count.ReceivedVoicePlayStatesCount++;  
       if(DelDrvObj.Count.ReceivedVoicePlayStatesCount>1)
@@ -335,6 +338,17 @@ static void DEL_500msProcess(void)			//delay 500ms process server
         ApiPocCmd_ReceivedVoicePlayStatesIntermediateSet(FALSE);
         ApiPocCmd_ReceivedVoicePlayStatesSet(FALSE);
         DelDrvObj.Count.ReceivedVoicePlayStatesCount=0;
+      }
+    }
+    
+    if(ApiPocCmd_ToneStateIntermediate()==TRUE)//bb音
+    {
+      DelDrvObj.Count.ToneStateCount++;
+      if(DelDrvObj.Count.ToneStateCount>1)
+      {
+        ApiPocCmd_ToneStateSet(FALSE);
+        ApiPocCmd_ToneStateIntermediateSet(FALSE);
+        DelDrvObj.Count.ToneStateCount=0;
       }
     }
 /*****低于设定值播报网络信号弱*************************************************************************/
@@ -356,7 +370,7 @@ static void DEL_500msProcess(void)			//delay 500ms process server
 /*****进入写频状态5s后将写频标志位清零****************/
     if(WriteFreq_Flag==TRUE)
     {
-      if(DelDrvObj.Count.WriteFreqTimeCount>=10)
+      if(DelDrvObj.Count.WriteFreqTimeCount>=2*6)
       {
         WriteFreq_Flag=FALSE;
         DelDrvObj.Count.WriteFreqTimeCount=0;

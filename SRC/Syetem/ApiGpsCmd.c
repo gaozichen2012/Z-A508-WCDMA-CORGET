@@ -340,10 +340,7 @@ void ApiGpsCmd_PowerOnInitial(void)//bubiao
   
   adr = CFG_GetCurAdr(ADR_IDGpsFun);//部标注册信息获取
   FILE_Read2(adr.Adr,adr.Len-16,(u8*)(&GpsFunDrvObj.GpsPar));
-#if 0//WCDMA 卓智达
-  FILE_Read(0,80,ReadBuffer);//80位
-#endif
-  FILE_Read(598,1,&Key3_PlayValue);//80位
+  FILE_Read(598,1,&Key3_PlayValue);//80位//待修改。20180523 改成FILE_Read
 #if 1//侧键1播报语音类型
   switch(Key3_PlayValue)
   {

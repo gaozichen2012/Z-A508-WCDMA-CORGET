@@ -140,6 +140,7 @@ void main_init(void)
 void main_app(void)
 {
   main_init();
+  //Test_PWM_LED();
   while(1)
   {
     LowVoltageDetection();

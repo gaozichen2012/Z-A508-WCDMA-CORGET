@@ -22,12 +22,13 @@ u8 KeyDownUpChoose_GroupOrUser_Flag=0;
 typedef struct{
   union{
     struct{
-      u16  bStartingUp     :1;
-      u16  bCardIn         :1;
-      u16  bNoCard         :1;
-      u16  bPPPStatusOpen  :1;
-      u16  bZTTSStates     :1;
-      u16                  :11;
+      u16  bStartingUp                  :1;
+      u16  bCardIn                      :1;
+      u16  bNoCard                      :1;
+      u16  bPPPStatusOpen               :1;
+      u16  bZTTSStates                  :1;
+      u16  bZTTSStates_Intermediate     :1;
+      u16                               :10;
     }Bits;
     u8 Byte;
   }Msg;
@@ -242,11 +243,12 @@ void ApiAtCmd_10msRenew(void)
     if(ucRet == 0x00)
     {
       AtCmdDrvobj.Msg.Bits.bZTTSStates=1;
+      AtCmdDrvobj.Msg.Bits.bZTTSStates_Intermediate = 0;//播报新语音时将中间变量清零，等待收到ztts0重新打开标志位
     }
     ucRet = memcmp(pBuf, ucRxZTTS0, 6);
     if(ucRet == 0x00)
     {
-      AtCmdDrvobj.Msg.Bits.bZTTSStates=0;
+      AtCmdDrvobj.Msg.Bits.bZTTSStates_Intermediate = 1;
     }
 /************************/
   }
@@ -332,4 +334,16 @@ u8 ApiAtCmd_CSQValue(void)
 u16 ApiAtCmd_bZTTSStates(void)
 {
   return AtCmdDrvobj.Msg.Bits.bZTTSStates;
+}
+void set_ApiAtCmd_bZTTSStates(u16 a)
+{
+  AtCmdDrvobj.Msg.Bits.bZTTSStates = a;
+}
+u16 ApiAtCmd_bZTTSStates_Intermediate(void)
+{
+  return AtCmdDrvobj.Msg.Bits.bZTTSStates_Intermediate;
+}
+void set_ApiAtCmd_bZTTSStates_Intermediate(u16 a)
+{
+  AtCmdDrvobj.Msg.Bits.bZTTSStates_Intermediate = a;
 }

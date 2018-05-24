@@ -180,7 +180,7 @@ void SubmenuMenuDisplay(SubmenuMenuDisplayType id)
   case GroupSwitch: 
     MenuDisplay(Menu_RefreshAllIco);
     api_lcd_pwr_on_hint(0,2,"                ");//清屏
-    //api_lcd_pwr_on_hint4(UnicodeForGbk_MainWorkName());//显示当前群组昵称
+    api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());//显示当前群组昵称
     break;
   case GpsInfoMenu:
      api_lcd_pwr_on_hint(0,2,"                ");//清屏

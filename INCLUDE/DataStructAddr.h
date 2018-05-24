@@ -9,7 +9,7 @@
 #define  nLenErpromChk    16
 
 /*ÆğÊ¼µØÖ·*/
-#define  nAddrTemp    0x4000 /* start address */
+#define  nAddrTemp    0x4200 /* start address */
 #define  nLenTemp     16
 
 #define LCD_DISP_LEN_MAX 16

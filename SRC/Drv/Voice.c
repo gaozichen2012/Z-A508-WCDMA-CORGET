@@ -15,9 +15,9 @@ const u8 *ucFortyPercentPower           = "50006f00770065007200200046006f0072007
 const u8 *ucSixtyPercentPower           = "50006f007700650072002000530069007800740079002000500065007200630065006e007400";
 const u8 *ucEightyPercentPower          = "50006f0077006500720020004500690067006800740079002000500065007200630065006e007400";
 const u8 *ucOneHundredPercentPower      = "50006f0077006500720020004f006e0065002000480075006e0064007200650064002000500065007200630065006e007400";
-const u8 *ucGroupMode                   = "07526263A47FC47E";
-const u8 *ucHandsetMode                 = "2c54527b216a0f5f";
-const u8 *ucHandfreeMode                = "4d51d063216a0f5f";
+const u8 *ucGroupMode                   = "470072006f007500700020004d006f0064006500";
+const u8 *ucHandsetMode                 = "480061006e006400200073006500740020004d006f0064006500";
+const u8 *ucHandfreeMode                = "480061006e0064002000660072006500650020004d006f0064006500";
 const u8 *ucNoOnlineUser                = "4e006f0020006f006e006c0069006e00650020007500730065007200";
 const u8 *ucLoggingIn                   = "4100630063006f0075006e007400200043006f006e00660069006700750072006100740069006f006e00";//Account Config
 typedef struct{
@@ -124,12 +124,9 @@ void VOICE_Play(VOICEPLAY_TYPE id)
 
 void VOICE_SetOutput(AtVoiceType Id, u8 *buf, u8 Len)
 {
-#if 0//WCDMA 卓智达
-  ApiAtCmd_ZTTS_Flag=TRUE;
-#endif
-  ApiAtCmd_ZTTSCount=0;
+  set_ApiAtCmd_bZTTSStates(1);
+  set_ApiAtCmd_bZTTSStates_Intermediate(0);//将播报语音中间变量清零，等待收到ztts0重新计数
   AUDIO_IOAFPOW(ON);
-	//DrvMC8332_TxPort_SetValidable(ON);
 	VoiceDrvObj.Msg.Byte |= Id;	
 	VoiceDrvObj.FreePlayData.buf = buf;
 	VoiceDrvObj.FreePlayData.Len = Len;

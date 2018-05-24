@@ -1,9 +1,9 @@
 #include "ALLHead.h"
 
-#define DrvMC8332_UseId_Len	        100//define UART Tx buffer length value
-#define APIPOC_GroupName_Len            32//unicode只存前2位，00不存，32/2=16,屏幕最多显示16个字符
+#define DrvMC8332_UseId_Len	        200//define UART Tx buffer length value
+#define APIPOC_GroupName_Len            33//unicode只存前2位，00不存，32/2=16,屏幕最多显示16个字符
 #define APIPOC_UserName_Len             38
-#define APIPOC_Group_Num                40
+#define APIPOC_Group_Num                25
 #define APIPOC_User_Num                 18
 
 const u8 *ucAtPocHead          = "AT+POC=";
@@ -16,6 +16,7 @@ u8 *ucUserListInfo              = "0e00000000";
 u8 *ucSetGPS                    = "110000";
 u8 *ucAlarm1                    = "2100000000";
 u8 *ucAlarm2                    = "00000000736f73";
+u8 *ucSetURL                    = "120000";
 typedef struct{
   struct{
     union{
@@ -87,8 +88,8 @@ typedef struct{
     }ReceiveMessagesUserName;
 /**************************/
   }NameInfo;
-  u8 ReadBuffer[80];//存EEPROM读取的数据使用
-  u8 ReadBuffer2[80];//存EEPROM读取的数据使用
+  u8 ReadBuffer[200];//存EEPROM读取的数据使用
+  u8 ReadBuffer2[100];//存EEPROM读取的数据使用
   u8 NowWorkingGroupNameBuf[APIPOC_GroupName_Len];
   u8 AllGroupNameBuf[APIPOC_GroupName_Len];
   u8 AllUserNameBuf[APIPOC_UserName_Len];
@@ -138,7 +139,7 @@ void ApiPocCmd_PowerOnInitial(void)
   
   PocCmdDrvobj.NetState.Msg.Byte = 0x00;
   memset(PocCmdDrvobj.ReadBuffer,0,sizeof(PocCmdDrvobj.ReadBuffer));
-  FILE_Read(0,80,PocCmdDrvobj.ReadBuffer);//80位
+  FILE_Read(0,200,PocCmdDrvobj.ReadBuffer);//80位
 }
 
 
@@ -146,9 +147,10 @@ void ApiPocCmd_PowerOnInitial(void)
 void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
 {
   u8 cBuf[4]={0,0,0,0};
-  u8 primary_buf_len;
   u16 i,temp_value;
   u8 gps_info_buf[25];
+  u8 SetParamBuf[3]={0,0,0};
+  u8 url_buf[150];
   DrvMC8332_TxPort_SetValidable(ON);
   DrvGD83_UART_TxCommand((u8 *)ucAtPocHead,strlen((char const *)ucAtPocHead));
   switch(id)
@@ -157,14 +159,42 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
     DrvGD83_UART_TxCommand((u8*)ucPocOpenConfig, strlen((char const *)ucPocOpenConfig));
     break;
   case PocComm_SetParam://设置账号密码
-    primary_buf_len=strlen((char const*)PocCmdDrvobj.ReadBuffer);
-    PocCmdDrvobj.ReadBuffer[primary_buf_len]='0';
-    PocCmdDrvobj.ReadBuffer[primary_buf_len+1]='0';
+    //ip=111.111.111.111;id=11111111111;pwd=111111;UPL=99999999999999999999999999999999999999999999999999;//会加上URL但是好像没影响所以就不管了
+    SetParamBuf[0]='0';
+    SetParamBuf[1]='0';
     DrvGD83_UART_TxCommand((u8 *)ucSetIPAndID,strlen((char const *)ucSetIPAndID));
     DrvGD83_UART_TxCommand(PocCmdDrvobj.ReadBuffer, strlen((char const *)PocCmdDrvobj.ReadBuffer));
+    DrvGD83_UART_TxCommand(SetParamBuf, strlen((char const *)SetParamBuf));
     break;
   case PocComm_SetURL:
-      DrvGD83_UART_TxCommand((u8 *)"120000687474703a2f2f736925642e7265616c7074742e636f6d3a32393939392f00",strlen((char const *)"120000687474703a2f2f736925642e7265616c7074742e636f6d3a32393939392f00"));
+    DrvGD83_UART_TxCommand((u8*)ucSetURL, strlen((char const *)ucSetURL));
+    memset(url_buf,0,sizeof(url_buf));
+    for(i=0;i<strlen((char const*)PocCmdDrvobj.ReadBuffer)-7;i++)
+    {
+      u8 temp_count1=0;
+      u8 j=0;
+      if(PocCmdDrvobj.ReadBuffer[i+0]=='5'
+         &&PocCmdDrvobj.ReadBuffer[i+1]=='5'
+           &&PocCmdDrvobj.ReadBuffer[i+2]=='5'
+             &&PocCmdDrvobj.ReadBuffer[i+3]=='0'
+               &&PocCmdDrvobj.ReadBuffer[i+4]=='4'
+                 &&PocCmdDrvobj.ReadBuffer[i+5]=='c'
+                   &&PocCmdDrvobj.ReadBuffer[i+6]=='3'
+                     &&PocCmdDrvobj.ReadBuffer[i+7]=='d')
+      {
+        for(temp_count1=i+8;temp_count1<strlen((char const*)PocCmdDrvobj.ReadBuffer)-2;temp_count1++)
+        {
+          url_buf[j] = PocCmdDrvobj.ReadBuffer[temp_count1];
+          j++;
+        }
+        break;
+      }
+    }
+    DrvGD83_UART_TxCommand((u8*)url_buf, strlen((char const *)url_buf));
+    SetParamBuf[0]='0';
+    SetParamBuf[1]='0';
+    DrvGD83_UART_TxCommand(SetParamBuf, strlen((char const *)SetParamBuf));
+    //DrvGD83_UART_TxCommand((u8 *)"120000687474703a2f2f736925642e7265616c7074742e636f6d3a32393939392f00",strlen((char const *)"120000687474703a2f2f736925642e7265616c7074742e636f6d3a32393939392f00"));
   case PocComm_Login:
     break;
   case PocComm_Logout:
@@ -374,7 +404,7 @@ bool ApiPocCmd_user_info_set(u8 *pBuf, u8 len)//cTxBuf为存放ip账号密码的信息
 		//adr = CFG_GetCurAdr(ADR_IDLocalUserInfo);
 		//FILE_Write(adr.Adr,adr.Len,(u8*)(&PocCmdDrvobj.NetState.LoginInfo));
                 //FILE_Write(0,PocCmdDrvobj.NetState.LoginInfo.Msg.Len,(u8*)(&PocCmdDrvobj.NetState.LoginInfo));
-                FILE_Write(0,90,(u8*)(&PocCmdDrvobj.NetState.LoginInfo));
+                FILE_Write(0,200,(u8*)(&PocCmdDrvobj.NetState.LoginInfo));
 		for(i = 0; i < len; i++)
 		{
 			PocCmdDrvobj.NetState.LoginInfo.Buf[i] = pBuf[i];
@@ -679,9 +709,9 @@ void ApiPocCmd_10msRenew(void)
       ucId = COML_AscToHex(pBuf+4, 0x02);
       if(ucId==0x01)
       {
-        PocCmdDrvobj.States.ReceivedVoicePlayStates=TRUE;//指示灯使用
+        PocCmdDrvobj.States.ReceivedVoicePlayStates=TRUE;//喇叭控制
         PocCmdDrvobj.States.ReceivedVoicePlayStatesForLED=TRUE;//指示灯使用
-        PocCmdDrvobj.States.ReceivedVoicePlayStatesForDisplay=ReceivedVoiceStart;//喇叭控制/接收图标/显示呼叫用户名/使用
+        PocCmdDrvobj.States.ReceivedVoicePlayStatesForDisplay=ReceivedVoiceStart;//接收图标/显示呼叫用户名/使用
       }
       else if(ucId==0x00)
       {

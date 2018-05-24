@@ -96,6 +96,7 @@ void Set_TIM1_PWM1_DutyCycle( uint16_t TIM1_Pulse)
  ******************************************************************************/
 void Test_PWM_LED(void)
 {
+  BEEP_SetOutput(BEEP_IDPowerOff,ON,0x00,TRUE);
 	u16 Duty_Val;
 	for(Duty_Val = 0; Duty_Val < 4000; Duty_Val++)
 	{

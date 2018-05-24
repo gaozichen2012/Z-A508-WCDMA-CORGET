@@ -237,7 +237,6 @@ void Keyboard_Test(void)
             MenuMode_Flag=0;
             break;
           }
-
           break;
         case 2://≥…‘±—°‘Ò
           switch(ApiMenu_SwitchCallUser_Flag)

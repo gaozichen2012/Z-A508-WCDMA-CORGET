@@ -4,7 +4,7 @@
 #define SYS_IDLE	0x00
 #define SYS_RUN		0x01
 
-//u32 T1[63];//MAX=6144
+
 
 typedef struct {
   struct{
@@ -137,10 +137,23 @@ void main_init(void)
   NoUseNum=ApiAtCmd_WritCommand(ATCOMM_RESET,(void*)0, 0);
   TaskDrvObj.NewId=Task_Start;//Task_Start
 }
+#if 0
 void main_app(void)
 {
   main_init();
-  //Test_PWM_LED();
+  
+  while(1)
+  {
+    Test_PWM_LED();
+    //DEL_Renew();
+  }
+}
+
+
+#else
+void main_app(void)
+{
+  main_init();
   while(1)
   {
     LowVoltageDetection();
@@ -169,7 +182,7 @@ void main_app(void)
     }
 }
 }
-
+#endif
 void SYS_McuReset(void)
 {
 	//POW_SetPowSwitch(OFF);

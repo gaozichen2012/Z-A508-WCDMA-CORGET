@@ -10,6 +10,7 @@ void main(void)
   FLASH_ProgramByte(0x487E,0x55);
   FLASH_ProgramByte(0x487F,0xAA);
   FLASH_Lock(FLASH_MEMTYPE_DATA);
+
   main_app();
 }
 #ifdef USE_FULL_ASSERT        

@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=-443990465
+Checksum=-1738512134
 [CodeCoverage]
 Enabled=_ 0
 [CallStack]
@@ -57,8 +57,6 @@ ShowSource=1
 Freq=16000000
 [struct_types]
 Fmt0=ADRLEN_INF-Adr	4	0
-Fmt1=struct <Unnamed 91>-Len	3	0
-Fmt2=struct <Unnamed 94>-NameLen	3	0
 [array_types]
 Fmt0=u8[101]	3	0
 Fmt1=u8[14]	4	0
@@ -211,7 +209,7 @@ Category=_ 0
 LoggingEnabled=_ 0
 LogFile=_ ""
 [Breakpoints]
-Bp0=_ "STD_CODE" "{$PROJ_DIR$\..\SRC\Syetem\uart3.c}.637.4" 1 0 0 0 "" 0 ""
+Bp0=_ "STD_CODE" "{$PROJ_DIR$\..\SRC\Syetem\uart3.c}.637.4" 0 0 0 0 "" 0 ""
 Count=1
 [Aliases]
 A0=_ "C:\Users\lei\Desktop\IAR\GT20L16P1Y.c" ""

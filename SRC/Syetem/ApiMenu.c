@@ -22,9 +22,10 @@ void MenuDisplay(MenuDisplayType id)
     break;
   case Menu1:
     api_lcd_pwr_on_hint(0,0,"Menu            ");
-    api_lcd_pwr_on_hint(13,0,"1/8");
+    api_lcd_pwr_on_hint(13,0,"1/5");
      api_lcd_pwr_on_hint(0,2,"Group Select    ");
     break;
+#if 0
   case Menu2:
     api_lcd_pwr_on_hint(0,0,"Menu            ");
     api_lcd_pwr_on_hint(13,0,"2/8");
@@ -35,15 +36,16 @@ void MenuDisplay(MenuDisplayType id)
     api_lcd_pwr_on_hint(13,0,"3/8");
     api_lcd_pwr_on_hint(0,2,"Online INDV List");
     break;
-  case Menu4:
+#endif
+  case Menu2:
     api_lcd_pwr_on_hint(0,0,"Menu            ");
-    api_lcd_pwr_on_hint(13,0,"4/8");
+    api_lcd_pwr_on_hint(13,0,"2/5");
     api_lcd_pwr_on_hint(0,2,"GPS Information ");
      break;
      
-  case Menu5:
+  case Menu3:
     api_lcd_pwr_on_hint(0,0,"Menu            ");
-    api_lcd_pwr_on_hint(13,0,"5/8");
+    api_lcd_pwr_on_hint(13,0,"3/5");
     api_lcd_pwr_on_hint(0,2,"Backlight Time  ");
      if(ApiMenu_BacklightTimeSet_Flag==2)
      {
@@ -60,9 +62,9 @@ void MenuDisplay(MenuDisplayType id)
        }
      }
      break;
-  case Menu6:
+  case Menu4:
     api_lcd_pwr_on_hint(0,0,"Menu            ");
-    api_lcd_pwr_on_hint(13,0,"6/8");
+    api_lcd_pwr_on_hint(13,0,"4/5");
      api_lcd_pwr_on_hint(0,2,"Keypad Lock Time");
      if(ApiMenu_KeylockTimeSet_Flag==2)
      {
@@ -81,21 +83,18 @@ void MenuDisplay(MenuDisplayType id)
        }
      }
      break;
-  case Menu7:
+  case Menu5:
     api_lcd_pwr_on_hint(0,0,"Menu            ");
-    api_lcd_pwr_on_hint(13,0,"7/8");
+    api_lcd_pwr_on_hint(13,0,"5/5");
      api_lcd_pwr_on_hint(0,2,"Software Version");
     break;
+#if 0
   case Menu8:
     api_lcd_pwr_on_hint(0,0,"Menu            ");
     api_lcd_pwr_on_hint(13,0,"8/8");
      api_lcd_pwr_on_hint(0,2,"北斗/写频切换   ");
      break;
-/*  case Menu8:
-    api_lcd_pwr_on_hint3("菜单            ");
-    api_lcd_pwr_on_hint5("8/8");
-     api_lcd_pwr_on_hint("语音播报        ");
-    break;*/
+#endif
   case Menu_Locking_NoOperation:
     MenuDisplay(Menu_RefreshAllIco);
     get_screen_display_group_name();//选择显示当前群组昵称（群组或单呼临时群组）

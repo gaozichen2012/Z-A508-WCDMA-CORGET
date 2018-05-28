@@ -139,7 +139,7 @@ void Keyboard_Test(void)
       else
       {
         MenuModeCount=MenuModeCount-1;
-        if(MenuModeCount<1) {MenuModeCount=8;}
+        if(MenuModeCount<1) {MenuModeCount=5;}
         MenuDisplay(MenuModeCount);
       }
     }
@@ -238,6 +238,7 @@ void Keyboard_Test(void)
             break;
           }
           break;
+#if 0//WCDMA
         case 2://成员选择
           switch(ApiMenu_SwitchCallUser_Flag)
           {
@@ -275,7 +276,8 @@ void Keyboard_Test(void)
             break;
           }
           break;
-        case 4://GPS设置
+#endif
+        case 2://GPS设置
               switch(ApiMenu_GpsInfo_Flag)
               {
                //客户要求GPS经纬度及本机信息界面按上下键和OK键无效，只有按退出键退出，故屏蔽以下
@@ -292,7 +294,7 @@ void Keyboard_Test(void)
                 break;
               }
           break;
-        case 5://背光灯设置
+        case 3://背光灯设置
               switch(ApiMenu_BacklightTimeSet_Flag)
               {
               case 2:
@@ -313,7 +315,7 @@ void Keyboard_Test(void)
                 break;
               }
           break;
-        case 6://键盘锁定
+        case 4://键盘锁定
               switch(ApiMenu_KeylockTimeSet_Flag)
               {
               case 2://默认状态按OK键进入一级菜单
@@ -334,7 +336,7 @@ void Keyboard_Test(void)
                 break;
               }
           break;
-        case 7://本机信息
+        case 5://本机信息
               switch(ApiMenu_NativeInfo_Flag)
               {
                 //客户要求GPS经纬度及本机信息界面按上下键和OK键无效，只有按退出键退出，故屏蔽以下
@@ -351,6 +353,7 @@ void Keyboard_Test(void)
                 break;
               }
           break;
+#if 0
         case 8://北斗/写频切换
           switch(ApiMenu_BeiDouOrWritingFrequency_Flag)
           {
@@ -369,6 +372,7 @@ void Keyboard_Test(void)
             break;
           }
           break;
+#endif
         default:
           break;
         }
@@ -511,7 +515,7 @@ void Keyboard_Test(void)
         else
         {
           MenuModeCount=MenuModeCount+1;
-          if(MenuModeCount>8) {MenuModeCount=1;}
+          if(MenuModeCount>5) {MenuModeCount=1;}
           MenuDisplay(MenuModeCount);
         }
       }

@@ -46,6 +46,7 @@ typedef struct {
     u8 choose_write_freq_or_gps_count;
     u8 receive_sos_statas_count;
     u8 ztts_states_intermediate_count;
+    u8 alarm_count;
   }Count;
   u8 BacklightTimeBuf[1];//背光灯时间(需要设置进入eeprom)
   u8 KeylockTimeBuf[1];//键盘锁时间(需要设置进入eeprom)
@@ -1149,6 +1150,17 @@ static void DEL_10msProcess(void)
   {
     DelDrvObj.Msg.Bit.b10ms = DEL_IDLE;
     ApGpsCmd_10msRenew();
+
+      DelDrvObj.Count.alarm_count++;
+      if(poc_receive_sos_statas()==TRUE)
+      {
+        if(DelDrvObj.Count.alarm_count>=2)
+      {
+        Test_PWM_LED();//报警音30ms进一次
+        DelDrvObj.Count.alarm_count = 0;
+      }
+      }
+
   }
   return;
 }

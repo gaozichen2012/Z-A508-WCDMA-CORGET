@@ -15,7 +15,7 @@ u8 *ucGroupListInfo             = "0d0000";
 u8 *ucUserListInfo              = "0e00000000";
 u8 *ucSetGPS                    = "110000";
 u8 *ucAlarm1                    = "2100000000";
-u8 *ucAlarm2                    = "00000000736f73";
+u8 *ucAlarm2                    = "00000000736f7300";
 u8 *ucSetURL                    = "120000";
 typedef struct{
   struct{
@@ -55,6 +55,7 @@ typedef struct{
     bool ToneState;
     bool ToneState_Intermediate;
     bool receive_sos_statas;
+    bool alarm_states;
   }States;
   struct{
 /*****组名**************/
@@ -692,17 +693,18 @@ void ApiPocCmd_10msRenew(void)
           {
             PocCmdDrvobj.NameInfo.ReceiveMessagesUserName.NameLen = APIPOC_UserName_Len;
           }
-        }
-        else//无群组名
-        {
+      }
+      else//无群组名
+      {
           PocCmdDrvobj.NameInfo.ReceiveMessagesUserName.NameLen = 0x00;
-        }
+      }
         for(i = 0x00; 2*i<PocCmdDrvobj.NameInfo.ReceiveMessagesUserName.NameLen; i++)
         {
           PocCmdDrvobj.NameInfo.ReceiveMessagesUserName.Name[2*i] = pBuf[4*i+20];//存入
           PocCmdDrvobj.NameInfo.ReceiveMessagesUserName.Name[2*i+1] = pBuf[4*i+1+20];
         }
       PocCmdDrvobj.States.receive_sos_statas = TRUE;
+      api_lcd_pwr_on_hint(0,2,"                ");
       api_lcd_pwr_on_hint(0,2,GetReceiveMessagesUserNameForDisplay());
       break;
     case 0x8B://通知音频播放状态

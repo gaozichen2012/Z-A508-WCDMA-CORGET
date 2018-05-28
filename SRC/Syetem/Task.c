@@ -15,7 +15,7 @@ bool EnterPttMoment_Flag=FALSE;
 bool LoosenPttMoment_Flag=FALSE;
 u8 EnterPttMomentCount=0;
 u8 LoosenPttMomentCount=0;
-u8 *ucCODECCTL                  = "at^codecctl=F000,9000,0";//T1默认
+u8 *ucCODECCTL                  = "at^codecctl=6000,4000,0";//T1默认
 
 void Key3_PlayVoice(void);
 
@@ -67,24 +67,6 @@ void Task_RunStart(void)
       }
     }
   }
-#if 0
-  api_disp_icoid_output( eICO_IDRXNULL, TRUE, TRUE);//GPRS无信号图标
-  VOICE_SetOutput(ATVOICE_FreePlay,"1c64227d517fdc7e",16);//播报搜索网络
-  api_lcd_pwr_on_hint("   搜索网络...  ");
-  NoUseNum=ApiAtCmd_WritCommand(ATCOMM_CSQ,(u8 *)0,0);//CSQ?
-  VOICE_SetOutput(ATVOICE_FreePlay,"c0680d4e30526153",16);//播报检不到卡
-  api_lcd_pwr_on_hint("    检不到卡    ");
-  HDRCSQSignalIcons(); 
-  api_disp_icoid_output( eICO_IDEmergency, TRUE, TRUE);//开机搜到信号，显示3G图标
-  api_lcd_pwr_on_hint("   正在登陆..     ");
-  ApiPocCmd_WritCommand(PocComm_SetParam,0,0);//配置echat账号、IP
-  VOICE_SetOutput(ATVOICE_FreePlay,"636b28577b764696",16);//播报正在登陆
-  api_lcd_pwr_on_hint("   正在登陆...    ");
-  ApiPocCmd_WritCommand(PocComm_OpenPOC,0,0);
-  VOICE_SetOutput(ATVOICE_FreePlay,"517fdc7ee14ff753315f",20);//播报网络信号弱
-  VOICE_SetOutput(ATVOICE_FreePlay,"1c64227d517fdc7e",16);//播报搜索网络
-  api_lcd_pwr_on_hint("   搜索网络...  ");
-#endif
 }
 
 #if 1//WCDMA 卓智达
@@ -141,7 +123,7 @@ void Task_RunNormalOperation(void)
     if(LoosenPttMoment_Flag==TRUE)//如果松开PTT瞬间，发送endPTT指令
     {
       ApiPocCmd_WritCommand(PocComm_EndPTT,0,0);
-      Set_RedLed(LED_OFF);
+      //Set_RedLed(LED_OFF);
     }
     break;
   case 2://2：按住PTT状态
@@ -312,6 +294,15 @@ void Task_RunNormalOperation(void)
     api_disp_icoid_output( eICO_IDVOX, TRUE, TRUE);//接收信号图标
     api_disp_all_screen_refresh();// 全屏统一刷新
     ApiPocCmd_ReceivedVoicePlayStatesForDisplaySet(ReceivedVoiceBeing);
+#if 1 //解决换组或换呼状态下，被呼叫后按PTT或OK键会切换群组，而不是回复刚刚说话人的语音
+    if(MenuMode_Flag!=0)
+    {
+      MenuDisplay(Menu_RefreshAllIco);
+      MenuMode_Flag = 0;
+    }
+    KeyDownUpChoose_GroupOrUser_Flag=0;
+    KeyUpDownCount=0;
+#endif
     break;
   case ReceivedVoiceBeing:
     break;
@@ -403,21 +394,29 @@ if(ApiPocCmd_ReceivedVoicePlayStates()==TRUE)
 }
 else
 {
-  if(ApiAtCmd_bZTTSStates()==1)
+  if(poc_receive_sos_statas()==TRUE)
   {
-    AUDIO_IOAFPOW(ON);
+     AUDIO_IOAFPOW(ON);
   }
   else
   {
-    if(ApiPocCmd_ToneState()==TRUE)
+    if(ApiAtCmd_bZTTSStates()==1)//解决报警的时候异常关闭喇叭，导致声音卡顿的文体
     {
       AUDIO_IOAFPOW(ON);
     }
     else
     {
-      AUDIO_IOAFPOW(OFF);
+      if(ApiPocCmd_ToneState()==TRUE)
+      {
+        AUDIO_IOAFPOW(ON);
+      }
+      else
+      {
+        AUDIO_IOAFPOW(OFF);
+      }
     }
   }
+
 }
 #endif
 

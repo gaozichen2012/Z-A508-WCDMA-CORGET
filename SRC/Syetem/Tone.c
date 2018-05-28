@@ -6,6 +6,9 @@
 #define TONE_RUN 	0x01
 #define TONE_MAXFREQ	0x02
 
+  u16 Duty_Val;
+  u8 j=0;
+
 typedef struct {						//DA tone freq parameter process
 	u8 cLevel;
 	u16  iStep;
@@ -40,11 +43,14 @@ void TIM1_PWM_Init(void)
 	GPIO_Init(GPIO_BEEP, GPIO_PIN_BEEP, GPIO_MODE_OUT_PP_LOW_FAST);
         TIM1_DeInit();
         /*
-	 * TIM2 Frequency = TIM2 counter clock/(ARR + 1) 
-	 * 这里设置TIM2的计数频率为 24M/8/(999+1)=1K
+	 * TIM1 Frequency = TIM1 counter clock/(ARR + 1) 
+	 * 这里设置TIM2的计数频率为 8M/8/(999+1)=1K
 	 */
-        TIM1_TimeBaseInit(1, TIM1_COUNTERMODE_UP, 4000, 0);
-	
+       // TIM1_TimeBaseInit(1, TIM1_COUNTERMODE_UP, 4000, 0);
+	//TIM1_TimeBaseInit(7, TIM1_COUNTERMODE_UP, 999, 0);//8M/(7+1)/(999+1)=1KHz
+        //TIM1_TimeBaseInit(1, TIM1_COUNTERMODE_UP, 999, 0);//8M/(1+1)/(999+1)=4KHz
+        //TIM1_TimeBaseInit(0, TIM1_COUNTERMODE_UP, 999, 0);//8M/(0+1)/(999+1)=8KHz
+        TIM1_TimeBaseInit(3, TIM1_COUNTERMODE_UP, 1999, 0);//8M/(3+1)/(199+1)=10KHz---分出10K的分辨率方便后面计算
 	/* 
 	 * PWM1 Mode configuration: Channel1
 	 * TIM2 Channel1 duty cycle = [TIM2_CCR1/(TIM2_ARR + 1)] * 100 = 50%
@@ -52,7 +58,7 @@ void TIM1_PWM_Init(void)
 	 */ 
 
 	/* 测试通道1 */
-	TIM1_OC1Init(TIM1_OCMODE_PWM1, TIM1_OUTPUTSTATE_ENABLE,TIM1_OUTPUTNSTATE_ENABLE ,2000, TIM1_OCPOLARITY_LOW,TIM1_OCNPOLARITY_LOW,TIM1_OCIDLESTATE_RESET,TIM1_OCNIDLESTATE_RESET);
+	TIM1_OC1Init(TIM1_OCMODE_PWM1, TIM1_OUTPUTSTATE_ENABLE,TIM1_OUTPUTNSTATE_ENABLE ,1000, TIM1_OCPOLARITY_LOW,TIM1_OCNPOLARITY_LOW,TIM1_OCIDLESTATE_RESET,TIM1_OCNIDLESTATE_RESET);
 	TIM1_CCxCmd(TIM1_CHANNEL_1, ENABLE);  
         TIM1_OC1PreloadConfig(ENABLE);
         TIM1_CtrlPWMOutputs(ENABLE);
@@ -96,13 +102,39 @@ void Set_TIM1_PWM1_DutyCycle( uint16_t TIM1_Pulse)
  ******************************************************************************/
 void Test_PWM_LED(void)
 {
+
   BEEP_SetOutput(BEEP_IDPowerOff,ON,0x00,TRUE);
-	u16 Duty_Val;
-	for(Duty_Val = 0; Duty_Val < 4000; Duty_Val++)
+
+       if(j>=1)
 	{
-		Set_TIM1_PWM1_DutyCycle(Duty_Val);
-		Delay(0xff);
+          Duty_Val+=100;
+          if(Duty_Val>=3300)
+          {
+            Duty_Val=3200;
+            j=0;
+          }	
 	}
+	else
+	{
+          Duty_Val-=100;
+          if(Duty_Val>3300)
+          {
+            Duty_Val=3200;
+          }
+          if(Duty_Val<=1300)
+          {
+            Duty_Val=1200;
+            j++;
+          }
+	}
+
+       
+      
+      
+      Set_TIM1_PWM_Frequency(Duty_Val);
+      Set_TIM1_PWM1_DutyCycle(Duty_Val/2);
+      //Set_TIM1_PWM_Frequency(Duty_Val/50);
+
 }
 
 static void Delay(u32 nCount)

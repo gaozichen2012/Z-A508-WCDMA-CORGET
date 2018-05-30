@@ -56,9 +56,13 @@ void TIM1_PWM_Init(void)
 	 * TIM2 Channel1 duty cycle = [TIM2_CCR1/(TIM2_ARR + 1)] * 100 = 50%
 	 * TIM2 Channel2 duty cycle = [TIM2_CCR2/(TIM2_ARR + 1)] * 100 = 50%
 	 */ 
-
+//中断定时
+           TIM1_SetCounter(0);/* 将计数器初值设为0 */
+           TIM1_ARRPreloadConfig(DISABLE);	/* 预装载不使能 */
+           TIM1_ITConfig(TIM1_IT_UPDATE , ENABLE);	/* 计数器向上计数/向下计数溢出更新中断 */
 	/* 测试通道1 */
-	TIM1_OC1Init(TIM1_OCMODE_PWM1, TIM1_OUTPUTSTATE_ENABLE,TIM1_OUTPUTNSTATE_ENABLE ,1000, TIM1_OCPOLARITY_LOW,TIM1_OCNPOLARITY_LOW,TIM1_OCIDLESTATE_RESET,TIM1_OCNIDLESTATE_RESET);
+	TIM1_OC1Init(TIM1_OCMODE_PWM1, TIM1_OUTPUTSTATE_ENABLE,TIM1_OUTPUTNSTATE_ENABLE ,1000,
+                     TIM1_OCPOLARITY_LOW,TIM1_OCNPOLARITY_HIGH,TIM1_OCIDLESTATE_SET,TIM1_OCNIDLESTATE_SET);
 	TIM1_CCxCmd(TIM1_CHANNEL_1, ENABLE);  
         TIM1_OC1PreloadConfig(ENABLE);
         TIM1_CtrlPWMOutputs(ENABLE);
@@ -112,7 +116,9 @@ void Test_PWM_LED(void)
           {
             Duty_Val=3200;
             j=0;
-          }	
+            Set_RedLed(LED_ON);
+            Set_GreenLed(LED_OFF);
+          }
 	}
 	else
 	{
@@ -125,15 +131,12 @@ void Test_PWM_LED(void)
           {
             Duty_Val=1200;
             j++;
+            Set_RedLed(LED_OFF);
+            Set_GreenLed(LED_OFF);
           }
 	}
-
-       
-      
-      
       Set_TIM1_PWM_Frequency(Duty_Val);
       Set_TIM1_PWM1_DutyCycle(Duty_Val/2);
-      //Set_TIM1_PWM_Frequency(Duty_Val/50);
 
 }
 

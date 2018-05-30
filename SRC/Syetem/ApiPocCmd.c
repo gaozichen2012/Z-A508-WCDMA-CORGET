@@ -15,7 +15,11 @@ u8 *ucGroupListInfo             = "0d0000";
 u8 *ucUserListInfo              = "0e00000000";
 u8 *ucSetGPS                    = "110000";
 u8 *ucAlarm1                    = "2100000000";
+#if 1
+u8 *ucAlarm2                    = "0000000020202000";
+#else
 u8 *ucAlarm2                    = "00000000736f7300";
+#endif
 u8 *ucSetURL                    = "120000";
 typedef struct{
   struct{
@@ -712,6 +716,7 @@ void ApiPocCmd_10msRenew(void)
       if(ucId==0x01)
       {
         PocCmdDrvobj.States.ReceivedVoicePlayStates=TRUE;//喇叭控制
+        PocCmdDrvobj.States.ReceivedVoicePlayStates_Intermediate=FALSE;//解决连续按ptt，第二次喇叭不出声
         PocCmdDrvobj.States.ReceivedVoicePlayStatesForLED=TRUE;//指示灯使用
         PocCmdDrvobj.States.ReceivedVoicePlayStatesForDisplay=ReceivedVoiceStart;//接收图标/显示呼叫用户名/使用
       }

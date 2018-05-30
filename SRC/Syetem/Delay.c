@@ -398,6 +398,7 @@ static void DEL_500msProcess(void)			//delay 500ms process server
       DelDrvObj.Count.receive_sos_statas_count++;
       if(DelDrvObj.Count.receive_sos_statas_count>=2*5)
       {
+        Set_RedLed(LED_OFF);
         set_poc_receive_sos_statas(FALSE);
         DelDrvObj.Count.receive_sos_statas_count=0;
         BEEP_SetOutput(BEEP_IDPowerOff,OFF,0x00,TRUE);
@@ -1154,9 +1155,9 @@ static void DEL_10msProcess(void)
       DelDrvObj.Count.alarm_count++;
       if(poc_receive_sos_statas()==TRUE)
       {
-        if(DelDrvObj.Count.alarm_count>=2)
+        if(DelDrvObj.Count.alarm_count>=3)
       {
-        Test_PWM_LED();//报警音30ms进一次
+        //Test_PWM_LED();//报警音30ms进一次
         DelDrvObj.Count.alarm_count = 0;
       }
       }

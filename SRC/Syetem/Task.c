@@ -15,8 +15,12 @@ bool EnterPttMoment_Flag=FALSE;
 bool LoosenPttMoment_Flag=FALSE;
 u8 EnterPttMomentCount=0;
 u8 LoosenPttMomentCount=0;
-u8 *ucCODECCTL                  = "at^codecctl=6000,4000,0";//T1默认
-
+u8 *ucCODECCTL                  = "at^codecctl=8000,6000,0";//T1默认
+#if 0//CDMA频响
+u8 *ucRXFILTER                  = "AT^rxfilter=1BA,FCB8,FAB7,FF11,9CF,1871,2C20";
+#else
+u8 *ucRXFILTER                  = "AT^rxfilter=f630,f745,238,e52,bea,fc69,e1a"; 
+#endif
 void Key3_PlayVoice(void);
 
 void Task_PowerOnInitial(void)
@@ -50,6 +54,7 @@ void Task_RunStart(void)
           if(TaskDrvobj.status.AccountConfig==FALSE)
           {
             ApiAtCmd_WritCommand(ATCOMM_Test,ucCODECCTL,strlen((char const *)ucCODECCTL));//设置音量增益
+            ApiAtCmd_WritCommand(ATCOMM_Test,(u8 *)ucRXFILTER,strlen((char const *)ucRXFILTER));//高子晨曲线T1-挺好 无啸叫
             TaskDrvobj.status.AccountConfig=TRUE;
             ApiPocCmd_WritCommand(PocComm_OpenPOC,0,0);//打开POC应用
             ApiPocCmd_WritCommand(PocComm_SetParam,0,0);//配置登录账号密码、IP
@@ -248,6 +253,7 @@ void Task_RunNormalOperation(void)
   if(ReadInput_KEY_4==0)//报警键
   {
     ApiPocCmd_WritCommand(PocComm_Alarm,0,0);
+    set_poc_receive_sos_statas(TRUE);
     DEL_SetTimer(0,100);
     while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
   }

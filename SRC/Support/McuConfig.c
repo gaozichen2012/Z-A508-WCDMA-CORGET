@@ -46,6 +46,7 @@ void Tim3_Timer_Init(void)
 #ifdef HSI_CLK
   	/*BaseTime=1/(16000000/16)*(999+1)=1ms*/
 	TIM3_TimeBaseInit(TIM3_PRESCALER_16 ,999);
+        
 	TIM3_PrescalerConfig(TIM3_PRESCALER_16,TIM3_PSCRELOADMODE_IMMEDIATE);
 #endif
 #ifdef HSE_CLK

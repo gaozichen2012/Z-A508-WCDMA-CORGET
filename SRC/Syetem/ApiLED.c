@@ -18,41 +18,48 @@ void LED_IntOutputRenew(void)
   }
   else
   {
-    if(ApiPocCmd_ReceivedVoicePlayStatesForLED()==TRUE)
+    if(poc_receive_sos_statas()==TRUE)
     {
-      Set_GreenLed(LED_ON);
     }
     else
     {
-      LED_Conut++;
-      if(LED_Conut>=49)
+      if(ApiPocCmd_ReceivedVoicePlayStatesForLED()==TRUE)
       {
-        if(beidou_valid()==TRUE)
+        Set_GreenLed(LED_ON);
+      }
+      else
+      {
+        LED_Conut++;
+        if(LED_Conut>=49)
         {
-          Set_RedLed(LED_ON);
+          if(beidou_valid()==TRUE)
+          {
+            Set_RedLed(LED_ON);
+          }
+          else
+          {
+            Set_GreenLed(LED_ON);
+          } 
         }
-        else
+        if(LED_Conut>=51)
         {
-          Set_GreenLed(LED_ON);
-        } 
-      }
-      if(LED_Conut>=51)
-      {
-        Set_GreenLed(LED_OFF);
-        Set_RedLed(LED_OFF);
-        LED_Conut=0;
-      }
-      if(LED_Conut<=48)
-      {
-        Set_GreenLed(LED_OFF);
-        if(WriteFreq_Flag==TRUE)//解决读频红灯常亮的问题，应该是闪红灯
-        {
+          Set_GreenLed(LED_OFF);
           Set_RedLed(LED_OFF);
+          LED_Conut=0;
         }
-        else
+        if(LED_Conut<=48)
         {
+          Set_GreenLed(LED_OFF);
+          if(WriteFreq_Flag==TRUE)//解决读频红灯常亮的问题，应该是闪红灯
+          {
+            Set_RedLed(LED_OFF);
+          }
+          else
+          {
+          }
         }
       }
     }
+
   }
 }

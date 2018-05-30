@@ -217,165 +217,153 @@ void Keyboard_Test(void)
       }
       else//否则就进入菜单模式
       {
-        switch(MenuModeCount)//默认按ok键进入一级菜单
+        if(get_current_working_status()==m_personal_mode)
         {
-        case 1://群组选择
-          Key_PersonalCalling_Flag=0;//进入组呼标志位
-          switch(ApiMenu_SwitchGroup_Flag)
-          {
-          case 0://默认模式按OK键进入一级菜单
-            MenuDisplay(MenuModeCount);
-            MenuMode_Flag=1;
-            ApiMenu_SwitchGroup_Flag=1;
-            TheMenuLayer_Flag=1;//处于一级菜单
-            break;
-          case 1://一级菜单再按ok键默认模式
-            SubmenuMenuDisplay(GroupSwitch);
-            VOICE_Play(GroupMode);
-            ApiMenu_SwitchGroup_Flag=0;
-            TheMenuLayer_Flag=0;//处于0级菜单，进入换组为菜单外功能
-            MenuMode_Flag=0;
-            break;
-          }
-          break;
-#if 0//WCDMA
-        case 2://成员选择
-          switch(ApiMenu_SwitchCallUser_Flag)
-          {
-          case 1://默认菜单按OK键进入一级菜单
-            MenuDisplay(MenuModeCount);
-            MenuMode_Flag=1;
-            ApiMenu_SwitchCallUser_Flag=0;
-            TheMenuLayer_Flag=1;//处于一级菜单
-            break;
-          case 0://一级菜单按ok键进入单呼模式
-            MenuDisplay(Menu_RefreshAllIco);
-            ApiMenu_SwitchCallUser_Flag=1;
-            MenuMode_Flag=0;
-            break;
-          }
-          break;
-        case 3://在线成员列表
-          switch(ApiMenu_SwitchOnlineUser_Flag)
-          {
-          case 2:
-            ApiMenu_SwitchOnlineUser_Flag=0;
-            MenuDisplay(MenuModeCount);
-            MenuMode_Flag=1;
-            break;
-          case 1://默认菜单按OK键进入一级菜单
-            MenuDisplay(MenuModeCount);
-            MenuMode_Flag=1;
-            ApiMenu_SwitchOnlineUser_Flag=2;
-            TheMenuLayer_Flag=1;//处于一级菜单
-            break;
-          case 0://一级菜单按ok键进入单呼模式
-            MenuDisplay(Menu_RefreshAllIco);
-            ApiMenu_SwitchOnlineUser_Flag=1;
-            MenuMode_Flag=1;
-            break;
-          }
-          break;
-#endif
-        case 2://GPS设置
-              switch(ApiMenu_GpsInfo_Flag)
-              {
-               //客户要求GPS经纬度及本机信息界面按上下键和OK键无效，只有按退出键退出，故屏蔽以下
-              /*case 1://二级菜单按OK键进入一级菜单
-                MenuDisplay(MenuModeCount);
-                MenuMode_Flag=1;
-                ApiMenu_GpsInfo_Flag=0;
-                TheMenuLayer_Flag=1;//处于一级菜单
-                break;*/
-              case 0://一级菜单按ok键进入二级菜单
-                SubmenuMenuDisplay(GpsInfoMenu);
-                ApiMenu_GpsInfo_Flag=1;
-                TheMenuLayer_Flag=2;//处于二级菜单
-                break;
-              }
-          break;
-        case 3://背光灯设置
-              switch(ApiMenu_BacklightTimeSet_Flag)
-              {
-              case 2:
-                ApiMenu_BacklightTimeSet_Flag=0;
-                MenuDisplay(MenuModeCount);
-                MenuMode_Flag=1;
-                break;
-              case 0://在一级菜单按ok键进入二级菜单
-                ApiMenu_BacklightTimeSet_Flag=1;//在上下键中处理
-                SubmenuMenuDisplay(BacklightTimeSet);
-                TheMenuLayer_Flag=2;//处于二级菜单
-                break;
-              case 1://二级菜单按ok键进入一级菜单
-                ApiMenu_BacklightTimeSet_Flag=2;
-                MenuDisplay(MenuModeCount);
-                MenuMode_Flag=1;
-                TheMenuLayer_Flag=1;//处于一级菜单
-                break;
-              }
-          break;
-        case 4://键盘锁定
-              switch(ApiMenu_KeylockTimeSet_Flag)
-              {
-              case 2://默认状态按OK键进入一级菜单
-                ApiMenu_KeylockTimeSet_Flag=0;
-                MenuDisplay(MenuModeCount);
-                MenuMode_Flag=1;
-                break;
-              case 0://在一级菜单按ok键进入二级菜单
-                ApiMenu_KeylockTimeSet_Flag=1;//在上下键中处理
-                SubmenuMenuDisplay(KeylockTimeSet);
-                TheMenuLayer_Flag=2;//处于二级菜单
-                break;
-              case 1:
-                ApiMenu_KeylockTimeSet_Flag=2;
-                MenuDisplay(MenuModeCount);
-                MenuMode_Flag=1;
-                TheMenuLayer_Flag=1;//处于一级菜单
-                break;
-              }
-          break;
-        case 5://本机信息
-              switch(ApiMenu_NativeInfo_Flag)
-              {
-                //客户要求GPS经纬度及本机信息界面按上下键和OK键无效，只有按退出键退出，故屏蔽以下
-              /*case 1://默认状态按OK键进入一级菜单
-                MenuDisplay(MenuModeCount);
-                MenuMode_Flag=1;
-                ApiMenu_NativeInfo_Flag=0;
-                TheMenuLayer_Flag=1;//处于一级菜单
-                break;*/
-              case 0://在gps信息一级菜单按ok键进入二级菜单
-                SubmenuMenuDisplay(NativeInfoMenu);
-                ApiMenu_NativeInfo_Flag=1;
-                TheMenuLayer_Flag=2;//处于二级菜单
-                break;
-              }
-          break;
-#if 0
-        case 8://北斗/写频切换
-          switch(ApiMenu_BeiDouOrWritingFrequency_Flag)
-          {
-            //客户要求GPS经纬度及本机信息界面按上下键和OK键无效，只有按退出键退出，故屏蔽以下
-          /*case 1://二级菜单按OK键进入一级菜单
-            MenuDisplay(MenuModeCount);
-            MenuMode_Flag=1;
-            ApiMenu_BeiDouOrWritingFrequency_Flag=0;
-            TheMenuLayer_Flag=1;//处于一级菜单
-            break;*/
-          case 0://一级菜单按ok键进入二级菜单
-            SubmenuMenuDisplay(BeiDouOrWritingFrequencySwitch);
-            ApiMenu_BeiDouOrWritingFrequency_Flag=1;
-            MenuMode_Flag=1;
-            TheMenuLayer_Flag=2;//处于二级菜单
-            break;
-          }
-          break;
-#endif
-        default:
-          break;
+          
         }
+        else
+        {
+          switch(MenuModeCount)//默认按ok键进入一级菜单
+          {
+          case 1://群组选择
+            Key_PersonalCalling_Flag=0;//进入组呼标志位
+            switch(ApiMenu_SwitchGroup_Flag)
+            {
+            case 0://默认模式按OK键进入一级菜单
+              MenuDisplay(MenuModeCount);
+              MenuMode_Flag=1;
+              ApiMenu_SwitchGroup_Flag=1;
+              TheMenuLayer_Flag=1;//处于一级菜单
+              break;
+            case 1://一级菜单再按ok键默认模式
+              SubmenuMenuDisplay(GroupSwitch);
+              VOICE_Play(GroupMode);
+              ApiMenu_SwitchGroup_Flag=0;
+              TheMenuLayer_Flag=0;//处于0级菜单，进入换组为菜单外功能
+              MenuMode_Flag=0;
+              break;
+            }
+            break;
+  #if 0//WCDMA
+          case 2://成员选择
+            switch(ApiMenu_SwitchCallUser_Flag)
+            {
+            case 1://默认菜单按OK键进入一级菜单
+              MenuDisplay(MenuModeCount);
+              MenuMode_Flag=1;
+              ApiMenu_SwitchCallUser_Flag=0;
+              TheMenuLayer_Flag=1;//处于一级菜单
+              break;
+            case 0://一级菜单按ok键进入单呼模式
+              MenuDisplay(Menu_RefreshAllIco);
+              ApiMenu_SwitchCallUser_Flag=1;
+              MenuMode_Flag=0;
+              break;
+            }
+            break;
+          case 3://在线成员列表
+            switch(ApiMenu_SwitchOnlineUser_Flag)
+            {
+            case 2:
+              ApiMenu_SwitchOnlineUser_Flag=0;
+              MenuDisplay(MenuModeCount);
+              MenuMode_Flag=1;
+              break;
+            case 1://默认菜单按OK键进入一级菜单
+              MenuDisplay(MenuModeCount);
+              MenuMode_Flag=1;
+              ApiMenu_SwitchOnlineUser_Flag=2;
+              TheMenuLayer_Flag=1;//处于一级菜单
+              break;
+            case 0://一级菜单按ok键进入单呼模式
+              MenuDisplay(Menu_RefreshAllIco);
+              ApiMenu_SwitchOnlineUser_Flag=1;
+              MenuMode_Flag=1;
+              break;
+            }
+            break;
+  #endif
+          case 2://GPS设置
+                switch(ApiMenu_GpsInfo_Flag)
+                {
+                 //客户要求GPS经纬度及本机信息界面按上下键和OK键无效，只有按退出键退出，故屏蔽以下
+                /*case 1://二级菜单按OK键进入一级菜单
+                  MenuDisplay(MenuModeCount);
+                  MenuMode_Flag=1;
+                  ApiMenu_GpsInfo_Flag=0;
+                  TheMenuLayer_Flag=1;//处于一级菜单
+                  break;*/
+                case 0://一级菜单按ok键进入二级菜单
+                  SubmenuMenuDisplay(GpsInfoMenu);
+                  ApiMenu_GpsInfo_Flag=1;
+                  TheMenuLayer_Flag=2;//处于二级菜单
+                  break;
+                }
+            break;
+          case 3://背光灯设置
+                switch(ApiMenu_BacklightTimeSet_Flag)
+                {
+                case 2:
+                  ApiMenu_BacklightTimeSet_Flag=0;
+                  MenuDisplay(MenuModeCount);
+                  MenuMode_Flag=1;
+                  break;
+                case 0://在一级菜单按ok键进入二级菜单
+                  ApiMenu_BacklightTimeSet_Flag=1;//在上下键中处理
+                  SubmenuMenuDisplay(BacklightTimeSet);
+                  TheMenuLayer_Flag=2;//处于二级菜单
+                  break;
+                case 1://二级菜单按ok键进入一级菜单
+                  ApiMenu_BacklightTimeSet_Flag=2;
+                  MenuDisplay(MenuModeCount);
+                  MenuMode_Flag=1;
+                  TheMenuLayer_Flag=1;//处于一级菜单
+                  break;
+                }
+            break;
+          case 4://键盘锁定
+                switch(ApiMenu_KeylockTimeSet_Flag)
+                {
+                case 2://默认状态按OK键进入一级菜单
+                  ApiMenu_KeylockTimeSet_Flag=0;
+                  MenuDisplay(MenuModeCount);
+                  MenuMode_Flag=1;
+                  break;
+                case 0://在一级菜单按ok键进入二级菜单
+                  ApiMenu_KeylockTimeSet_Flag=1;//在上下键中处理
+                  SubmenuMenuDisplay(KeylockTimeSet);
+                  TheMenuLayer_Flag=2;//处于二级菜单
+                  break;
+                case 1:
+                  ApiMenu_KeylockTimeSet_Flag=2;
+                  MenuDisplay(MenuModeCount);
+                  MenuMode_Flag=1;
+                  TheMenuLayer_Flag=1;//处于一级菜单
+                  break;
+                }
+            break;
+          case 5://本机信息
+                switch(ApiMenu_NativeInfo_Flag)
+                {
+                  //客户要求GPS经纬度及本机信息界面按上下键和OK键无效，只有按退出键退出，故屏蔽以下
+                /*case 1://默认状态按OK键进入一级菜单
+                  MenuDisplay(MenuModeCount);
+                  MenuMode_Flag=1;
+                  ApiMenu_NativeInfo_Flag=0;
+                  TheMenuLayer_Flag=1;//处于一级菜单
+                  break;*/
+                case 0://在gps信息一级菜单按ok键进入二级菜单
+                  SubmenuMenuDisplay(NativeInfoMenu);
+                  ApiMenu_NativeInfo_Flag=1;
+                  TheMenuLayer_Flag=2;//处于二级菜单
+                  break;
+                }
+            break;
+          default:
+            break;
+          }
+        }
+
     }
     }
     Delay_100ms(1);

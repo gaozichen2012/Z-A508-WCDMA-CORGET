@@ -15,7 +15,7 @@ bool EnterPttMoment_Flag=FALSE;
 bool LoosenPttMoment_Flag=FALSE;
 u8 EnterPttMomentCount=0;
 u8 LoosenPttMomentCount=0;
-u8 *ucCODECCTL                  = "at^codecctl=8000,6000,0";//T1Ä¬ÈÏ
+u8 *ucCODECCTL                  = "at^codecctl=C000,4000,0";//T1Ä¬ÈÏ
 #if 0//CDMAÆµÏì
 u8 *ucRXFILTER                  = "AT^rxfilter=1BA,FCB8,FAB7,FF11,9CF,1871,2C20";
 #else

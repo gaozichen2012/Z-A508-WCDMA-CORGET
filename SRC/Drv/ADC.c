@@ -59,31 +59,37 @@ void LowVoltageDetection(void)
    
    if(ADValue<=350&&ADValue>=200)
       {
-        api_disp_icoid_output( eICO_IDBATT , TRUE, TRUE);
+        if(MenuMode_Flag==0)
+          api_disp_icoid_output( eICO_IDBATT , TRUE, TRUE);
         BatteryLevel=0;
       }//电池电量0级
       else if(ADValue<=360&&ADValue>350)
       {
+        if(MenuMode_Flag==0)
         api_disp_icoid_output( eICO_IDBATT1, TRUE, TRUE);
         BatteryLevel=1;
       }//电池电量1级
       else if(ADValue<=375&&ADValue>365)
       {
+        if(MenuMode_Flag==0)
         api_disp_icoid_output( eICO_IDBATT2, TRUE, TRUE);
         BatteryLevel=2;
       }//电池电量2级
       else if(ADValue<=390&&ADValue>380)
       {
+        if(MenuMode_Flag==0)
         api_disp_icoid_output( eICO_IDBATT3, TRUE, TRUE);
         BatteryLevel=3;
       }//电池电量3级
       else if(ADValue<=405&&ADValue>395)
       {
+        if(MenuMode_Flag==0)
         api_disp_icoid_output( eICO_IDBATT4, TRUE, TRUE);
         BatteryLevel=4;
       }//电池电量4级
       else if(ADValue<=500&&ADValue>410)
       {
+        if(MenuMode_Flag==0)
         api_disp_icoid_output( eICO_IDBATT5, TRUE, TRUE);
         BatteryLevel=5;
       }//电池电量5级
@@ -96,6 +102,7 @@ void LowVoltageDetection(void)
       Count++;
       if(Count>=100)
       {
+        if(MenuMode_Flag==0)
         api_disp_icoid_output( eICO_IDBATT, TRUE, TRUE);
         SetTaskId(TASK_LOBATT);
         LowVoltageDetection_Flag=TRUE;
@@ -107,6 +114,7 @@ void LowVoltageDetection(void)
       Count2++;
       if(Count2>=100)
       {
+        if(MenuMode_Flag==0)
         api_disp_icoid_output( eICO_IDBATT, TRUE, TRUE);
         SetTaskId(Task_NormalOperation);
         PrimaryLowPower_Flag=TRUE;
@@ -119,31 +127,37 @@ void LowVoltageDetection(void)
       SetTaskId(Task_NormalOperation); 
       if(ADValue<=350&&ADValue>=200)
       {
+        if(MenuMode_Flag==0)
         api_disp_icoid_output( eICO_IDBATT , TRUE, TRUE);
         BatteryLevel=0;
       }//电池电量0级
       else if(ADValue<=360&&ADValue>350)
       {
+        if(MenuMode_Flag==0)
         api_disp_icoid_output( eICO_IDBATT1, TRUE, TRUE);
         BatteryLevel=1;
       }//电池电量1级
       else if(ADValue<=375&&ADValue>365)
       {
+        if(MenuMode_Flag==0)
         api_disp_icoid_output( eICO_IDBATT2, TRUE, TRUE);
         BatteryLevel=2;
       }//电池电量2级
       else if(ADValue<=390&&ADValue>380)
       {
+        if(MenuMode_Flag==0)
         api_disp_icoid_output( eICO_IDBATT3, TRUE, TRUE);
         BatteryLevel=3;
       }//电池电量3级
       else if(ADValue<=405&&ADValue>395)
       {
+        if(MenuMode_Flag==0)
         api_disp_icoid_output( eICO_IDBATT4, TRUE, TRUE);
         BatteryLevel=4;
       }//电池电量4级
       else if(ADValue<=500&&ADValue>410)
       {
+        if(MenuMode_Flag==0)
         api_disp_icoid_output( eICO_IDBATT5, TRUE, TRUE);
         BatteryLevel=5;
       }//电池电量5级

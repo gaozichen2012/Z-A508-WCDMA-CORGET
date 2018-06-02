@@ -6,6 +6,11 @@ u8 KeylockTimeSetCount=0x11;//默认进选择体1
 
 
 #define KeyCountNum 50//数字键盘消抖-解决了上下键误读数字键问题
+
+
+u8 *ucCODECCTL1                  = "at^codecctl=C000,4000,0";//T1默认
+u8 *ucCODECCTL2                  = "at^codecctl=5000,4000,0";//T1默认
+
 u8 AkeyvolumeCount=7;
 u8 *ucVGR1                       = "AT+VGR=1";//音量增益1
 u8 *ucVGR7                       = "AT+VGR=7";//音量增益默认7
@@ -379,8 +384,12 @@ void Keyboard_Test(void)
     {
       
       VOICE_Play(HandsetMode);//听筒模式
-      api_disp_icoid_output( eICO_IDMONITER, TRUE, TRUE);//听筒模式图标
+      if(MenuMode_Flag==0)
+      {
+        api_disp_icoid_output( eICO_IDMONITER, TRUE, TRUE);//听筒模式图标
+      }
       VoiceType_FreehandOrHandset_Flag=1;
+      ApiAtCmd_WritCommand(ATCOMM_Test,ucCODECCTL1,strlen((char const *)ucCODECCTL1));//设置音量增益
       api_disp_all_screen_refresh();// 全屏统一刷新
       DEL_SetTimer(0,30);
       while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
@@ -392,8 +401,12 @@ void Keyboard_Test(void)
       if(AkeyvolumeCount==1)
       {
         VOICE_Play(HandfreeMode);//免提模式
+        if(MenuMode_Flag==0)
+        {
         api_disp_icoid_output( eICO_IDTemper, TRUE, TRUE);//免提模式图标
+        }
         VoiceType_FreehandOrHandset_Flag=0;
+        ApiAtCmd_WritCommand(ATCOMM_Test,ucCODECCTL1,strlen((char const *)ucCODECCTL1));//设置音量增益
         api_disp_all_screen_refresh();// 全屏统一刷新
         DEL_SetTimer(0,30);
         while(1){if(DEL_GetTimer(0) == TRUE) {break;}}

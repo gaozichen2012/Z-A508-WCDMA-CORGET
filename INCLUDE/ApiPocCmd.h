@@ -82,7 +82,8 @@ extern working_status_type get_current_working_status(void);
 extern PocStatesType poccmd_states_poc_status(void);
 extern bool poc_receive_sos_statas(void);
 extern void set_poc_receive_sos_statas(bool a);
-
+extern bool poc_first_enter_into_group_flag(void);
+extern bool poc_gps_value_for_display_flag(void);
 /*****群组用户名相关调用函数****************/
 extern u8 *GetNowWorkingGroupNameForDisplay(void);
 extern u8 GetNowWorkingGroupNameLenForDisplay(void);

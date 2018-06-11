@@ -60,6 +60,8 @@ typedef struct{
     bool ToneState_Intermediate;
     bool receive_sos_statas;
     bool alarm_states;
+    bool first_enter_into_group_flag;
+    bool gps_value_for_display_flag;
   }States;
   struct{
 /*****组名**************/
@@ -136,6 +138,8 @@ void ApiPocCmd_PowerOnInitial(void)
   PocCmdDrvobj.States.ReceivedVoicePlayStatesForDisplay = ReceivedVoiceNone;
   PocCmdDrvobj.States.ToneState = FALSE;
   PocCmdDrvobj.States.ToneState_Intermediate = FALSE;
+  PocCmdDrvobj.States.first_enter_into_group_flag=FALSE;
+  PocCmdDrvobj.States.gps_value_for_display_flag=FALSE;
   
   PocCmdDrvobj.offline_user_count=0;
   PocCmdDrvobj.all_user_num=0;
@@ -276,6 +280,7 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
     PocCmdDrvobj.Position.latitude_float = (beidou_latitude_minute()*10000+beidou_latitude_second())*10/6;//小数位合并换算
 #endif
     Digital_TO_CHAR(&gps_info_buf[0],PocCmdDrvobj.Position.latitude_integer,2);
+    gps_info_buf[2] = 0x2E;
     Digital_TO_CHAR(&gps_info_buf[3],PocCmdDrvobj.Position.latitude_float,6);//转换格式二合一
     gps_info_buf[9] = 0x2C;
     Digital_TO_CHAR(&gps_info_buf[10],PocCmdDrvobj.Position.longitude_integer,3);
@@ -286,6 +291,7 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
     PocCmdDrvobj.gps_info_report[41]='0';
     PocCmdDrvobj.gps_info_report[42]='0';
     DrvGD83_UART_TxCommand(PocCmdDrvobj.gps_info_report,strlen((char const *)PocCmdDrvobj.gps_info_report));
+    PocCmdDrvobj.States.gps_value_for_display_flag=TRUE;
     break;
   case PocComm_Key://7
     DrvGD83_UART_TxCommand(buf, len);
@@ -476,6 +482,7 @@ void ApiPocCmd_10msRenew(void)
       }
       break;
     case 0x0D://获取群组信息
+      //ucId = COML_AscToHex(pBuf+10, 0x02);
       break;
     case 0x0e://获取组成员信息
       PocCmdDrvobj.all_user_num=COML_AscToHex(pBuf+10,0x02);
@@ -633,14 +640,15 @@ void ApiPocCmd_10msRenew(void)
       ucId = COML_AscToHex(pBuf+2, 0x02);
       if(ucId==0x00)
       {
-        ApiPocCmd_WritCommand(PocComm_GroupListInfo,0,0);
+        //ApiPocCmd_WritCommand(PocComm_GroupListInfo,0,0);
       }
       if(ucId==0x01)
       {
-        ApiPocCmd_WritCommand(PocComm_UserListInfo,0,0);
+        //ApiPocCmd_WritCommand(PocComm_UserListInfo,0,0);
       }
       break;
     case 0x86://通知用户进入群组信息
+      PocCmdDrvobj.States.first_enter_into_group_flag=TRUE;
       temp_id = COML_AscToHex(pBuf+2, 0x02);
       if(temp_id==0x01)
       {
@@ -1453,4 +1461,14 @@ bool poc_receive_sos_statas(void)
 void set_poc_receive_sos_statas(bool a)
 {
   PocCmdDrvobj.States.receive_sos_statas = a;
+}
+
+bool poc_first_enter_into_group_flag(void)
+{
+  return PocCmdDrvobj.States.first_enter_into_group_flag;
+}
+
+bool poc_gps_value_for_display_flag(void)
+{
+  return PocCmdDrvobj.States.gps_value_for_display_flag;
 }

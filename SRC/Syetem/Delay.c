@@ -47,7 +47,10 @@ typedef struct {
     u8 receive_sos_statas_count;
     u8 ztts_states_intermediate_count;
     u8 alarm_count;
+    u8 poc_first_enter_into_group_flag_count;
+    u8 poc_gps_value_for_display_flag_count;
   }Count;
+  bool poc_gps_value_for_display_flag2;
   u8 BacklightTimeBuf[1];//背光灯时间(需要设置进入eeprom)
   u8 KeylockTimeBuf[1];//键盘锁时间(需要设置进入eeprom)
 }DEL_DRV;
@@ -87,6 +90,9 @@ void DEL_PowerOnInitial(void)//原瑞撒單片機多長時間進一次中斷
   DelDrvObj.Count.choose_write_freq_or_gps_count = 0;
   DelDrvObj.Count.receive_sos_statas_count = 0;
   DelDrvObj.Count.ztts_states_intermediate_count = 0;
+  DelDrvObj.Count.alarm_count = 0;
+  DelDrvObj.Count.poc_first_enter_into_group_flag_count = 0;
+  DelDrvObj.Count.poc_gps_value_for_display_flag_count=0;
   return;
 }
 
@@ -342,7 +348,7 @@ static void DEL_500msProcess(void)			//delay 500ms process server
       }
     }
     
-    if(ApiPocCmd_ToneStateIntermediate()==TRUE)//bb音
+    if(ApiPocCmd_ToneStateIntermediate()==TRUE||ApiPocCmd_ToneState()==TRUE)//bb音
     {
       DelDrvObj.Count.ToneStateCount++;
       if(DelDrvObj.Count.ToneStateCount>1)
@@ -352,8 +358,21 @@ static void DEL_500msProcess(void)			//delay 500ms process server
         DelDrvObj.Count.ToneStateCount=0;
       }
     }
-/*****低于设定值播报网络信号弱*************************************************************************/
-    
+/****定位成功后3s后在菜单模式下才能查看到经纬度信息（解决刚定位成功查看经纬度异常的问题）*********************************************************/
+    if(poc_gps_value_for_display_flag()==TRUE)
+    {
+      DelDrvObj.Count.poc_gps_value_for_display_flag_count++;
+      if(DelDrvObj.Count.poc_gps_value_for_display_flag_count>2*6)
+      {
+        DelDrvObj.Count.poc_gps_value_for_display_flag_count=0;
+        DelDrvObj.poc_gps_value_for_display_flag2=TRUE;
+      }
+    }
+    else
+    {
+      DelDrvObj.Count.poc_gps_value_for_display_flag_count=0;
+      DelDrvObj.poc_gps_value_for_display_flag2=FALSE;
+    }
 /******登录状态下的低电报警**********************************************/
     if(LobatteryTask_StartFlag==TRUE)
     {
@@ -389,6 +408,20 @@ static void DEL_500msProcess(void)			//delay 500ms process server
         PrimaryLowPower_Flag=FALSE;
       }
     }
+/**登录成功后更新群组信息，若获取不完整则重新获取直到完整**/
+    if(poc_first_enter_into_group_flag()==TRUE)
+    {
+      DelDrvObj.Count.poc_first_enter_into_group_flag_count++;
+      if(DelDrvObj.Count.poc_first_enter_into_group_flag_count==1)
+      {
+        ApiPocCmd_WritCommand(PocComm_GroupListInfo,0,0);
+      }
+      if(DelDrvObj.Count.poc_first_enter_into_group_flag_count>=2)
+      {
+        DelDrvObj.Count.poc_first_enter_into_group_flag_count=2;
+      }
+    }
+    //if(poc_first_enter_into_group_flag()==TRUE&&)
 /********收到0x8a则进入一键报警********/
     if(poc_receive_sos_statas()==TRUE)
     {
@@ -410,11 +443,16 @@ static void DEL_500msProcess(void)			//delay 500ms process server
     {
       DelDrvObj.Count.receive_sos_statas_count=0;
     }
-    
+/*******收到离线指令，屏幕提示离线状态*******/
+    if(GetTaskId()==Task_NormalOperation&&poccmd_states_poc_status()==OffLine)
+    {
+      api_lcd_pwr_on_hint(0,2,"Status:Offline  ");
+    }
 /*******收到离线指令过1分钟未登陆重启*******/
     if(poccmd_states_poc_status()==OffLine)
     {
       DelDrvObj.Count.poc_status_count++;
+      
       if(DelDrvObj.Count.poc_status_count>2*60)
       {
         DelDrvObj.Count.poc_status_count=0;
@@ -1164,4 +1202,18 @@ static void DEL_10msProcess(void)
 
   }
   return;
+}
+
+bool delay_gps_value_for_display_flag2(void)
+{
+  return DelDrvObj.poc_gps_value_for_display_flag2;
+}
+
+u8 read_backlight_time_value(void)
+{
+  return DelDrvObj.BacklightTimeBuf[0];
+}
+u8 read_key_lock_time_value(void)
+{
+  return DelDrvObj.KeylockTimeBuf[0];
 }

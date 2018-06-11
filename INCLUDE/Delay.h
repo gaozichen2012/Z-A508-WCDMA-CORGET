@@ -16,6 +16,11 @@
 #endif
 DELAPI u8 ApiAtCmd_ZTTSCount;
 DELAPI u8 ShowTime_Flag;
+extern bool delay_gps_value_for_display_flag2(void);
+extern u8 read_backlight_time_value(void);
+extern u8 read_key_lock_time_value(void);
+
+
 DELAPI u8 TaskStartDeleteDelay1Count;
 DELAPI u8 TaskStartDeleteDelay3Count;
 DELAPI u8 TaskStartDeleteDelay4Count;

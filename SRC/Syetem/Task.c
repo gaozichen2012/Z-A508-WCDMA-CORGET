@@ -184,6 +184,7 @@ void Task_RunNormalOperation(void)
       while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
       ApiPocCmd_WritCommand(PocComm_EnterGroup,0,0);
       KeyDownUpChoose_GroupOrUser_Flag=0;
+      api_disp_icoid_output( eICO_IDMESSAGEOff, TRUE, TRUE);//S选择对应空图标
       KeyUpDownCount=0;
       break;
     case 2://=2,呼叫某用户
@@ -192,6 +193,7 @@ void Task_RunNormalOperation(void)
       while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
       ApiPocCmd_WritCommand(PocComm_Invite,0,0);
       KeyDownUpChoose_GroupOrUser_Flag=0;
+      api_disp_icoid_output( eICO_IDMESSAGEOff, TRUE, TRUE);//S选择对应空图标
       KeyPersonalCallingCount=0;
       break;
     case 3:
@@ -248,6 +250,7 @@ void Task_RunNormalOperation(void)
     while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
     ApiPocCmd_WritCommand(PocComm_UserListInfo,0,0);
     KeyDownUpChoose_GroupOrUser_Flag=2;
+    api_disp_icoid_output( eICO_IDLOCKED, TRUE, TRUE);//S选择图标
   }
 /*******报警键状态检测********************************************************************************************************************************************/
   if(ReadInput_KEY_4==0)//报警键
@@ -307,6 +310,7 @@ void Task_RunNormalOperation(void)
       MenuMode_Flag = 0;
     }
     KeyDownUpChoose_GroupOrUser_Flag=0;
+    api_disp_icoid_output( eICO_IDMESSAGEOff, TRUE, TRUE);//S选择对应空图标
     KeyUpDownCount=0;
 #endif
     break;

@@ -168,6 +168,7 @@ void LowVoltageDetection(void)
         MenuMode_Flag=0;
         get_screen_display_group_name();//选择显示当前群组昵称（群组或单呼临时群组）
         KeyDownUpChoose_GroupOrUser_Flag=0;
+        api_disp_icoid_output( eICO_IDMESSAGEOff, TRUE, TRUE);//S选择对应空图标
         KeyUpDownCount=0;
         LowVoltageDetection_Flag=FALSE;
       }

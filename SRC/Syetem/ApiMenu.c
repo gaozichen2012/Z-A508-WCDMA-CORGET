@@ -184,7 +184,7 @@ void SubmenuMenuDisplay(SubmenuMenuDisplayType id)
   case GpsInfoMenu:
      api_lcd_pwr_on_hint(0,2,"                ");//清屏
     api_lcd_pwr_on_hint(0,0,"                ");//清屏
-    if(beidou_valid()==FALSE)
+    if(delay_gps_value_for_display_flag2()==FALSE)
     {
       api_lcd_pwr_on_hint(0,0,"Lat :00.000000 ");//清屏
       api_lcd_pwr_on_hint(0,2,"Lng :000.000000  ");//清屏
@@ -223,9 +223,11 @@ void SubmenuMenuDisplay(SubmenuMenuDisplayType id)
     MCU_VERSIONForMenu();
     break;
   case BacklightTimeSet:
+    BacklightTimeSetCount=read_backlight_time_value();
     Level3MenuDisplay(BacklightTimeSetCount);
     break;
   case KeylockTimeSet:
+    KeylockTimeSetCount=read_key_lock_time_value()+0x10;
     Level3MenuDisplay(KeylockTimeSetCount);
     break;
   case BeiDouOrWritingFrequencySwitch:

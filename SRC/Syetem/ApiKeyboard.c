@@ -9,7 +9,7 @@ u8 KeylockTimeSetCount=0x11;//默认进选择体1
 
 
 u8 *ucCODECCTL1                  = "at^codecctl=C000,4000,0";//T1默认
-u8 *ucCODECCTL2                  = "at^codecctl=5000,4000,0";//T1默认
+u8 *ucCODECCTL2                  = "at^codecctl=1000,4000,0";//T1默认
 
 u8 AkeyvolumeCount=7;
 u8 *ucVGR1                       = "AT+VGR=1";//音量增益1
@@ -150,6 +150,7 @@ void Keyboard_Test(void)
     }
     else
     {
+      api_disp_icoid_output( eICO_IDLOCKED, TRUE, TRUE);//S选择图标
       if(TASK_PersonalKeyMode()==TRUE)//单呼模式
       {
         KeyPersonalCallingCount--;
@@ -204,6 +205,7 @@ void Keyboard_Test(void)
           while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
           ApiPocCmd_WritCommand(PocComm_EnterGroup,0,0);
           KeyDownUpChoose_GroupOrUser_Flag=0;
+          api_disp_icoid_output( eICO_IDMESSAGEOff, TRUE, TRUE);//S选择对应空图标
           KeyUpDownCount=0;
           break;
         case 2://=2,呼叫某用户
@@ -212,6 +214,7 @@ void Keyboard_Test(void)
           while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
           ApiPocCmd_WritCommand(PocComm_Invite,0,0);
           KeyDownUpChoose_GroupOrUser_Flag=0;
+          api_disp_icoid_output( eICO_IDMESSAGEOff, TRUE, TRUE);//S选择对应空图标
           KeyPersonalCallingCount=0;
           break;
         case 3:
@@ -389,7 +392,7 @@ void Keyboard_Test(void)
         api_disp_icoid_output( eICO_IDMONITER, TRUE, TRUE);//听筒模式图标
       }
       VoiceType_FreehandOrHandset_Flag=1;
-      ApiAtCmd_WritCommand(ATCOMM_Test,ucCODECCTL1,strlen((char const *)ucCODECCTL1));//设置音量增益
+      ApiAtCmd_WritCommand(ATCOMM_Test,ucCODECCTL2,strlen((char const *)ucCODECCTL2));//设置音量增益
       api_disp_all_screen_refresh();// 全屏统一刷新
       DEL_SetTimer(0,30);
       while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
@@ -447,7 +450,7 @@ void Keyboard_Test(void)
       TestNum10=0;
     NumberKeyboardPressDown_flag=TRUE;
     }
-    break;  
+    break;
   case 0x00004000://8
     TestNum11++;
     if(TestNum11>=KeyCountNum)
@@ -522,6 +525,7 @@ void Keyboard_Test(void)
       }
       else
       {
+        api_disp_icoid_output( eICO_IDLOCKED, TRUE, TRUE);//S选择图标
         if(TASK_PersonalKeyMode()==TRUE)//单呼模式
         {
           KeyPersonalCallingCount++;
@@ -738,6 +742,7 @@ void Keyboard_Test(void)
         api_lcd_pwr_on_hint(0,2,"                ");//清屏
         api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());//显示当前群组昵称
         KeyDownUpChoose_GroupOrUser_Flag=0;
+        api_disp_icoid_output( eICO_IDMESSAGEOff, TRUE, TRUE);//S选择对应空图标
         KeyUpDownCount=0;
         Key_Flag_1=1;//按键延时标志位
 

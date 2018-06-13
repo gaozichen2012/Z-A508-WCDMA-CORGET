@@ -1424,7 +1424,7 @@ void get_screen_display_group_name(void)
   else //单呼模式
   {
     api_lcd_pwr_on_hint(0,2,"                ");
-    api_lcd_pwr_on_hint(0,2,"Temporary groups");//Temporary groups临时群组
+    api_lcd_pwr_on_hint(0,2,"Individual Call ");//Temporary groups临时群组
   }
 }
 

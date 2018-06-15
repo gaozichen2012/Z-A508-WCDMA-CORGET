@@ -63,12 +63,40 @@ static void mcu_lcd_initial(void)
 ********************************************************************************/
 static void htg_initial(void)
 {
+  
 	MCU_LCD_RESET(LO);//reset?Áî0
 	htg_delay_ms(50); // ëxªÙ2um
 
 	MCU_LCD_RESET(HI);//reset?Áî1
 	htg_delay_ms(20);
-	
+#if 1
+        drv_htg_write_command(0xa0);	//a1
+        drv_htg_write_command(0xa2);
+        drv_htg_write_command(0xc0);//c0
+        drv_htg_write_command(0xa4);
+        drv_htg_write_command(0x40);
+        drv_htg_write_command(0x24);//0x25
+        
+        drv_htg_write_command(0x81);//Set Electronic Volume 
+        drv_htg_write_command(0x00);//Set Electronic Volume //0X1B
+        
+        drv_htg_write_command(0xf8);//
+        drv_htg_write_command(0x00);//
+        
+        drv_htg_write_command(0xa6);
+        
+        drv_htg_write_command(0x2c);//
+        htg_delay_ms(10);
+        
+        drv_htg_write_command(0x2e);//
+        htg_delay_ms(100);
+        
+        drv_htg_write_command(0x2f);//
+        htg_delay_ms(10);
+        drv_htg_clr_allscr();//??3y?D??
+        drv_htg_write_command(0xaf);
+        
+#else
 	drv_htg_write_command(0xE2);		//soft-reset
 	drv_htg_write_command(0xA2);		//bias set
 	drv_htg_write_command(0xA1);		//normal
@@ -82,7 +110,7 @@ static void htg_initial(void)
 	drv_htg_clr_allscr();//??3y?D??
 	drv_htg_write_command(0x40); //?????a??
 	drv_htg_write_command(0xAF); //¨Œ??¡ÙDD?a??????
-
+#endif
 	return;
 }
 

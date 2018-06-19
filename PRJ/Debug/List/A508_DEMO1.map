@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V2.20.1.176 for STM8                     15/Jun/2018  16:20:20
+# IAR ELF Linker V2.20.1.176 for STM8                     15/Jun/2018  17:01:51
 # Copyright 2010-2015 IAR Systems AB.
 #
 #    Output file  =  
@@ -386,7 +386,7 @@ __rt_version               = 4
   .near.rodata       const    0x00acd8     0x3  uart3.o [1]
                             - 0x00acdb  0x2c5b
 
-"P4", part 1 of 2:                      0x427d
+"P4", part 1 of 2:                      0x4258
   .far_func.text     ro code  0x00acdb   0xa32  ApiKeyboard.o [1]
   .far_func.text     ro code  0x00b70d   0x823  DrvGD83.o [1]
   .far_func.text     ro code  0x00bf30   0x759  ApiPocCmd.o [1]
@@ -399,10 +399,10 @@ __rt_version               = 4
   .far_func.text     ro code  0x00dfbb   0x2ff  ApiGpsCmd.o [1]
   .far_func.text     ro code  0x00e2ba   0x2cd  GT20L16P1Y.o [3]
   .far_func.text     ro code  0x00e587   0x2bc  ADC.o [1]
-  .far_func.text     ro code  0x00e843   0x277  DrvHTG12832.o [1]
-  .far_func.text     ro code  0x00eaba   0x251  GT20L16P1Y.o [3]
-  .far_func.text     ro code  0x00ed0b   0x24d  ApiGpsCmd.o [1]
-                            - 0x00ef58  0x427d
+  .far_func.text     ro code  0x00e843   0x252  DrvHTG12832.o [1]
+  .far_func.text     ro code  0x00ea95   0x251  GT20L16P1Y.o [3]
+  .far_func.text     ro code  0x00ece6   0x24d  ApiGpsCmd.o [1]
+                            - 0x00ef33  0x4258
 
 "P4", part 2 of 2:                      0x6128
   .far_func.text     ro code  0x010000   0x249  Voice.o [1]
@@ -754,7 +754,7 @@ E:\1-source\2-A508_WCDMA_CORGET\PRJ\Debug\Obj: [1]
     Delay.o                  1 992       68       42
     DrvGD83.o                2 847       33    1 153
     DrvGT20L16S1Y.o            679
-    DrvHTG12832.o              631                 2
+    DrvHTG12832.o              594                 2
     DrvKeyboard.o            1 440
     Flash_eeprom.o             362
     GT20L16P1Y_D.o             274    7 776
@@ -778,7 +778,7 @@ E:\1-source\2-A508_WCDMA_CORGET\PRJ\Debug\Obj: [1]
     sysclock.o                 128
     uart3.o                  2 343       30      122
     ------------------------------------------------
-    Total:                  38 179   11 273    5 678
+    Total:                  38 142   11 273    5 678
 
 command line: [2]
     ------------------------------------------------
@@ -823,7 +823,7 @@ dlstm8mmn.a: [5]
 
     Linker created                       20      256
 ----------------------------------------------------
-    Grand Total:            41 893   11 483    5 950
+    Grand Total:            41 856   11 483    5 950
 
 
 *******************************************************************************
@@ -1163,7 +1163,7 @@ FLASH_SetProgrammingTime
 FLASH_Unlock            0x015dc6    0x16  Code  Gb  stm8s_flash.o [1]
 FLASH_WaitForLastOperation
                         0x0155e3    0x36  Code  Gb  stm8s_flash.o [1]
-GB2312_16_GetData       0x00eaba   0x251  Code  Gb  GT20L16P1Y.o [3]
+GB2312_16_GetData       0x00ea95   0x251  Code  Gb  GT20L16P1Y.o [3]
 GPIO_Init               0x01333a    0xaf  Code  Gb  stm8s_gpio.o [1]
 GPIO_ReadInputPin       0x015fcd     0x9  Code  Gb  stm8s_gpio.o [1]
 GPIO_WriteHigh          0x016037     0x7  Code  Gb  stm8s_gpio.o [1]
@@ -1194,7 +1194,7 @@ GetReceiveMessagesUserNameForDisplay
 GetSpeakingUserNameForDisplay
                         0x014f4a    0x4e  Code  Gb  ApiPocCmd.o [1]
 GetTaskId               0x0160ec     0x4  Code  Gb  System.o [1]
-GpsCmd_GbAnalytical     0x00ed0b   0x24d  Code  Lc  ApiGpsCmd.o [1]
+GpsCmd_GbAnalytical     0x00ece6   0x24d  Code  Lc  ApiGpsCmd.o [1]
 GpsCmd_GbDataTransave   0x00dfbb   0x2ff  Code  Lc  ApiGpsCmd.o [1]
 GpsCmd_GbWritCommand    0x00d146   0x29f  Code  Lc  ApiGpsCmd.o [1]
 GpsFunDrvObj            0x001287   0x1c3  Data  Lc  ApiGpsCmd.o [1]
@@ -1469,7 +1469,7 @@ drv_gt20_data_output    0x0120e9   0x134  Code  Gb  DrvGT20L16S1Y.o [1]
 drv_gt20_data_output2   0x011e7a   0x13b  Code  Gb  DrvGT20L16S1Y.o [1]
 drv_gt20_pwr_on_init    0x0155a8     0x4  Code  Gb  DrvGT20L16S1Y.o [1]
 drv_htg_clr_allscr      0x00e97c    0x35  Code  Gb  DrvHTG12832.o [1]
-drv_htg_pwr_on_init     0x00eaae     0xc  Code  Gb  DrvHTG12832.o [1]
+drv_htg_pwr_on_init     0x00ea89     0xc  Code  Gb  DrvHTG12832.o [1]
 drv_htg_reset           0x00e843     0x5  Code  Gb  DrvHTG12832.o [1]
 drv_htg_set_address     0x00e8c2    0x40  Code  Gb  DrvHTG12832.o [1]
 drv_htg_write_command   0x00e848    0x7a  Code  Gb  DrvHTG12832.o [1]
@@ -1483,7 +1483,7 @@ get_key_value           0x012938    0xe5  Code  Gb  ApiKeyboard.o [1]
 get_screen_display_group_name
                         0x0155ac    0x37  Code  Gb  ApiPocCmd.o [1]
 htg_delay_ms            0x00e9b1    0x1e  Code  Lc  DrvHTG12832.o [1]
-htg_initial             0x00e9cf    0x91  Code  Lc  DrvHTG12832.o [1]
+htg_initial             0x00e9cf    0x6c  Code  Lc  DrvHTG12832.o [1]
 j                       0x00163c     0x1  Data  Gb  Tone.o [1]
 key_scan_board          0x011d3b   0x13f  Code  Gb  DrvKeyboard.o [1]
 main                    0x0159d5    0x27  Code  Gb  main.o [1]
@@ -1493,7 +1493,7 @@ mcu_gt20_initial        0x015574    0x34  Code  Lc  DrvGT20L16S1Y.o [1]
 mcu_key_pad_out         0x0138d5    0x96  Code  Gb  DrvKeyboard.o [1]
 mcu_key_pad_read        0x014246    0x72  Code  Gb  DrvKeyboard.o [1]
 mcu_key_pad_set         0x011bf3   0x148  Code  Gb  DrvKeyboard.o [1]
-mcu_lcd_initial         0x00ea60    0x4e  Code  Lc  DrvHTG12832.o [1]
+mcu_lcd_initial         0x00ea3b    0x4e  Code  Lc  DrvHTG12832.o [1]
 memcmp                  0x01564f    0x36  Code  Gb  memcmp.o [5]
 memcpy                  0x015a95    0x26  Code  Gb  memcpy.o [5]
 memset                  0x015d99    0x17  Code  Gb  memset.o [5]
@@ -1583,7 +1583,7 @@ ucUserListInfo          0x00003d     0x2  Data  Gb  ApiPocCmd.o [1]
 [4] = dbgstm8mmd.a
 [5] = dlstm8mmn.a
 
-  41 893 bytes of readonly  code memory
+  41 856 bytes of readonly  code memory
   11 483 bytes of readonly  data memory
    5 950 bytes of readwrite data memory
 

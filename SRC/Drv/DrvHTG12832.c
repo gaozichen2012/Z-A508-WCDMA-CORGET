@@ -69,7 +69,7 @@ static void htg_initial(void)
 
 	MCU_LCD_RESET(HI);//reset?令1
 	htg_delay_ms(20);
-#if 1
+#if 0//中意微显示屏驱动
         drv_htg_write_command(0xa0);	//a1
         drv_htg_write_command(0xa2);
         drv_htg_write_command(0xc0);//c0

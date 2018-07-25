@@ -20,33 +20,17 @@ void MenuDisplay(MenuDisplayType id)
   {
   case Menu0:
     break;
-  case Menu1:
-    api_lcd_pwr_on_hint(0,0,"Menu            ");
-    api_lcd_pwr_on_hint(13,0,"1/5");
-     api_lcd_pwr_on_hint(0,2,"Group Select    ");
+  case Menu1://群组选择
+    DISPLAY_Show(d_menu);
+    DISPLAY_Show(d_menu_groupselect);
     break;
-#if 0
-  case Menu2:
-    api_lcd_pwr_on_hint(0,0,"Menu            ");
-    api_lcd_pwr_on_hint(13,0,"2/8");
-    api_lcd_pwr_on_hint(0,2,"INDV Select     ");
-    break;
-  case Menu3:
-    api_lcd_pwr_on_hint(0,0,"Menu            ");
-    api_lcd_pwr_on_hint(13,0,"3/8");
-    api_lcd_pwr_on_hint(0,2,"Online INDV List");
-    break;
-#endif
-  case Menu2:
-    api_lcd_pwr_on_hint(0,0,"Menu            ");
-    api_lcd_pwr_on_hint(13,0,"2/5");
-    api_lcd_pwr_on_hint(0,2,"GPS Information ");
+  case Menu2://GPS信息
+    DISPLAY_Show(d_menu);
+    DISPLAY_Show(d_menu_gpsinformation);
      break;
-     
-  case Menu3:
-    api_lcd_pwr_on_hint(0,0,"Menu            ");
-    api_lcd_pwr_on_hint(13,0,"3/5");
-    api_lcd_pwr_on_hint(0,2,"Backlight Time  ");
+  case Menu3://背光灯时间
+    DISPLAY_Show(d_menu);
+    DISPLAY_Show(d_menu_backlighttime);
      if(ApiMenu_BacklightTimeSet_Flag==2)
      {
        ApiMenu_BacklightTimeSet_Flag=0;
@@ -62,10 +46,9 @@ void MenuDisplay(MenuDisplayType id)
        }
      }
      break;
-  case Menu4:
-    api_lcd_pwr_on_hint(0,0,"Menu            ");
-    api_lcd_pwr_on_hint(13,0,"4/5");
-     api_lcd_pwr_on_hint(0,2,"Keypad Lock Time");
+  case Menu4://键盘锁时间
+    DISPLAY_Show(d_menu);
+    DISPLAY_Show(d_menu_keypadlocktime);
      if(ApiMenu_KeylockTimeSet_Flag==2)
      {
        ApiMenu_KeylockTimeSet_Flag=0;
@@ -83,18 +66,10 @@ void MenuDisplay(MenuDisplayType id)
        }
      }
      break;
-  case Menu5:
-    api_lcd_pwr_on_hint(0,0,"Menu            ");
-    api_lcd_pwr_on_hint(13,0,"5/5");
-     api_lcd_pwr_on_hint(0,2,"Software Version");
+  case Menu5://软件版本
+    DISPLAY_Show(d_menu);
+    DISPLAY_Show(d_menu_softwareversion);
     break;
-#if 0
-  case Menu8:
-    api_lcd_pwr_on_hint(0,0,"Menu            ");
-    api_lcd_pwr_on_hint(13,0,"8/8");
-     api_lcd_pwr_on_hint(0,2,"北斗/写频切换   ");
-     break;
-#endif
   case Menu_Locking_NoOperation:
     MenuDisplay(Menu_RefreshAllIco);
     get_screen_display_group_name();//选择显示当前群组昵称（群组或单呼临时群组）
@@ -162,8 +137,7 @@ void MenuDisplay(MenuDisplayType id)
     }
       break;
   case Menu_UnlockStep1_Ok:
-    api_lcd_pwr_on_hint(0,2,"                ");//清屏
-    api_lcd_pwr_on_hint(0,2,"Press #         ");
+    DISPLAY_Show(d_presswell);//显示请按#号键
     break;
   default:
     break;
@@ -186,8 +160,7 @@ void SubmenuMenuDisplay(SubmenuMenuDisplayType id)
     api_lcd_pwr_on_hint(0,0,"                ");//清屏
     if(delay_gps_value_for_display_flag2()==FALSE)
     {
-      api_lcd_pwr_on_hint(0,0,"Lat :00.000000 ");//清屏
-      api_lcd_pwr_on_hint(0,2,"Lng :000.000000  ");//清屏
+      DISPLAY_Show(d_longitude_and_latitude0);
     }
     else
     {
@@ -242,72 +215,72 @@ void Level3MenuDisplay(Level3MenuDisplayType id)
   switch(id)
   {
   case BacklightTimeSet_0s:
-    api_lcd_pwr_on_hint(0,0,"Backlight       ");
+    DISPLAY_Show(d_backlight);
     api_lcd_pwr_on_hint(13,0,"7/7");
-    api_lcd_pwr_on_hint(0,2,"Close           ");
+    DISPLAY_Show(d_close);
     break;
   case BacklightTimeSet_10s:
-    api_lcd_pwr_on_hint(0,0,"Backlight       ");
+    DISPLAY_Show(d_backlight);
     api_lcd_pwr_on_hint(13,0,"1/7");
     api_lcd_pwr_on_hint(0,2,"5s              ");
     break;
   case BacklightTimeSet_20s:
-    api_lcd_pwr_on_hint(0,0,"Backlight       ");
+    DISPLAY_Show(d_backlight);
     api_lcd_pwr_on_hint(13,0,"2/7");
     api_lcd_pwr_on_hint(0,2,"10s             ");
     break;
   case BacklightTimeSet_30s:
-    api_lcd_pwr_on_hint(0,0,"Backlight       ");
+    DISPLAY_Show(d_backlight);
     api_lcd_pwr_on_hint(13,0,"3/7");
     api_lcd_pwr_on_hint(0,2,"15s             ");
     break;
   case BacklightTimeSet_40s:
-    api_lcd_pwr_on_hint(0,0,"Backlight       ");
+    DISPLAY_Show(d_backlight);
     api_lcd_pwr_on_hint(13,0,"4/7");
     api_lcd_pwr_on_hint(0,2,"20s             ");
     break;
   case BacklightTimeSet_50s:
-    api_lcd_pwr_on_hint(0,0,"Backlight       ");
+    DISPLAY_Show(d_backlight);
     api_lcd_pwr_on_hint(13,0,"5/7");
     api_lcd_pwr_on_hint(0,2,"25s             ");
     break;
   case BacklightTimeSet_60s:
-    api_lcd_pwr_on_hint(0,0,"Backlight       ");
+    DISPLAY_Show(d_backlight);
     api_lcd_pwr_on_hint(13,0,"6/7");
     api_lcd_pwr_on_hint(0,2,"30s             ");
     break;
   case KeylockTimeSet_0s:
-    api_lcd_pwr_on_hint(0,0,"Keypad Lock     ");
+    DISPLAY_Show(d_keypadlock);
     api_lcd_pwr_on_hint(13,0,"7/7");
-    api_lcd_pwr_on_hint(0,2,"Close            ");
+    DISPLAY_Show(d_close);
     break;
   case KeylockTimeSet_30s:
-    api_lcd_pwr_on_hint(0,0,"Keypad Lock     ");
+    DISPLAY_Show(d_keypadlock);
     api_lcd_pwr_on_hint(13,0,"1/7");
     api_lcd_pwr_on_hint(0,2,"5s              ");
     break;
   case KeylockTimeSet_60s:
-    api_lcd_pwr_on_hint(0,0,"Keypad Lock     ");
+    DISPLAY_Show(d_keypadlock);
     api_lcd_pwr_on_hint(13,0,"2/7");
     api_lcd_pwr_on_hint(0,2,"10s             ");
     break;
   case KeylockTimeSet_90s:
-    api_lcd_pwr_on_hint(0,0,"Keypad Lock     ");
+    DISPLAY_Show(d_keypadlock);
     api_lcd_pwr_on_hint(13,0,"3/7");
     api_lcd_pwr_on_hint(0,2,"15s             ");
     break;
   case KeylockTimeSet_120s:
-    api_lcd_pwr_on_hint(0,0,"Keypad Lock     ");
+    DISPLAY_Show(d_keypadlock);
     api_lcd_pwr_on_hint(13,0,"4/7");
     api_lcd_pwr_on_hint(0,2,"20s             ");
     break;
   case KeylockTimeSet_150s:
-    api_lcd_pwr_on_hint(0,0,"Keypad Lock     ");
+    DISPLAY_Show(d_keypadlock);
     api_lcd_pwr_on_hint(13,0,"5/7");
     api_lcd_pwr_on_hint(0,2,"25s             ");
     break;
   case KeylockTimeSet_180s:
-    api_lcd_pwr_on_hint(0,0,"Keypad Lock     ");
+    DISPLAY_Show(d_keypadlock);
     api_lcd_pwr_on_hint(13,0,"6/7");
     api_lcd_pwr_on_hint(0,2,"30s             ");
     break;

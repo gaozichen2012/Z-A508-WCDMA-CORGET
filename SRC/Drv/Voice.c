@@ -2,6 +2,26 @@
 #include "AllHead.h"
 #ifdef	VOICE_SEL
 
+#ifdef  CHINESE
+const u8 *ucPersonalMode                = "2a4e7c54216a0f5f";//个呼模式-
+const u8 *ucABELL                       = "276b0768f95bb28b3a67";//欧标对讲
+const u8 *ucGroupSelected               = "f25d09902d4e";//已选中-
+const u8 *ucNoSimCard                   = "2a67d2636153";//未插卡
+const u8 *ucNetworkSearching            = "1c64227d517fdc7e";//搜索网络-
+const u8 *ucPowerLowPleaseCharge        = "3575cf914e4f0cfff78b45513575";//电量低，请充电-
+const u8 *ucLowBattery                  = "3575cf914e4f";//电量低-
+const u8 *ucFivePercentPower            = "3575cf917e7606524b4e944e";//百分之五-
+const u8 *ucTwentyPercentPower          = "3575cf917e7606524b4e8c4e4153";//百分之二十-
+const u8 *ucFortyPercentPower           = "3575cf917e7606524b4edb564153";//百分之四十-
+const u8 *ucSixtyPercentPower           = "3575cf917e7606524b4e6d514153";//百分之六十-
+const u8 *ucEightyPercentPower          = "3575cf917e7606524b4e6b514153";//百分之八十-
+const u8 *ucOneHundredPercentPower      = "3575cf917e7606524b4e004e7e76";//百分之一百-
+const u8 *ucGroupMode                   = "c47e7c54216a0f5f";//组呼模式-
+const u8 *ucHandsetMode                 = "2c54527b216a0f5f";//听筒模式-
+const u8 *ucHandfreeMode                = "4d51d063216a0f5f";//免提模式-
+const u8 *ucNoOnlineUser                = "e0652857bf7e10625854";//无在线成员
+const u8 *ucLoggingIn                   = "636b28577b764696";//正在登陆- 
+#else
 const u8 *ucPersonalMode                = "50006500720073006f006e0061006c0020004d006f0064006500";//personal mode
 const u8 *ucABELL                       = "4100620065006C006C00";//ABELL
 const u8 *ucGroupSelected               = "530065006c0065006300740065006400";//Group Selected
@@ -20,6 +40,8 @@ const u8 *ucHandsetMode                 = "480061006e006400200073006500740020004
 const u8 *ucHandfreeMode                = "480061006e0064002000660072006500650020004d006f0064006500";
 const u8 *ucNoOnlineUser                = "4e006f0020006f006e006c0069006e00650020007500730065007200";
 const u8 *ucLoggingIn                   = "4100630063006f0075006e007400200043006f006e00660069006700750072006100740069006f006e00";//Account Config
+#endif
+
 typedef struct{
 	union{
 		struct{

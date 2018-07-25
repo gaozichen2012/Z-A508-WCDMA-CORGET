@@ -60,4 +60,8 @@
 
 //软件版本设置
 #include "KeyCmd.h"
+
+//使能英文语音
+//#define CHINESE
+
 #endif

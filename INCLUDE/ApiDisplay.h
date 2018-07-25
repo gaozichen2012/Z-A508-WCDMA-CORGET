@@ -16,6 +16,31 @@
 
 #define LCD_DISP_LEN_MAX 	16
 
+typedef enum{
+  d_PersonalMode                = 0x00,
+  d_ABELL                       = 0x01,
+  d_AllGroupName                = 0x02,
+  d_NoSimCard                   = 0x03,
+  d_NetworkSearching            = 0x04,
+  d_PowerLowPleaseCharge        = 0x05,
+  d_AllUserName                 = 0x06,
+  d_LoggingIn                   = 0x07,
+  d_menu                        = 0x08,
+  d_menu_groupselect            = 0x09,
+  d_menu_gpsinformation         = 0x0A,
+  d_menu_backlighttime          = 0x0B,
+  d_menu_keypadlocktime         = 0x0C,
+  d_menu_softwareversion        = 0x0D,
+  d_presswell                   = 0x0F,//按#
+  d_longitude_and_latitude0     = 0x10,
+  d_backlight                   = 0x11,
+  d_keypadlock                  = 0x12,
+  d_close                       = 0x13,
+  d_individualcall              = 0x14,//临时群组
+  d_version                     = 0x15,
+  d_press_ok_then_well          = 0x16,
+  d_status_offline              = 0x17,
+}DISPLAY_TYPE;
 
 typedef struct
 {
@@ -39,8 +64,8 @@ typedef struct
 }DISP_ICO;
 
 #define LCD_ICO_BUF_LEN 32
+extern void DISPLAY_Show(DISPLAY_TYPE id);
 extern void api_disp_icoid_output(u8 IcoIdIndex, bool IcoDefault,bool on_off);
-
 extern void api_disp_all_screen_refresh(void);
 extern void api_disp_all_screen_refresh(void);
 #if 1//WCDMA 卓智达

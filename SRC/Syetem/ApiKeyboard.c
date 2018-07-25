@@ -160,9 +160,11 @@ void Keyboard_Test(void)
           PersonalCallingNum=GetAllUserNum()-1;
           KeyPersonalCallingCount=GetAllUserNum()-1;
         }
-        api_lcd_pwr_on_hint(0,2,"                ");//清屏
-        api_lcd_pwr_on_hint(0,2,GetAllUserNameForDisplay(PersonalCallingNum));//显示当前选中的群组名
+
+        
         VOICE_Play(AllUserName);//播报按上键之后对应的用户名
+        DISPLAY_Show(d_AllUserName);
+        
       }
       else
       {
@@ -173,9 +175,8 @@ void Keyboard_Test(void)
           GroupCallingNum=GetAllGroupNum()-1;
           KeyUpDownCount=GetAllGroupNum()-1-GetNowWorkingGroupXuhao();//
         }
-        api_lcd_pwr_on_hint(0,2,"                ");//清屏
-        api_lcd_pwr_on_hint(0,2,GetAllGroupNameForDisplay(GroupCallingNum));//显示当前选中的群组名
         VOICE_Play(AllGroupName);
+        DISPLAY_Show(d_AllGroupName);
         KeyDownUpChoose_GroupOrUser_Flag=1;
       }
 
@@ -535,9 +536,10 @@ void Keyboard_Test(void)
             PersonalCallingNum=0;
             KeyPersonalCallingCount=0;
           }
-          api_lcd_pwr_on_hint(0,2,"                ");//清屏
-          api_lcd_pwr_on_hint(0,2,GetAllUserNameForDisplay(PersonalCallingNum));//显示当前选中的群组名
+
+
           VOICE_Play(AllUserName);//播报按上键之后对应的用户名
+          DISPLAY_Show(d_AllUserName);
           KeyDownUpChoose_GroupOrUser_Flag=2;
         }
         else
@@ -549,10 +551,8 @@ void Keyboard_Test(void)
             GroupCallingNum=0;
             KeyUpDownCount=-GetNowWorkingGroupXuhao();
           }
-          api_lcd_pwr_on_hint(0,2,"                ");//清屏
-          api_lcd_pwr_on_hint(0,2,GetAllGroupNameForDisplay(GroupCallingNum));//显示当前选中的群组名
           VOICE_Play(AllGroupName);
-
+          DISPLAY_Show(d_AllGroupName);
           //api_lcd_pwr_on_hint("群组:   群组选择");//显示汉字
           //api_lcd_pwr_on_hint2(HexToChar_GroupCallingNum());//显示数据
           KeyDownUpChoose_GroupOrUser_Flag=1;

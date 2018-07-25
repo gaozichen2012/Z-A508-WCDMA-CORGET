@@ -171,6 +171,142 @@ const u8 Ico_DataBuf[32][32]=
 {0x00,0xF8,0x08,0x08,0x08,0x08,0x08,0x08,0x08,0x08,0x08,0x08,0x08,0xF8,0xE0,0x00,
  0x00,0x03,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x03,0x00,0x00},//31
 };
+
+#ifdef CHINESE
+const u8 *dp_abell              = "   欧标对讲机   ";
+const u8 *dp_personal_mode      = "   个呼模式     ";
+const u8 *dp_no_sim_card        = "   请插卡       ";
+const u8 *dp_network_search     = "搜索网络...     ";
+const u8 *dp_account_config     = "正在登录...     ";
+const u8 *dp_please_charge      = "电量低,请充电   ";
+const u8 *dp_menu               = "菜单            ";
+const u8 *dp_group_select       = "群组选择        ";
+const u8 *dp_gps_information    = "GPS信息         ";
+const u8 *dp_backlight_time     = "背光灯时间      ";
+const u8 *dp_keypad_lock_time   = "键盘锁时间      ";
+const u8 *dp_software_version   = "软件版本        ";
+const u8 *dp_press_well         = "请按#键         ";
+const u8 *dp_latitude0          = "纬度:00.000000  ";
+const u8 *dp_longitude0         = "经度:000.000000 ";
+const u8 *dp_backlight          = "背光灯时间      ";
+const u8 *dp_keypad_lock        = "键盘锁时间      ";
+const u8 *dp_close              = "关闭            ";
+const u8 *dp_individual_call    = "临时群组        ";
+const u8 *dp_version            = "软件版本        ";
+const u8 *dp_press_ok_then_well = "先按OK键再按#键 ";
+const u8 *dp_status_offline     = "状态：离线      ";
+#else
+const u8 *dp_abell              = "     ABELL      ";
+const u8 *dp_personal_mode      = "Personal Mode   ";
+const u8 *dp_no_sim_card        = "No SIM Card     ";
+const u8 *dp_network_search     = "Network Search  ";
+const u8 *dp_account_config     = "Account Config..";
+const u8 *dp_please_charge      = " Please charge  ";
+const u8 *dp_menu               = "Menu            ";
+const u8 *dp_group_select       = "Group Select    ";
+const u8 *dp_gps_information    = "GPS Information ";
+const u8 *dp_backlight_time     = "Backlight Time  ";
+const u8 *dp_keypad_lock_time   = "Keypad Lock Time";
+const u8 *dp_software_version   = "Software Version";
+const u8 *dp_press_well         = "Press #         ";
+const u8 *dp_latitude0          = "Lat :00.000000  ";
+const u8 *dp_longitude0         = "Lng :000.000000 ";
+const u8 *dp_backlight          = "Backlight       ";
+const u8 *dp_keypad_lock        = "Keypad Lock     ";
+const u8 *dp_close              = "Close           ";
+const u8 *dp_individual_call    = "Individual Call ";
+const u8 *dp_version            = "Version:        ";
+const u8 *dp_press_ok_then_well = "Press OK then # ";
+const u8 *dp_status_offline     = "Status:Offline  ";
+#endif
+
+void DISPLAY_Show(DISPLAY_TYPE id)
+{
+  switch(id)
+  {
+  case d_ABELL:
+    api_lcd_pwr_on_hint(0,2,(u8 *)dp_abell);
+      break;
+  case d_PersonalMode:
+    api_lcd_pwr_on_hint(0,2,(u8 *)dp_personal_mode);
+    break;
+  case d_AllGroupName:
+    api_lcd_pwr_on_hint(0,2,"                ");//清屏
+    api_lcd_pwr_on_hint(0,2,GetAllGroupNameForDisplay(GroupCallingNum));//显示当前选中的群组名
+    break;
+  case d_NoSimCard:
+    api_lcd_pwr_on_hint(0,2,(u8 *)dp_no_sim_card);
+    break;
+  case d_NetworkSearching:
+    api_lcd_pwr_on_hint(0,2,(u8 *)dp_network_search);
+    break;
+  case d_AllUserName:
+    api_lcd_pwr_on_hint(0,2,"                ");//清屏
+    api_lcd_pwr_on_hint(0,2,GetAllUserNameForDisplay(PersonalCallingNum));//显示当前选中的群组名
+    break;
+  case d_LoggingIn:
+    api_lcd_pwr_on_hint(0,2,(u8 *)dp_account_config);
+    break;
+  case d_PowerLowPleaseCharge:
+    api_lcd_pwr_on_hint(0,2,(u8 *)dp_please_charge);
+    break;
+  case d_menu:
+    api_lcd_pwr_on_hint(0,0,(u8 *)dp_menu);
+    break;
+  case d_menu_groupselect:
+    api_lcd_pwr_on_hint(13,0,"1/5");
+    api_lcd_pwr_on_hint(0,2,(u8 *)dp_group_select);
+    break;
+  case d_menu_gpsinformation:
+    api_lcd_pwr_on_hint(13,0,"2/5");
+    api_lcd_pwr_on_hint(0,2,(u8 *)dp_gps_information);
+    break;
+  case d_menu_backlighttime:
+    api_lcd_pwr_on_hint(13,0,"3/5");
+    api_lcd_pwr_on_hint(0,2,(u8 *)dp_backlight_time);
+    break;
+  case d_menu_keypadlocktime:
+    api_lcd_pwr_on_hint(13,0,"4/5");
+    api_lcd_pwr_on_hint(0,2,(u8 *)dp_keypad_lock_time);
+    break;
+  case d_menu_softwareversion:
+    api_lcd_pwr_on_hint(13,0,"5/5");
+    api_lcd_pwr_on_hint(0,2,(u8 *)dp_software_version);
+    break;
+  case d_presswell:
+    api_lcd_pwr_on_hint(0,2,(u8 *)dp_press_well);
+    break;
+  case d_longitude_and_latitude0:
+    api_lcd_pwr_on_hint(0,0,(u8 *)dp_latitude0);//清屏
+    api_lcd_pwr_on_hint(0,2,(u8 *)dp_longitude0);//清屏
+    break;
+  case d_backlight:
+    api_lcd_pwr_on_hint(0,0,(u8 *)dp_backlight);
+    break;
+  case d_keypadlock:
+    api_lcd_pwr_on_hint(0,0,(u8 *)dp_keypad_lock);
+    break;
+  case d_close:
+    api_lcd_pwr_on_hint(0,2,(u8 *)dp_close);
+    break;
+  case d_individualcall:
+    api_lcd_pwr_on_hint(0,2,(u8 *)dp_individual_call);//Individual Call临时群组
+    break;
+  case d_version:
+    api_lcd_pwr_on_hint(0,0,(u8 *)dp_version);
+    break;
+  case d_press_ok_then_well:
+    api_lcd_pwr_on_hint(0,2,(u8 *)dp_press_ok_then_well);
+    break;
+  case d_status_offline:
+    api_lcd_pwr_on_hint(0,2,(u8 *)dp_status_offline);
+    break;
+  default:
+    break;
+  }
+}
+
+
 /*******************************************************************************
 * Description	: char-data display process
 * Input			: CharInfo	: char data location information and dispaly char type
@@ -391,7 +527,7 @@ void api_disp_icoid_output(u8 IcoIdIndex, bool IcoDefault,bool on_off)
 	u16 IcoDataLen;
 	ICO_INF	IcoInf;
 	DISP_ICO IcoInfo;
-	u8 IcoDataBuf[LCD_ICO_BUF_LEN];
+	u8 IcoDataBuf[LCD_ICO_BUF_LEN];//LCD_ICO_BUF_LEN=32
         /* 两个字节存一个像素 */
         
         IcoDataLen = ((u16)(IcoInf.xLen) * (u16)(IcoInf.yLen)) / 0x08;

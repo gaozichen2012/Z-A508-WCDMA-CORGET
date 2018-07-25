@@ -8,7 +8,11 @@
 
 const u8 *ucAtPocHead          = "AT+POC=";
 const u8 *ucSetIPAndID         = "010000";
+#ifdef CHINESE
+const u8 *ucPocOpenConfig      = "00000001010100";
+#else
 const u8 *ucPocOpenConfig      = "00000001010101";
+#endif
 u8 *ucStartPTT                  = "0B0000";
 u8 *ucEndPTT                    = "0C0000";
 u8 *ucGroupListInfo             = "0d0000";
@@ -1423,8 +1427,7 @@ void get_screen_display_group_name(void)
   }
   else //单呼模式
   {
-    api_lcd_pwr_on_hint(0,2,"                ");
-    api_lcd_pwr_on_hint(0,2,"Individual Call ");//Temporary groups临时群组
+    DISPLAY_Show(d_individualcall);
   }
 }
 

@@ -15,6 +15,12 @@ bool EnterPttMoment_Flag=FALSE;
 bool LoosenPttMoment_Flag=FALSE;
 u8 EnterPttMomentCount=0;
 u8 LoosenPttMomentCount=0;
+#ifdef CHINESE
+u8 *ucSetLanguage               = "at^ttslangdigit=1,1";
+#else
+u8 *ucSetLanguage               = "at^ttslangdigit=2,1";
+#endif
+
 u8 *ucCODECCTL                  = "at^codecctl=C000,4000,0";//T1默认
 #if 0//CDMA频响
 u8 *ucRXFILTER                  = "AT^rxfilter=1BA,FCB8,FAB7,FF11,9CF,1871,2C20";
@@ -53,6 +59,7 @@ void Task_RunStart(void)
         {
           if(TaskDrvobj.status.AccountConfig==FALSE)
           {
+            ApiAtCmd_WritCommand(ATCOMM_Test,ucSetLanguage,strlen((char const *)ucSetLanguage));//设置语言
             ApiAtCmd_WritCommand(ATCOMM_Test,ucCODECCTL,strlen((char const *)ucCODECCTL));//设置音量增益
             ApiAtCmd_WritCommand(ATCOMM_Test,(u8 *)ucRXFILTER,strlen((char const *)ucRXFILTER));//高子晨曲线T1-挺好 无啸叫
             TaskDrvobj.status.AccountConfig=TRUE;
@@ -60,7 +67,8 @@ void Task_RunStart(void)
             ApiPocCmd_WritCommand(PocComm_SetParam,0,0);//配置登录账号密码、IP
             ApiPocCmd_WritCommand(PocComm_SetURL,0,0);//设置URL
             VOICE_Play(LoggingIn);
-            api_lcd_pwr_on_hint(0,2,"Account Config..");
+            DISPLAY_Show(d_LoggingIn);
+            
           }
         }
       }
@@ -244,8 +252,8 @@ void Task_RunNormalOperation(void)
   if(ReadInput_KEY_2==0)//个呼键
   {
     TaskDrvobj.status.PersonalKeyMode=TRUE;
-    api_lcd_pwr_on_hint(0,2,"Personal Mode   ");
     VOICE_Play(PersonalMode);
+    DISPLAY_Show(d_PersonalMode);
     DEL_SetTimer(0,120);
     while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
     ApiPocCmd_WritCommand(PocComm_UserListInfo,0,0);
@@ -280,8 +288,7 @@ void Task_RunNormalOperation(void)
   {
     if(ApiPocCmd_GroupStates()==EnterGroup)
     {
-      api_lcd_pwr_on_hint(0,2,"                ");
-      api_lcd_pwr_on_hint(0,2,"Individual Call ");//Individual Call临时群组
+      DISPLAY_Show(d_individualcall);
       ApiPocCmd_GroupStatesSet(InGroup);
     }
     else if(ApiPocCmd_GroupStates()==InGroup)
@@ -952,8 +959,8 @@ void TASK_WriteFreq(void)
 void TASK_RunLoBattery(void)
 {
 #if 1
-  api_lcd_pwr_on_hint(0,2," Please charge  ");
   VOICE_Play(PowerLowPleaseCharge);
+  DISPLAY_Show(d_PowerLowPleaseCharge);
   DEL_SetTimer(0,1000);
   while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
   BEEP_Time(10);

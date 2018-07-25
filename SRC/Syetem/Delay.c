@@ -290,7 +290,8 @@ static void DEL_500msProcess(void)			//delay 500ms process server
         {
           DelDrvObj.Count.NoCardCount=0;
           VOICE_Play(NoSimCard);
-          api_lcd_pwr_on_hint(0,2,"No SIM Card     ");
+          DISPLAY_Show(d_NoSimCard);
+          
         }
       } 
     }
@@ -303,7 +304,7 @@ static void DEL_500msProcess(void)			//delay 500ms process server
       if(GetTaskId()==Task_Start&&task_status_account_config()==FALSE&&ApiAtCmd_CSQValue()<25)//如果处于开机状态、未写入账号状态、网络信号小于25状态
       {
         VOICE_Play(NetworkSearching);
-        api_lcd_pwr_on_hint(0,2,"Network Search  ");
+        DISPLAY_Show(d_NetworkSearching);
       }
 
       HDRCSQSignalIcons();
@@ -380,6 +381,7 @@ static void DEL_500msProcess(void)			//delay 500ms process server
       if(DelDrvObj.Count.LobatteryTask_StartCount==1)
       {
         VOICE_Play(PowerLowPleaseCharge);
+        DISPLAY_Show(d_PowerLowPleaseCharge);
       }
       if(DelDrvObj.Count.LobatteryTask_StartCount>2*5)
       {
@@ -446,7 +448,7 @@ static void DEL_500msProcess(void)			//delay 500ms process server
 /*******收到离线指令，屏幕提示离线状态*******/
     if(GetTaskId()==Task_NormalOperation&&poccmd_states_poc_status()==OffLine)
     {
-      api_lcd_pwr_on_hint(0,2,"Status:Offline  ");
+      DISPLAY_Show(d_status_offline);
     }
 /*******收到离线指令过1分钟未登陆重启*******/
     if(poccmd_states_poc_status()==OffLine)
@@ -555,7 +557,7 @@ static void DEL_500msProcess(void)			//delay 500ms process server
         if(NumberKeyboardPressDown_flag==TRUE&&TimeCount>=KeylockTimeCount*2)//超过10秒后再按按键提示“按OK键再按*键”
         {
           DelDrvObj.Count.TimeCount2++;
-          api_lcd_pwr_on_hint(0,2,"Press OK then # ");//
+          DISPLAY_Show(d_press_ok_then_well);//显示先按ok键再按#
           if(DelDrvObj.Count.TimeCount2>=2)//0.5s
           {
             DelDrvObj.Count.TimeCount2=0;

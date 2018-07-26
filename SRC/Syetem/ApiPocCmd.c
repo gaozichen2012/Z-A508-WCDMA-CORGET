@@ -18,7 +18,7 @@ u8 *ucEndPTT                    = "0C0000";
 u8 *ucGroupListInfo             = "0d0000";
 u8 *ucUserListInfo              = "0e00000000";
 u8 *ucSetGPS                    = "110000";
-u8 *ucAlarm1                    = "2100000000";
+u8 *ucAlarm1                    = "210000";
 #if 1
 u8 *ucAlarm2                    = "0000000020202000";
 #else
@@ -70,12 +70,12 @@ typedef struct{
   struct{
 /*****组名**************/
     struct{
-      u16 ID;
+      u32 ID;
       u8  Name[APIPOC_GroupName_Len];
       u8  NameLen;
     }AllGroupName[APIPOC_Group_Num];//所有群组成员名
     struct{
-      u16 ID;
+      u32 ID;
       u8  Name[APIPOC_GroupName_Len];
       u8  NameLen;
     }NowWorkingGroupName;//当前工作群组成员名
@@ -116,7 +116,7 @@ typedef struct{
   u16 all_user_num;//所有成员（包括离线）
   u16 GroupXuhao;
   u16 UserXuhao;
-  u8 GroupIdBuf[5];
+  u8 GroupIdBuf[10];
   u8 UserIdBuf[8];
   u8 gps_info_report[45];
   struct{
@@ -164,6 +164,8 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
   u8 gps_info_buf[25];
   u8 SetParamBuf[3]={0,0,0};
   u8 url_buf[150];
+  u8 temp_count=0;
+  u8 GroupIdBuf_len=0;
   DrvMC8332_TxPort_SetValidable(ON);
   DrvGD83_UART_TxCommand((u8 *)ucAtPocHead,strlen((char const *)ucAtPocHead));
   switch(id)
@@ -217,10 +219,17 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
   case PocComm_ModifyPwd:
     break;
   case PocComm_EnterGroup:
-    DrvGD83_UART_TxCommand("0900000000", 10);
+    DrvGD83_UART_TxCommand("090000", 6);
+    memset(PocCmdDrvobj.GroupIdBuf,0,sizeof(PocCmdDrvobj.GroupIdBuf));
     COML_HexToAsc(PocCmdDrvobj.NameInfo.AllGroupName[GroupCallingNum].ID,PocCmdDrvobj.GroupIdBuf);
-    COML_StringReverse(4,PocCmdDrvobj.GroupIdBuf);
-    DrvGD83_UART_TxCommand(PocCmdDrvobj.GroupIdBuf, 4);
+    GroupIdBuf_len=strlen((char const *)PocCmdDrvobj.GroupIdBuf);
+    temp_count=8-GroupIdBuf_len;
+    for(i=0;i<temp_count;i++)
+    {
+      PocCmdDrvobj.GroupIdBuf[i+GroupIdBuf_len]=0x30;
+    }
+    COML_StringReverse(8,PocCmdDrvobj.GroupIdBuf);
+    DrvGD83_UART_TxCommand(PocCmdDrvobj.GroupIdBuf, 8);
     break;
   case PocComm_Invite:
     DrvGD83_UART_TxCommand("0a0000", 6);
@@ -302,9 +311,16 @@ void ApiPocCmd_WritCommand(PocCommType id, u8 *buf, u16 len)
     break;
   case PocComm_Alarm:
     DrvGD83_UART_TxCommand(ucAlarm1,strlen((char const *)ucAlarm1));
+    memset(PocCmdDrvobj.GroupIdBuf,0,sizeof(PocCmdDrvobj.GroupIdBuf));
     COML_HexToAsc(PocCmdDrvobj.NameInfo.AllGroupName[GroupCallingNum].ID,PocCmdDrvobj.GroupIdBuf);
-    COML_StringReverse(4,PocCmdDrvobj.GroupIdBuf);
-    DrvGD83_UART_TxCommand(PocCmdDrvobj.GroupIdBuf, 4);
+    GroupIdBuf_len=strlen((char const *)PocCmdDrvobj.GroupIdBuf);
+    temp_count=8-GroupIdBuf_len;
+    for(i=0;i<temp_count;i++)
+    {
+      PocCmdDrvobj.GroupIdBuf[i+GroupIdBuf_len]=0x30;
+    }
+    COML_StringReverse(8,PocCmdDrvobj.GroupIdBuf);
+    DrvGD83_UART_TxCommand(PocCmdDrvobj.GroupIdBuf, 8);
     DrvGD83_UART_TxCommand(ucAlarm2,strlen((char const *)ucAlarm2));
     break;
   default:
@@ -446,7 +462,7 @@ void ApiPocCmd_10msRenew(void)
 {
   u8 ucId, Len,i,temp_id;
   u8 * pBuf;
-  u16 ucNameId;
+  u32 ucNameId;
   u32 ucUserId;
   while((Len = DrvMC8332_PocNotify_Queue_front(&pBuf)) != 0x00)
   {
@@ -507,7 +523,7 @@ void ApiPocCmd_10msRenew(void)
     case 0x28://获取北京时间
       break;
     case 0x80://群组列表
-      ucNameId=COML_AscToHex(pBuf+16,0x04);
+      ucNameId=COML_AscToHex(pBuf+12,0x08);
       if(ucNameId==0xffff)
       {}
       else
@@ -675,7 +691,7 @@ void ApiPocCmd_10msRenew(void)
         PocCmdDrvobj.States.GroupStats=EnterGroup;
         if(PocCmdDrvobj.States.current_working_status==m_group_mode)
         {
-          PocCmdDrvobj.NameInfo.NowWorkingGroupName.ID=COML_AscToHex(pBuf+8,0x04);;//保存群组ID，从[0]开始存
+          PocCmdDrvobj.NameInfo.NowWorkingGroupName.ID=COML_AscToHex(pBuf+4,0x08);//保存群组ID，从[0]开始存
           if(Len >= 12)//如果群组id后面还有群组名
           {
             PocCmdDrvobj.NameInfo.NowWorkingGroupName.NameLen= (Len-12)/2;//英文字符只存一半

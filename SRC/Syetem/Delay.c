@@ -46,6 +46,7 @@ typedef struct {
     u8 choose_write_freq_or_gps_count;
     u8 receive_sos_statas_count;
     u8 ztts_states_intermediate_count;
+    u8 ztts_states_count;
     u8 alarm_count;
     u8 poc_first_enter_into_group_flag_count;
     u8 poc_gps_value_for_display_flag_count;
@@ -90,6 +91,7 @@ void DEL_PowerOnInitial(void)//原瑞撒單片機多長時間進一次中斷
   DelDrvObj.Count.choose_write_freq_or_gps_count = 0;
   DelDrvObj.Count.receive_sos_statas_count = 0;
   DelDrvObj.Count.ztts_states_intermediate_count = 0;
+  DelDrvObj.Count.ztts_states_count = 0;
   DelDrvObj.Count.alarm_count = 0;
   DelDrvObj.Count.poc_first_enter_into_group_flag_count = 0;
   DelDrvObj.Count.poc_gps_value_for_display_flag_count=0;
@@ -335,6 +337,18 @@ static void DEL_500msProcess(void)			//delay 500ms process server
         set_ApiAtCmd_bZTTSStates_Intermediate(0);
         set_ApiAtCmd_bZTTSStates(0);
         DelDrvObj.Count.ztts_states_intermediate_count = 0;
+      }
+    }
+    else
+    {
+      if(ApiAtCmd_bZTTSStates()==1)
+      {
+        DelDrvObj.Count.ztts_states_count++;
+        if(DelDrvObj.Count.ztts_states_count>2*20)
+        {
+          set_ApiAtCmd_bZTTSStates(0);
+          DelDrvObj.Count.ztts_states_count=0;
+        }
       }
     }
     

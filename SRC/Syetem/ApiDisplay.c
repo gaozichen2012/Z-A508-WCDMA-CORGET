@@ -196,7 +196,11 @@ const u8 *dp_version            = "软件版本        ";
 const u8 *dp_press_ok_then_well = "先按OK键再按#键 ";
 const u8 *dp_status_offline     = "状态：离线      ";
 #else
+#ifdef INDIA
+const u8 *dp_abell              = "    CONEXIS     ";
+#else
 const u8 *dp_abell              = "     ABELL      ";
+#endif
 const u8 *dp_personal_mode      = "Personal Mode   ";
 const u8 *dp_no_sim_card        = "No SIM Card     ";
 const u8 *dp_network_search     = "Network Search  ";

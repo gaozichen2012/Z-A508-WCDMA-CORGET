@@ -23,7 +23,11 @@ const u8 *ucNoOnlineUser                = "e0652857bf7e10625854";//无在线成员
 const u8 *ucLoggingIn                   = "636b28577b764696";//正在登陆- 
 #else
 const u8 *ucPersonalMode                = "50006500720073006f006e0061006c0020004d006f0064006500";//personal mode
+#ifdef INDIA
+const u8 *ucABELL                       = "43004f004e004500580049005300";//CONEXIS
+#else
 const u8 *ucABELL                       = "4100620065006C006C00";//ABELL
+#endif
 const u8 *ucGroupSelected               = "530065006c0065006300740065006400";//Group Selected
 const u8 *ucNoSimCard                   = "6e006f002000730069006D0020006300610072006400";//NO SIM Card
 const u8 *ucNetworkSearching            = "6e006500740077006f0072006b002000730065006100720063006800";//network searching

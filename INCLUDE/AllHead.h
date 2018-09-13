@@ -64,4 +64,7 @@
 //使能英文语音
 //#define CHINESE
 
+//使能印度标识
+#define INDIA
+
 #endif

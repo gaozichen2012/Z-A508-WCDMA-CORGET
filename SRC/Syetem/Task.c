@@ -994,13 +994,13 @@ void Key3_PlayVoice(void)
     api_lcd_pwr_on_hint(0,2,"                ");
     api_lcd_pwr_on_hint(0,2,GetLocalUserNameForDisplay());
     VOICE_SetOutput(ATVOICE_FreePlay,GetLocalUserNameForVoice(),strlen((char const *)GetLocalUserNameForVoice()));//播报本机用户
-    DEL_SetTimer(0,100);
+    DEL_SetTimer(0,200);
     while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
     //当前群组
     api_lcd_pwr_on_hint(0,2,"                ");
     api_lcd_pwr_on_hint(0,2,GetNowWorkingGroupNameForDisplay());
     VOICE_SetOutput(ATVOICE_FreePlay,GetNowWorkingGroupNameForVoice(),strlen((char const *)GetNowWorkingGroupNameForVoice()));//播报当前用户手机号
-    DEL_SetTimer(0,120);
+    DEL_SetTimer(0,260);
     while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
     //电量播报
     KeyBatteryReport();
@@ -1010,7 +1010,7 @@ void Key3_PlayVoice(void)
     api_lcd_pwr_on_hint(0,2,"                ");
     api_lcd_pwr_on_hint(0,2,GetLocalUserNameForDisplay());
     VOICE_SetOutput(ATVOICE_FreePlay,GetLocalUserNameForVoice(),strlen((char const *)GetLocalUserNameForVoice()));//播报本机用户
-    DEL_SetTimer(0,100);
+    DEL_SetTimer(0,200);
     while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
     //当前群组
     api_lcd_pwr_on_hint(0,2,"                ");//显示当前群组昵称
@@ -1023,7 +1023,7 @@ void Key3_PlayVoice(void)
     api_lcd_pwr_on_hint(0,2,"                ");
     api_lcd_pwr_on_hint(0,2,GetLocalUserNameForDisplay());
     VOICE_SetOutput(ATVOICE_FreePlay,GetLocalUserNameForVoice(),strlen((char const *)GetLocalUserNameForVoice()));//播报本机用户
-    DEL_SetTimer(0,100);
+    DEL_SetTimer(0,200);
     while(1){if(DEL_GetTimer(0) == TRUE) {break;}}
     //当前群组
     api_lcd_pwr_on_hint(0,2,"                ");

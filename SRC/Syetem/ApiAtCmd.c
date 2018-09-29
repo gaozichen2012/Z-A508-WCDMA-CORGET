@@ -18,8 +18,7 @@ const u8 *ucRxZTTS0 = "ZTTS:0";
 
 const u8 *cTxCGDCONT_READ       ="at+cgdcont?";
 #if 1//test
-//const u8 *cTxCGDCONT_SET0        ="AT+CGDCONT=1,\"IP\",\"\"";//
-const u8 *cTxCGDCONT_SET0        ="AT+CGDCONT=1,\"IP\",\"3gnet\"";//
+const u8 *cTxCGDCONT_SET0        ="AT+CGDCONT=1,\"IP\",\"etisalat.ae\"";//
 const u8 *cTxCGDCONT_SET1        ="AT+CGDCONT=1,\"IP\",\"3gnet\"";
 const u8 *cTxCGDCONT_SET2        ="AT+CGDCONT=1,\"IP\",\"internet\"";//
 const u8 *cTxCGDCONT_SET3        ="AT+CGDCONT=1,\"IP\",\"internet.proximus.be\"";//±»¿˚ ±Proximus

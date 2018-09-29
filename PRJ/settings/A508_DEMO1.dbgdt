@@ -44,7 +44,7 @@
         <expressions>
           
           
-        <item>PocCmdDrvobj.States.PocStatus</item><item>TaskDrvObj.NewId</item><item>DelDrvObj.Count.TimeCount_Light</item><item>DelDrvObj.BacklightTimeBuf</item><item>DelDrvObj.KeylockTimeBuf</item><item>DelDrvObj.KeylockTimeBuf[0]</item><item>BacklightTimeSet</item><item>KeylockTimeSet</item><item>BacklightTimeSetCount</item><item>KeylockTimeSetCount</item><item>PocCmdDrvobj.Position.latitude_float</item><item>gps_info_buf</item><item>Buf1</item><item>Buf2</item><item></item></expressions>
+        <item>PocCmdDrvobj.States.PocStatus</item><item>TaskDrvObj.NewId</item><item>DelDrvObj.Count.TimeCount_Light</item><item>DelDrvObj.BacklightTimeBuf</item><item>DelDrvObj.KeylockTimeBuf</item><item>DelDrvObj.KeylockTimeBuf[0]</item><item>BacklightTimeSet</item><item>KeylockTimeSet</item><item>BacklightTimeSetCount</item><item>KeylockTimeSetCount</item><item>PocCmdDrvobj.Position.latitude_float</item><item>gps_info_buf</item><item>Buf1</item><item>Buf2</item><item/></expressions>
         <col-names>
           
           

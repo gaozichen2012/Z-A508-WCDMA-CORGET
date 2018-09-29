@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=-2101209313
+Checksum=1703779976
 [CodeCoverage]
 Enabled=_ 0
 [CallStack]

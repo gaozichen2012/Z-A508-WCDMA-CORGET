@@ -59,6 +59,8 @@ void Task_RunStart(void)
         {
           if(TaskDrvobj.status.AccountConfig==FALSE)
           {
+            ApiAtCmd_WritCommand(ATCOMM_CGDCONT_SET,0,0);//设置APN（暂未设置，只是读取）
+            ApiAtCmd_WritCommand(ATCOMM_CGDCONT_READ,0,0);//设置APN（暂未设置，只是读取）
             ApiAtCmd_WritCommand(ATCOMM_Test,ucSetLanguage,strlen((char const *)ucSetLanguage));//设置语言
             ApiAtCmd_WritCommand(ATCOMM_Test,ucCODECCTL,strlen((char const *)ucCODECCTL));//设置音量增益
             ApiAtCmd_WritCommand(ATCOMM_Test,(u8 *)ucRXFILTER,strlen((char const *)ucRXFILTER));//高子晨曲线T1-挺好 无啸叫

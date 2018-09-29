@@ -8,7 +8,9 @@ typedef enum{
   ATCOMM_ZPPPOPEN               = 0x01,
   ATCOMM_CSQ                    = 0x02,
   ATCOMM_RESET                  = 0x03,
-  ATCOMM_Test                   = 0x04
+  ATCOMM_Test                   = 0x04,
+  ATCOMM_CGDCONT_SET            = 0x05,
+  ATCOMM_CGDCONT_READ           = 0x06
 }AtCommType;
 #else //CDMA ÖÐÐË
 typedef enum{

@@ -65,6 +65,6 @@
 //#define CHINESE
 
 //使能印度标识
-#define INDIA
+//#define INDIA
 
 #endif

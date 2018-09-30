@@ -18,17 +18,16 @@ const u8 *ucRxZTTS0 = "ZTTS:0";
 
 const u8 *cTxCGDCONT_READ       ="at+cgdcont?";
 #if 1//test
-const u8 *cTxCGDCONT_SET0        ="AT+CGDCONT=1,\"IP\",\"etisalat.ae\"";//
+const u8 *cTxCGDCONT_SET0        ="AT+CGDCONT=1,\"IP\",\"\"";//
 const u8 *cTxCGDCONT_SET1        ="AT+CGDCONT=1,\"IP\",\"3gnet\"";
-const u8 *cTxCGDCONT_SET2        ="AT+CGDCONT=1,\"IP\",\"internet\"";//
-const u8 *cTxCGDCONT_SET3        ="AT+CGDCONT=1,\"IP\",\"internet.proximus.be\"";//比利时Proximus
-const u8 *cTxCGDCONT_SET4        ="AT+CGDCONT=1,\"IP\",\"\"";//
+const u8 *cTxCGDCONT_SET2        ="AT+CGDCONT=1,\"IP\",\"etisalat.ae\"";//
+const u8 *cTxCGDCONT_SET3       ="AT+CGDCONT=1,\"IP\",\"internet\"";//
+const u8 *cTxCGDCONT_SET4        ="AT+CGDCONT=1,\"IP\",\"internet.proximus.be\"";//比利时Proximus
 const u8 *cTxCGDCONT_SET5        ="AT+CGDCONT=1,\"IP\",\"\"";//
 const u8 *cTxCGDCONT_SET6        ="AT+CGDCONT=1,\"IP\",\"\"";//
 const u8 *cTxCGDCONT_SET7        ="AT+CGDCONT=1,\"IP\",\"\"";//
 const u8 *cTxCGDCONT_SET8        ="AT+CGDCONT=1,\"IP\",\"\"";//
-const u8 *cTxCGDCONT_SET9        ="AT+CGDCONT=1,\"IP\",\"\"";//
-const u8 *cTxCGDCONT_SET10       ="AT+CGDCONT=1,\"IP\",\"\"";//
+const u8 *cTxCGDCONT_SET9       ="AT+CGDCONT=1,\"IP\",\"\"";//
 #endif
 
 u8 KeyDownUpChoose_GroupOrUser_Flag=0;
@@ -61,6 +60,7 @@ static AtCmdDrv AtCmdDrvobj;
 
 void ApiAtCmd_PowerOnInitial(void)
 {
+  FILE_Read(0x230,50,AtCmdDrvobj.apn_set);//FILE_Read
   KeyDownUpChoose_GroupOrUser_Flag = 0;
   AtCmdDrvobj.Msg.Byte = 0;
   AtCmdDrvobj.CSQParam.Buf[0] = 0x00;
@@ -92,47 +92,41 @@ bool ApiAtCmd_WritCommand(AtCommType id, u8 *buf, u16 len)
     DrvGD83_UART_TxCommand(buf, len);
     break;
   case ATCOMM_CGDCONT_SET:
-    FILE_Read(0x247,1,AtCmdDrvobj.apn_set);//
-    DrvGD83_UART_TxCommand((u8*)cTxCGDCONT_SET0, strlen((char const*)cTxCGDCONT_SET0));
-    /*switch(AtCmdDrvobj.apn_set[0])
+    switch(AtCmdDrvobj.apn_set[0])
     {
-    case 0:
+    case 0://ok
       DrvGD83_UART_TxCommand((u8*)cTxCGDCONT_SET0, strlen((char const*)cTxCGDCONT_SET0));
       break;
-    case 1:
+    case 1://ok
       DrvGD83_UART_TxCommand((u8*)cTxCGDCONT_SET1, strlen((char const*)cTxCGDCONT_SET1));
       break;
-    case 2:
+    case 2://ok
       DrvGD83_UART_TxCommand((u8*)cTxCGDCONT_SET2, strlen((char const*)cTxCGDCONT_SET2));
       break;
-    case 3:
+    case 3://ok
       DrvGD83_UART_TxCommand((u8*)cTxCGDCONT_SET3, strlen((char const*)cTxCGDCONT_SET3));
       break;
-    case 4:
+    case 4://ok
       DrvGD83_UART_TxCommand((u8*)cTxCGDCONT_SET4, strlen((char const*)cTxCGDCONT_SET4));
       break;
-    case 5:
+    case 5://ok
       DrvGD83_UART_TxCommand((u8*)cTxCGDCONT_SET5, strlen((char const*)cTxCGDCONT_SET5));
       break;
-    case 6:
+    case 6://ok
       DrvGD83_UART_TxCommand((u8*)cTxCGDCONT_SET6, strlen((char const*)cTxCGDCONT_SET6));
       break;
-    case 7:
+    case 7://ok
       DrvGD83_UART_TxCommand((u8*)cTxCGDCONT_SET7, strlen((char const*)cTxCGDCONT_SET7));
       break;
-    case 8:
+    case 8://ok
       DrvGD83_UART_TxCommand((u8*)cTxCGDCONT_SET8, strlen((char const*)cTxCGDCONT_SET8));
       break;
-    case 9:
+    case 9://ok
       DrvGD83_UART_TxCommand((u8*)cTxCGDCONT_SET9, strlen((char const*)cTxCGDCONT_SET9));
-      break;
-    case 10:
-      DrvGD83_UART_TxCommand((u8*)cTxCGDCONT_SET10, strlen((char const*)cTxCGDCONT_SET10));
       break;
     default:
       break;
     }
-    */
     break;
   case ATCOMM_CGDCONT_READ:
     DrvGD83_UART_TxCommand((u8*)cTxCGDCONT_READ, strlen((char const*)cTxCGDCONT_READ));

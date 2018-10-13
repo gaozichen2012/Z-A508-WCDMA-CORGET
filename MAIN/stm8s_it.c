@@ -362,11 +362,10 @@ INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
   */
  INTERRUPT_HANDLER(UART1_RX_IRQHandler, 18)
  {
-      if(UART1_GetITStatus(UART1_IT_RXNE )!= RESET)  
+   if(UART1_GetITStatus(UART1_IT_RXNE )!= RESET)  
    {
      DrvMC8332_UART_Interrupt();
    }
-
  }
 
 #endif /* (STM8S208) || (STM8S207) || (STM8S103) || (STM8S903) || (STM8AF62Ax) || (STM8AF52Ax) */

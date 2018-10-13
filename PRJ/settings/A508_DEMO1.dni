@@ -215,9 +215,9 @@ Category=_ 0
 LoggingEnabled=_ 0
 LogFile=_ ""
 [Breakpoints]
-Bp0=_ "STD_CODE" "{$PROJ_DIR$\..\SRC\Syetem\uart3.c}.637.4" 0 0 0 0 "" 0 ""
+Bp0=_ "STD_CODE" "{$PROJ_DIR$\..\MAIN\stm8s_it.c}.299.1" 1 0 0 0 "" 0 ""
 Bp1=_ "STD_CODE" "{$PROJ_DIR$\..\MAIN\stm8s_it.c}.299.2" 1 0 0 0 "" 0 ""
-Bp2=_ "STD_CODE" "{$PROJ_DIR$\..\MAIN\stm8s_it.c}.299.2" 1 0 0 0 "" 0 ""
+Bp2=_ "STD_CODE" "{$PROJ_DIR$\..\MAIN\stm8s_it.c}.367.1" 1 0 0 0 "" 0 ""
 Count=3
 [Aliases]
 A0=_ "C:\Users\lei\Desktop\IAR\GT20L16P1Y.c" ""
